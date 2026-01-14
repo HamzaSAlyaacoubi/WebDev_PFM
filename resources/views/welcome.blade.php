@@ -62,23 +62,39 @@
             <h2>Nos Services :</h2>
             <div class="services">
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server"></a>
+                    @foreach ($categories as $category)
+                    @if($category->id == 1)
+                    <a href="{{ route('categories.index', $category->id) }}"><img src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server"></a>
                     <img id="im1" src="images/servers.png" alt="">
+                    @endif
+                    @endforeach
                     <label id="txt1" for="server">Serveurs physiques</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine"></a>
+                    @foreach ($categories as $category)
+                    @if($category->id == 2)
+                    <a href="{{ route('categories.index', $category->id) }}"><img src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine"></a>
                     <img id="im2" src="images/ar.png" alt="">
+                    @endif
+                    @endforeach
                     <label id="txt2" for="machine">Machines virtuelles</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage"></a>
+                    @foreach ($categories as $category)
+                    @if($category->id == 4)
+                    <a href="{{ route('categories.index', $category->id) }}"><img src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage"></a>
                     <img id="im3" src="images/memory.png" alt="">
+                    @endif
+                    @endforeach
                     <label id="txt3" for="stockage">Bloc de stockage</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau"></a>
+                    @foreach ($categories as $category)
+                    @if($category->id == 3)
+                    <a href="{{ route('categories.index', $category->id) }}"><img src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau"></a>
                     <img id="im4" src="images/electrical.png" alt="">
+                    @endif
+                    @endforeach
                     <label id="txt4" for="reseau">Equipement réseau</label>
                 </div>
             </div>

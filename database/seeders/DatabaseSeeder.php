@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             'type' => 'administrateur',
         ]);
 
-        $this->call(ResourceCategorySeeder::class);
-        $this->call(ResourceSeeder::class);
+        $this->call([
+                    ResourceCategorySeeder::class,
+                    ResourceSeeder::class,
+                ]);
     }
 }

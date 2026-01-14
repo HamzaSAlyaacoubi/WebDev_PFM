@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('manufacturer')->nullable();
             $table->foreignId('category_id')->constrained('resource_categories')->onDelete('cascade');
             $table->integer('cpu');
             $table->integer('ram');
