@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 // yassine
 use App\Http\Controllers\Guest\CategoryController;
 use App\Http\Controllers\Guest\ResourceController;
@@ -22,9 +23,6 @@ Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('re
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('User.dashboard');
-})->name('dashboard');
 
 Route::get('/admin', [AdminController::class, 'afficherUsers'])->name('admin');
 
@@ -33,7 +31,15 @@ Route::get('/responsable', function () {
 })->name('responsable');
 
 
-
 // yassine
+Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
 Route::get('/categories/{id}/resources', [ResourceController::class, 'index'])->name('categories.index');
+
+Route::get('/Report', function () {
+    return view('User.Report');
+})->name('Report');
+
+Route::get('/Reserve/{id}', [ResourceController::class, 'reserve'])->name('reserve');

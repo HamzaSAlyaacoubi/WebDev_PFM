@@ -12,4 +12,13 @@ class ResourceController extends Controller
 
     return view('Guest.ResourcesGuest', compact('ressources'));
 }
+public function reserve($id)
+{
+    $ressource = Resource::where('id', $id)
+                         ->where('status', 'disponible')
+                         ->firstOrFail();
+
+    return view('User.Reserve', compact('ressource'));
+}
+
 }

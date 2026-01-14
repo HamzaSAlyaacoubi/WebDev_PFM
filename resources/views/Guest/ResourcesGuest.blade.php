@@ -10,7 +10,7 @@
     <table border=1>
         <tr>
             <th>Resource Name</th>
-            <th>Description</th>
+            <th>Manufacturer</th>
             <th>cpu</th>
             <th>Storage</th>
             <th>Location</th>
@@ -19,7 +19,7 @@
         @foreach($ressources as $ressource)
         <tr>
             <td>{{ $ressource->name }}</td>
-            <td>{{ $ressource->description }}</td>
+            <td>{{ $ressource->manufacturer }}</td>
             <td>{{ $ressource->cpu }}</td>
             <td>{{ $ressource->storage }}</td>
             <td>{{ $ressource->location }}</td>

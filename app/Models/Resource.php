@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Resource extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'category_id', 'cpu', 'ram', 'storage', 'os', 'location', 'status'];
+    protected $fillable = ['name', 'manufacturer', 'category_id', 'cpu', 'ram', 'storage', 'os', 'location', 'status'];
     public function category()
     {
         return $this->belongsTo(ResourceCategory::class, 'category_id');

@@ -18,7 +18,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Server HP ProLiant'], 
             [
-                'description' => 'Enterprise physical server',
+                'manufacturer' => 'HP',
                 'category_id' => $serverCategory->id,
                 'cpu' => 16,
                 'ram' => 64,
@@ -32,7 +32,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Virtual Machine VM-01'],
             [
-                'description' => 'Virtual machine for development',
+                'manufacturer' => 'VMware',
                 'category_id' => $vmCategory->id,
                 'cpu' => 4,
                 'ram' => 16,
@@ -46,7 +46,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Network Switch Cisco'],
             [
-                'description' => 'High-speed network switch',
+                'manufacturer' => 'Cisco',
                 'category_id' => $networkCategory->id,
                 'cpu' => 0,
                 'ram' => 0,
@@ -60,7 +60,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Storage Array Dell EMC'],
             [
-                'description' => 'High-capacity storage solution',
+                'manufacturer' => 'Dell EMC',
                 'category_id' => $storageCategory->id,
                 'cpu' => 0,
                 'ram' => 0,
@@ -73,7 +73,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Virtual Machine VM-02'],
             [
-                'description' => 'Virtual machine for testing',
+                'manufacturer' => 'VMware',
                 'category_id' => $vmCategory->id,
                 'cpu' => 2,
                 'ram' => 8,
@@ -86,7 +86,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Server Dell PowerEdge'],
             [
-                'description' => 'High-performance physical server',
+                'manufacturer' => 'Dell',
                 'category_id' => $serverCategory->id,
                 'cpu' => 32,
                 'ram' => 128,
@@ -99,7 +99,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Storage NAS Synology'],
             [
-                'description' => 'Network-attached storage for small businesses',
+                'manufacturer' => 'Synology',
                 'category_id' => $storageCategory->id,
                 'cpu' => 0,
                 'ram' => 0,
@@ -112,7 +112,7 @@ class ResourceSeeder extends Seeder
         Resource::firstOrCreate(
             ['name' => 'Network Router Juniper'],
             [
-                'description' => 'Enterprise-grade network router',
+                'manufacturer' => 'Juniper',
                 'category_id' => $networkCategory->id,
                 'cpu' => 0,
                 'ram' => 0,

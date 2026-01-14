@@ -57,6 +57,46 @@
 
     <main id="main">
 
+        <div>
+            <div>
+                <!-- Le select envoie la catégorie → le contrôleur filtre → la vue affiche le résultat. -->
+                <form method="GET" action="{{ route('dashboard') }}">
+                    <select name="filter" onchange="this.form.submit()">
+                        <option value="all">All Categories</option>
+                        <option value="1" {{ request('filter') == 1 ? 'selected' : '' }}>Physical Servers</option>
+                        <option value="2" {{ request('filter') == 2 ? 'selected' : '' }}>Virtual Machines</option>
+                        <option value="4" {{ request('filter') == 4 ? 'selected' : '' }}>Storage Blocks</option>
+                        <option value="3" {{ request('filter') == 3 ? 'selected' : '' }}>Network Equipment</option>
+                    </select>
+                </form>
+
+            </div><br><br><br>
+            <h1>Ressources disponibles</h1><br><br>
+            <table border=1>
+                <tr>
+                    <th>Resource Name</th>
+                    <th>Manufacturer</th>
+                    <th>cpu</th>
+                    <th>Storage</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Reserve</th>
+                </tr>
+                @foreach($ressources as $ressource)
+                <tr>
+                    <td>{{ $ressource->name }}</td>
+                    <td>{{ $ressource->manufacturer }}</td>
+                    <td>{{ $ressource->cpu }}</td>
+                    <td>{{ $ressource->storage }}</td>
+                    <td>{{ $ressource->location }}</td>
+                    <td>{{ $ressource->status }}</td>
+                    <td><a href="{{ route('reserve', $ressource->id) }}">Reserve</a></td>
+                </tr>
+                @endforeach
+            </table><br><br><br>
+        </div>
+        <a href="Report">Report</a>
+
 
         <section id="services-container" class="bpart2">
             <h2>Nos Services :</h2>
