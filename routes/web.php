@@ -23,7 +23,7 @@ Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('re
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('User.dashboard');
 })->name('dashboard');
 
 Route::get('/admin', [AdminController::class, 'afficherUsers'])->name('admin');

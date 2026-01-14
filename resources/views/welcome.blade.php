@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Center</title>
+    <!-- <link rel="stylesheet" href="home.css"> -->
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+
+    <title>Data Center</title>
 </head>
 
 <body>
@@ -15,24 +17,23 @@
             <nav id="headlist">
                 <ul>
                     <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Ressources</a></li>
-                    <li><a href=#contact>Contact</a></li>
+                    <li><a href="#services-container">Ressources</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
 
-            <a id="seconnecter" href="login.html">Se connecter</a>
         </div>
 
         <div id="h2"><span>Make <br><br>New Friends </span></div>
 
         <div id="h3">
-            <p>Friends are the family we choose, offering support, laughter, and shared memories<br> that enrich our lives. True friendship is built on trust,
-                <br> understanding, and the comfort .
-            </p>
+            <p>Friends are the family we choose, offering support, laughter, and shared memories that enrich our lives. True friendship is built on trust,
+                understanding, and the comfort .</p>
+            <a href="{{route('login')}}"><button id="login">Login</button></a>
             <a href="{{route('registration')}}"><button id="login">S'inscrire</button></a>
         </div>
 
-        <img src="images/pngegg.png" alt="">
+        <img src="{{asset('images/pngegg.png')}}" alt="">
 
         <div id="blur">
             <p class="blur-this">We believe that in a world</p>
@@ -58,28 +59,45 @@
     <main id="main">
 
 
-        <section class="bpart2">
+        <section id="services-container" class="bpart2">
             <h2>Nos Services :</h2>
             <div class="services">
+
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server"></a>
-                    <img id="im1" src="images/servers.png" alt="">
-                    <label id="txt1" for="server">Serveurs physiques</label>
+                    @foreach ($categories as $category)
+                    @if($category->id == 1)
+                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server"></a>
+                    <img class="icon" id="im1" src="{{asset('images/servers.png')}}" alt="">
+                    @endif
+                    @endforeach
+                    <label class="txt" id="txt1" for="server">Serveurs physiques</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine"></a>
-                    <img id="im2" src="images/ar.png" alt="">
-                    <label id="txt2" for="machine">Machines virtuelles</label>
+                    @foreach ($categories as $category)
+                    @if($category->id == 2)
+                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine"></a>
+                    <img class="icon" id="im2" src="{{asset('images/ar.png')}}" alt="">
+                    @endif
+                    @endforeach
+                    <label class="txt" id="txt2" for="machine">Machines virtuelles</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage"></a>
-                    <img id="im3" src="images/memory.png" alt="">
-                    <label id="txt3" for="stockage">Bloc de stockage</label>
+                    @foreach ($categories as $category)
+                    @if($category->id == 4)
+                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage"></a>
+                    <img class="icon" id="im3" src="images/memory.png" alt="">
+                    @endif
+                    @endforeach
+                    <label class="txt" id="txt3" for="stockage">Bloc de stockage</label>
                 </div>
                 <div class="service">
-                    <a href="guest/ressources_guest.php"><img src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau"></a>
-                    <img id="im4" src="images/electrical.png" alt="">
-                    <label id="txt4" for="reseau">Equipement réseau</label>
+                    @foreach ($categories as $category)
+                    @if($category->id == 3)
+                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau"></a>
+                    <img class="icon" id="im4" src="images/electrical.png" alt="">
+                    @endif
+                    @endforeach
+                    <label class="txt" id="txt4" for="reseau">Equipement réseau</label>
                 </div>
             </div>
         </section>
@@ -107,5 +125,3 @@
 </body>
 
 </html>
-<a href="{{route('login')}}" class="btn"><button id="login">Login</button></a>
-<a href="{{route('registration')}}" class="btn"><button id="Register">Register</button></a>
