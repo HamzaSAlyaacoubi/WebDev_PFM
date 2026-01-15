@@ -9,6 +9,7 @@ class Resource extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'manufacturer', 'category_id', 'cpu', 'ram', 'storage', 'os', 'location', 'status'];
+
     public function category()
     {
         return $this->belongsTo(ResourceCategory::class, 'category_id');

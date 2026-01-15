@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,13 +23,17 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Administrateur',
             'email' => 'Administrateur@gmail.com',
-            'password' => 'password',
+            'password' => 'jjj',
             'type' => 'administrateur',
         ]);
 
         $this->call([
-                    ResourceCategorySeeder::class,
-                    ResourceSeeder::class,
-                ]);
+            ResourceCategorySeeder::class,
+            ResourceSeeder::class,
+            ServerSeeder::class,
+            VirtualMachinesSeeder::class,
+            NetworkSeeder::class,
+            StorageSeeder::class,
+        ]);
     }
 }
