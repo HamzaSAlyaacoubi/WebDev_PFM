@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('os')->nullable();
             $table->string('location')->nullable();
             $table->enum('status', ['disponible', 'indisponible', 'maintenance'])->default('disponible');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

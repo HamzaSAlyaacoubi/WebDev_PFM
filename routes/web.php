@@ -32,7 +32,7 @@ Route::get('/responsable', function () {
 
 
 // yassine
-Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'filter'])->name('dashboard');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 

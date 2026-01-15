@@ -1,4 +1,3 @@
-import "./bootstrap";
 const elements = document.querySelectorAll(".blur-this");
 
 const observer = new IntersectionObserver(
