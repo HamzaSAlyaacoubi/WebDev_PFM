@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="home.css"> -->
-    @vite('resources/css/app.css')
+    @vite('resources/css/app2.css')
     @vite('resources/js/app.js')
 
     <title>Data Center</title>
@@ -30,7 +30,6 @@
             <p>Friends are the family we choose, offering support, laughter, and shared memories that enrich our lives. True friendship is built on trust,
                 understanding, and the comfort .</p>
             <a href="{{route('login')}}"><button id="login">Login</button></a>
-            <a href="{{route('registration')}}"><button id="login">S'inscrire</button></a>
         </div>
 
         <img src="{{asset('images/pngegg.png')}}" alt="">
@@ -66,38 +65,46 @@
                 <div class="service">
                     @foreach ($categories as $category)
                     @if($category->id == 1)
-                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server"></a>
-                    <img class="icon" id="im1" src="{{asset('images/servers.png')}}" alt="">
-                    @endif
-                    @endforeach
-                    <label class="txt" id="txt1" for="server">Serveurs physiques</label>
+                    <img class="imgs" src="images/lee-soo-hyun-iFyJfU4D2Tg-unsplash.jpg" alt="Serveurs physiques" id="server">
+                    <a href="{{ route('categories.index', $category->id) }}">
+                        <img class="icon" src="{{asset('images/servers.png')}}" alt="">
+                        @endif
+                        @endforeach
+                        <label class="txt" for="server">Serveurs physiques</label>
+                    </a>
                 </div>
                 <div class="service">
                     @foreach ($categories as $category)
                     @if($category->id == 2)
-                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine"></a>
-                    <img class="icon" id="im2" src="{{asset('images/ar.png')}}" alt="">
-                    @endif
-                    @endforeach
-                    <label class="txt" id="txt2" for="machine">Machines virtuelles</label>
+                    <img class="imgs" src="images/Gemini_Generated_Image_adrgd8adrgd8adrg.png" alt="Machines virtuelles" id="machine">
+                    <a href="{{ route('categories.index', $category->id) }}">
+                        <img class="icon" src="{{asset('images/ar.png')}}" alt="">
+                        @endif
+                        @endforeach
+                        <label class="txt" for="machine">Machines virtuelles</label>
+                    </a>
                 </div>
                 <div class="service">
                     @foreach ($categories as $category)
                     @if($category->id == 4)
-                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage"></a>
-                    <img class="icon" id="im3" src="images/memory.png" alt="">
-                    @endif
-                    @endforeach
-                    <label class="txt" id="txt3" for="stockage">Bloc de stockage</label>
+                    <img class="imgs" src="images/matthieu-beaumont-iYnpYeyu57k-unsplash.jpg" alt="Bloc de stockage" id="stockage">
+                    <a href="{{ route('categories.index', $category->id) }}">
+                        <img class="icon" src="images/memory.png" alt="">
+                        @endif
+                        @endforeach
+                        <label class="txt" for="stockage">Bloc de stockage</label>
+                    </a>
                 </div>
                 <div class="service">
                     @foreach ($categories as $category)
                     @if($category->id == 3)
-                    <a href="{{ route('categories.index', $category->id) }}"><img class="imgs" src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau"></a>
-                    <img class="icon" id="im4" src="images/electrical.png" alt="">
-                    @endif
-                    @endforeach
-                    <label class="txt" id="txt4" for="reseau">Equipement réseau</label>
+                    <img class="imgs" src="images/joshua-quilala-RXn-uTxKBtQ-unsplash.jpg" alt="Réseau" id="reseau">
+                    <a href="{{ route('categories.index', $category->id) }}">
+                        <img class="icon" src="images/electrical.png" alt="">
+                        @endif
+                        @endforeach
+                        <label class="txt" for="reseau">Equipement réseau</label>
+                    </a>
                 </div>
             </div>
         </section>

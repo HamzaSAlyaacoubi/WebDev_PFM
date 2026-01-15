@@ -12,17 +12,17 @@ class AuthManager extends Controller
 {
     function login()
     {
-        return view('login');
+        return view('Guest.login');
     }
 
     function registration()
     {
-        return view('registration');
+        return view('Guest.login');
     }
 
     function loginPost(Request $request)
     {
-        $request->validate([
+        $request->validateWithBag('login', [
             'email' => 'required',
             'password' => 'required'
         ]);
@@ -41,7 +41,7 @@ class AuthManager extends Controller
 
     function registrationPost(Request $request)
     {
-        $request->validate([
+        $request->validateWithBag('register', [
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required'
@@ -57,7 +57,7 @@ class AuthManager extends Controller
         if (!$user) {
             return redirect()->intended('registration')->with('error', 'Registration fail, Try again');
         }
-        return redirect()->intended('login')->with('success', 'Registration success, login to access the app');
+        return redirect()->route('login')->with('success', 'Registration success, login to access the app');
     }
 
     function logout()

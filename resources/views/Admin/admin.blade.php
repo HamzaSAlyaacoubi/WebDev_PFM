@@ -19,6 +19,12 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->type }}</td>
+                @if($user->type === "utilisateur")
+                <td><a href="{{route('toResponsable', $user->id)}}"><button>Rendre Responsable</button></a></td>
+                @endif
+                @if($user->type === "responsable")
+                <td><a href="{{route('toUtilisateur', $user->id)}}"><button>Rendre Utilisateur</button></a></td>
+                @endif
             </tr>
             @endforeach
         </table>

@@ -9,6 +9,8 @@ use App\Http\Controllers\Guest\CategoryController;
 use App\Http\Controllers\Guest\ResourceController;
 use App\Models\ResourceCategory;
 
+
+// Route de Guest
 Route::get('/', function () {
     $categories = ResourceCategory::all();
     return view('welcome', compact('categories'));
@@ -23,9 +25,12 @@ Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('re
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-
+// Route de Administrateur
 Route::get('/admin', [AdminController::class, 'afficherUsers'])->name('admin');
+Route::get('/admin/resp/{id}', [AdminController::class, 'toResponsable'])->name('toResponsable');
+Route::get('/admin/user/{id}', [AdminController::class, 'toUtilisateur'])->name('toUtilisateur');
 
+// Route de Responsable
 Route::get('/responsable', function () {
     return view('Responsable.responsable');
 })->name('responsable');
