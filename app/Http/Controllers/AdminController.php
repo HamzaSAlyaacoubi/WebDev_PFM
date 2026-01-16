@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -32,5 +33,21 @@ class AdminController extends Controller
             'type' => 'utilisateur'
         ]);
         return redirect()->intended(route('admin'));
+    }
+
+    function createResponsable(Request $request)
+    {
+        $responsable = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+
+        $responsable['type'] = 'responsable';
+        $responsable['password'] = Hash::make($request->password);
+
+        User::create($responsable);
+
+        return redirect()->route('admin');
     }
 }
