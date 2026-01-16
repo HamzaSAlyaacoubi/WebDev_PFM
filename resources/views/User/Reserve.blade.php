@@ -7,8 +7,24 @@
     <title>Data Center - Réservation</title>
 </head>
 <body>
+    <header>
+        <span>ᔕEᖇᐯE</span>  
 
-<section>
+        <nav>
+            <ul>
+                <li><a href="home_user.php">Accueil</a></li>
+                <li><a href="ressources_user.php">Ressources</a></li>
+                <li><a href="suivis.php">Vos reservations</a></li>
+                <li><a href="history.php">Historique</a></li>
+                <li><a href="signaler.php">Support</a></li>
+                <li><a href=#contact>Contact</a></li>
+            </ul>
+        </nav>
+
+        <a href="../guest/home_guest.php">Se deconnecter</a>
+    </header>
+    <main>
+        <section>
     <h1>Demande de réservation</h1>
 
     <form method="POST" action="{{ route('reservations.store') }}">
@@ -80,6 +96,22 @@
         <button type="submit">Confirmer</button>
     </form>
 </section>
+</main>
+<footer id="contact">
+        <h1>Contact</h1>
+
+        <span>Nos reseaux sociaux</span>
+        <ul>
+            <li><a href="https://www.instagram.com"><img src="../images/instagram.jpeg" alt="Logo Instagram" width="50" height="50"></a></li>
+            <li><a href="https://www.facebook.com"><img src="../images/facebook.jpeg" alt="Logo Facebook" width="50" height="50"></a></li>
+            <li><a href="https://www.tiktok.com"><img src="../images/tikTok.jpeg" alt="Logo TikTok" width="50" height="50"></a></li>
+            <li><a href="tel:+212660750696"><img src="../images/whatsApp.jpeg" alt="Logo WhatsApp" width="50" height="50"></a></li>
+        </ul>
+
+        <p><a href="mailto:contact@datacenter.ma">contact@datacenter.ma</a></p>
+
+        <p>&copy; 2026 Data Center. Tous droits réservés.</p>
+    </footer>
 
 </body>
 </html>

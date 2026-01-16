@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -15,9 +14,9 @@
                 <ul>
                     <li><a href="home_user.php">Accueil</a></li>
                     <li><a href="ressources_user.php">Ressources</a></li>
-                    <li><a href="suivis.php">Vos reservations</a></li>
-                    <li><a href="history.php">Historique</a></li>
-                    <li><a href="signaler.php">Support</a></li>
+                    <li><a href="{{ route('vosreservations') }}">Vos reservations</a></li>
+                    <li><a href="{{ route('history') }}">Historique</a></li>
+                    <li><a href="{{ route('support') }}">Support</a></li>
                     <li><a href=#contact>Contact</a></li>
                 </ul>
             </nav>

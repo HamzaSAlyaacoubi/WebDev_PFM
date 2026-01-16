@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/Message.css')
     <title>Data Center</title>
 </head>
 <body>
@@ -11,11 +12,11 @@
 
         <nav>
             <ul>
-                <li><a href="home_user.php">Accueil</a></li>
-                <li><a href="ressources_user.php">Ressources</a></li>
-                <li><a href="suivis.php">Vos reservations</a></li>
-                <li><a href="history.php">Historique</a></li>
-                <li><a href="signaler.php">Support</a></li>
+                <li><a href="{{ route('dashboard') }}">Accueil</a></li>
+                <li><a href="{{ route('dashboard') }}">Ressources</a></li>
+                <li><a href="{{ route('vosreservations') }}">Vos reservations</a></li>
+                <li><a href="{{ route('history') }}">Historique</a></li>
+                <li><a href="{{ route('support') }}">Support</a></li>
                 <li><a href=#contact>Contact</a></li>
             </ul>
         </nav>
@@ -24,38 +25,17 @@
     </header>
 
     <main>
+        
         <section>
-
+            <form method="POST" action="{{ route('support.message.store') }}">
+                @csrf
             <h1>Support & Avis</h1>
             <p>Votre avis nous aide à améliorer la plateforme.</p>
 
-            <form method="POST">
 
                 <div>
                     <label>Votre message / réclamation</label>
                     <textarea name="message" rows="5" cols="200" placeholder="N'hésitez pas à décrire votre problème ou suggestion..." required></textarea>
-                </div>
-
-                <!-- optionel -->
-                <div>
-                    <label>Notez le service</label>
-
-                    <div class="rating">
-                        <input type="radio" name="rating" id="star5" value="5">
-                        <label for="star5">★</label>
-
-                        <input type="radio" name="rating" id="star4" value="4">
-                        <label for="star4">★</label>
-
-                        <input type="radio" name="rating" id="star3" value="3">
-                        <label for="star3">★</label>
-
-                        <input type="radio" name="rating" id="star2" value="2">
-                        <label for="star2">★</label>
-
-                        <input type="radio" name="rating" id="star1" value="1">
-                        <label for="star1">★</label>
-                    </div>
                 </div>
 
                 <button type="submit">Envoyer</button>

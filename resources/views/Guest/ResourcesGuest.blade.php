@@ -1,149 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    @vite('resources/css/GuestCategories.css')
+    <title>Data Center</title>
 </head>
 <body>
-<h1>Ressources disponibles</h1>
 
-<table border="1">
+<header>
+    <span>ᔕEᖇᐯE</span>
+    <nav>
+        <ul>
+            <li><a href="{{ url('/') }}">Accueil</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-@foreach($ressources as $ressource)
+<main>
+<section class="resources">
+    <h1>All resources</h1>
 
-    <!-- Pour Afficher les Headers une seule fois -->
-    @if($loop->first)
+    <div class="resources-list">
 
-        @if($ressource->id_categorie == 1)
-        <tr>
-            <th>Resource Name</th>
-            <th>Brand</th>
-            <th>CPU</th>
-            <th>RAM</th>
-            <th>Storage</th>
-            <th>Storage Type</th>
-            <th>OS</th>
-            <th>Location</th>
-            <th>Quantity</th>
-            <th>Status</th>
-        </tr>
+        @foreach($ressources as $ressource)
 
-        @elseif($ressource->id_categorie == 2)
-        <tr>
-            <th>Resource Name</th>
-            <th>CPU</th>
-            <th>RAM</th>
-            <th>Storage</th>
-            <th>Storage Type</th>
-            <th>OS</th>
-            <th>IP Address</th>
-            <th>Server Hôte</th>
-            <th>Quantity</th>
-            <th>Status</th>
-        </tr>
+        <div class="resource-card">
 
-        @elseif($ressource->id_categorie == 3)
-        <tr>
-            <th>Resource Name</th>
-            <th>Brand</th>
-            <th>Type</th>
-            <th>Model</th>
-            <th>Port</th>
-            <th>Speed</th>
-            <th>Status</th>
-            <th>Quantity</th>
-        </tr>
+            {{-- TITRE --}}
+            <h3>{{ $ressource->name }}</h3>
 
-        @elseif($ressource->id_categorie == 4)
-        <tr>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>Capacity</th>
-            <th>Type</th>
-            <th>Speed</th>
-            <th>Status</th>
-            <th>Quantity</th>
-        </tr>
-        @endif
-
-    @endif
-
-    {{-- LIGNES --}}
-    <tr>
-        @if($ressource->id_categorie == 1)
-            <td>{{ $ressource->name }}</td>
-            <td>{{ $ressource->brand }}</td>
-            <td>{{ $ressource->cpu }}</td>
-            <td>{{ $ressource->ram }}</td>
-            <td>{{ $ressource->storage }}</td>
-            <td>{{ $ressource->storage_type }}</td>
-            <td>{{ $ressource->os }}</td>
-            <td>{{ $ressource->location }}</td>
-            <td>{{ $ressource->quantity_available }}</td>
-            <td>{{ $ressource->status }}</td>
-
-        @elseif($ressource->id_categorie == 2)
-            <td>{{ $ressource->name }}</td>
-            <td>{{ $ressource->cpu }}</td>
-            <td>{{ $ressource->ram }}</td>
-            <td>{{ $ressource->storage }}</td>
-            <td>{{ $ressource->storage_type }}</td>
-            <td>{{ $ressource->os }}</td>
-            <td>{{ $ressource->ip_address }}</td>
-            <td>{{ $ressource->server_hote }}</td>
-            <td>{{ $ressource->quantity_available }}</td>
-            <td>{{ $ressource->status }}</td>
-
-        @elseif($ressource->id_categorie == 3)
-            <td>{{ $ressource->name }}</td>
-            <td>{{ $ressource->brand }}</td>
-            <td>{{ $ressource->type }}</td>
-            <td>{{ $ressource->model }}</td>
-            <td>{{ $ressource->port_number }}</td>
-            <td>{{ $ressource->speed }}</td>
-            <td>{{ $ressource->status }}</td>
-            <td>{{ $ressource->quantity_available }}</td>
-
-        @elseif($ressource->id_categorie == 4)
-            <td>{{ $ressource->name }}</td>
-            <td>{{ $ressource->brand }}</td>
-            <td>{{ $ressource->capacity }}</td>
-            <td>{{ $ressource->type }}</td>
-            <td>{{ $ressource->speed }}</td>
-            <td>{{ $ressource->status }}</td>
-            <td>{{ $ressource->quantity_available }}</td>
-        @endif
-    </tr>
-
-@endforeach
-
-</table><br><br><br>
-    <div><h2>Règles d’utilisation</h2>
-        
-        <details>
-            <summary><strong>Accès aux ressources</strong></summary>
             <ul>
-                <li>Les invités peuvent consulter les ressources en lecture seule.</li>
-                <li>Un compte est obligatoire pour effectuer une réservation.</li>
+                {{-- ===== CATÉGORIE 1 : SERVEURS ===== --}}
+                @if($ressource->id_categorie == 1)
+                    <li>Brand : {{ $ressource->brand }}</li>
+                    <li>CPU : {{ $ressource->cpu }}</li>
+                    <li>RAM : {{ $ressource->ram }}</li>
+                    <li>Storage : {{ $ressource->storage }} ({{ $ressource->storage_type }})</li>
+                    <li>OS : {{ $ressource->os }}</li>
+                    <li>Location : {{ $ressource->location }}</li>
+
+                {{-- ===== CATÉGORIE 2 : VM ===== --}}
+                @elseif($ressource->id_categorie == 2)
+                    <li>CPU : {{ $ressource->cpu }}</li>
+                    <li>RAM : {{ $ressource->ram }}</li>
+                    <li>Storage : {{ $ressource->storage }} ({{ $ressource->storage_type }})</li>
+                    <li>OS : {{ $ressource->os }}</li>
+                    <li>IP : {{ $ressource->ip_address }}</li>
+                    <li>Serveur hôte : {{ $ressource->server_hote }}</li>
+
+                {{-- ===== CATÉGORIE 3 : SWITCH ===== --}}
+                @elseif($ressource->id_categorie == 3)
+                    <li>Brand : {{ $ressource->brand }}</li>
+                    <li>Type : {{ $ressource->type }}</li>
+                    <li>Model : {{ $ressource->model }}</li>
+                    <li>Ports : {{ $ressource->port_number }}</li>
+                    <li>Speed : {{ $ressource->speed }}</li>
+
+                {{-- ===== CATÉGORIE 4 : STORAGE ===== --}}
+                @elseif($ressource->id_categorie == 4)
+                    <li>Brand : {{ $ressource->brand }}</li>
+                    <li>Capacity : {{ $ressource->capacity }}</li>
+                    <li>Type : {{ $ressource->type }}</li>
+                    <li>Speed : {{ $ressource->speed }}</li>
+                @endif
+
+                <li>Status : {{ $ressource->status }}</li>
+                <li>Available : {{ $ressource->quantity_available }}</li>
             </ul>
-        </details>
-        
-        <details>
-            <summary><strong>Conditions d’utilisation</strong></summary>
-            <ul>
-                <li>Les ressources sont réservées à un usage pédagogique et de recherche.</li>
-                <li>Toute modification ou utilisation abusive est interdite.</li>
-            </ul>
-        </details>
-        
-        <details>
-            <summary><strong>Sécurité et responsabilité</strong></summary>
-            <ul>
-                <li>Les données hébergées doivent être sauvegardées par l’utilisateur.</li>
-                <li>Le Data Center n’est pas responsable des pertes de données.</li>
-            </ul>
-        </details>
+
+            {{-- BOUTON --}}
+            <a href="{{ route('login') }}">Réserver</a>
+
+        </div>
+
+        @endforeach
+
     </div>
+</section>
+
+{{-- RÈGLES --}}
+<div>
+<h2>Règles d’utilisation</h2>
+
+<details>
+    <summary><strong>Accès aux ressources</strong></summary>
+    <ul>
+        <li>Les invités peuvent consulter les ressources en lecture seule.</li>
+        <li>Un compte est obligatoire pour effectuer une réservation.</li>
+    </ul>
+</details>
+
+<details>
+    <summary><strong>Conditions d’utilisation</strong></summary>
+    <ul>
+        <li>Usage pédagogique et de recherche uniquement.</li>
+        <li>Toute utilisation abusive est interdite.</li>
+    </ul>
+</details>
+
+<details>
+    <summary><strong>Sécurité et responsabilité</strong></summary>
+    <ul>
+        <li>Sauvegarde à la charge de l’utilisateur.</li>
+        <li>Le Data Center n’est pas responsable des pertes.</li>
+    </ul>
+</details>
+</div>
+
+</main>
+
+<footer id="contact">
+    <h1>Contact</h1>
+
+    <span>Nos réseaux sociaux</span>
+    <ul>
+        <li><a href="https://www.instagram.com"><img src="{{ asset('images/instagram.jpeg') }}" width="50"></a></li>
+        <li><a href="https://www.facebook.com"><img src="{{ asset('images/facebook.jpeg') }}" width="50"></a></li>
+        <li><a href="https://www.tiktok.com"><img src="{{ asset('images/tikTok.jpeg') }}" width="50"></a></li>
+        <li><a href="tel:+212660750696"><img src="{{ asset('images/whatsApp.jpeg') }}" width="50"></a></li>
+    </ul>
+
+    <p><a href="mailto:contact@datacenter.ma">contact@datacenter.ma</a></p>
+    <p>&copy; 2026 Data Center. Tous droits réservés.</p>
+</footer>
+
 </body>
 </html>
