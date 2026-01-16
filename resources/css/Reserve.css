@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f6f7fb;
+    color: #1c1e21;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1rem;
+}
+
+section {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    padding: 3rem 3.5rem;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2.5rem;
+    color: #1c1e21;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+fieldset {
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 2rem;
+}
+
+legend {
+    padding: 0 0.6rem;
+    font-weight: 700;
+    color: #6366f1;
+    font-size: 1rem;
+}
+
+fieldset h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+fieldset ul {
+    list-style: none;
+    color: #6b7280;
+}
+
+fieldset ul li {
+    margin-bottom: 0.4rem;
+}
+
+fieldset > div {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+label {
+    font-weight: 600;
+    color: #374151;
+}
+
+input[type="date"],
+textarea {
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    font-family: monospace;
+    font-size: 0.95rem;
+    outline: none;
+    background: #f9fafb;
+    transition: 0.2s ease;
+}
+
+input[type="date"]:focus,
+textarea:focus {
+    border: 2px solid #6366f1;
+    background: #ecfdf5;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    align-self: flex-end;
+    font-family: monospace;
+    font-weight: 800;
+    background: #6366f1;
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 14px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: white;
+    color: #6366f1;
+    border: 1px solid rgba(0,0,0,0.18);
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 2.2rem 2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}

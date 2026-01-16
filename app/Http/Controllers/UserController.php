@@ -4,33 +4,40 @@ namespace App\Http\Controllers;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use App\Models\ResourceCategory;
+use App\Models\Servers;
+use App\Models\VirtualMachines;
+use App\Models\Network;
+use App\Models\Storage;
 
 class UserController extends Controller
 {
 public function filter(Request $request)
 {
-    $query = Resource::where('status', 'disponible');
     $categories = ResourceCategory::all();
-    $manufacturers = Resource::select('manufacturer')->distinct()->where('status', 'disponible')->get();
+
+    $servers   = Servers::where('status', 'disponible')->get();
+    $vms       = VirtualMachines::where('status', 'disponible')->get();
+    $networks  = Network::where('status', 'disponible')->get();
+    $storages  = Storage::where('status', 'disponible')->get();
+
+    $ressources = collect()->merge($servers)->merge($vms)->merge($networks)->merge($storages);
+
+    if ($request->filled('filter') && $request->filter !== 'all') {
+        $ressources = $ressources->where('id_categorie', (int) $request->filter);
+    }
 
     if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
-    }
-    if ($request->filter && $request->filter != 'all') {
-        $query->where('category_id', $request->filter);
+        $ressources = $ressources->filter(function ($ressource) use ($request) {
+            return str_contains(strtolower($ressource->name),strtolower($request->search)); });
     }
 
-    $ressources = $query->get();
+    $brands = $ressources->pluck('brand')->filter()->unique()->values();
 
-    if($manufacturers){
-        if ($request->manufacturer && $request->manufacturer != 'all') {
-            $query->where('manufacturer', $request->manufacturer);
-        }
-        $ressources = $query->get();
+    if ($request->filled('brand') && $request->brand !== 'all') {
+        $ressources = $ressources->where('brand', $request->brand);
     }
 
-    return view('User.dashboard', compact('categories', 'ressources', 'manufacturers'));
-}
+    return view('User.dashboard', compact('categories','ressources','brands'));
+    }
 
 }
-

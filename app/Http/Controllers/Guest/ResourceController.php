@@ -24,16 +24,16 @@ class ResourceController extends Controller
         $categorie = ResourceCategory::find($categoryId);
         // $ressources;
         if ($categorie->name === "Servers") {
-            $ressources = Servers::all();
+            $ressources = Servers::where('status', 'disponible')->get();
         }
         if ($categorie->name === "Virtual Machines") {
-            $ressources = VirtualMachines::all();
+            $ressources = VirtualMachines::where('status', 'disponible')->get();
         }
         if ($categorie->name === "Networking equipment") {
-            $ressources = Network::all();
+            $ressources = Network::where('status', 'disponible')->get();
         }
         if ($categorie->name === "Storage") {
-            $ressources = Storage::all();
+            $ressources = Storage::where('status', 'disponible')->get();
         }
         return view('Guest.ResourcesGuest', compact('ressources'));
     }

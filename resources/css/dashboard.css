@@ -153,14 +153,15 @@ input:focus{
     padding: 1.5rem;
     margin-bottom: 3.5rem;
     border-radius: 20px;
-    /* height: 70%; */
+    height: 100%;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.123);
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .imgs{
-    height: 42%;
-    width: 100%;
+    display: none;
+    height: 0;
+    width: 0;
     /* height: 100%; */
     background-color: #10b981;
     border-radius: 12px;
@@ -168,6 +169,7 @@ input:focus{
     overflow: hidden;
 }
 .imgs img{
+    display: none;
     width: 100%;
     height: 100%;
     background-size: contain;
@@ -181,7 +183,7 @@ input:focus{
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.187);
 }
 
-.Disponible {
+.unavailable , .available{
     position: absolute;
     top: 16px;
     right: 16px;
@@ -191,7 +193,7 @@ input:focus{
     font-weight: 600;
 }
 
-.Disponible {
+.available {
     
     background: #ecfdf5;
     color: #10b981;
@@ -217,7 +219,8 @@ input:focus{
 }
 
 .resources ul {
-    height: 25%;
+    /* background-color: #10b981; */
+    height: 50%;
     list-style: none;
     color: #6b7280;
     font-size: 0.95rem;
@@ -239,8 +242,8 @@ input:focus{
     color: white;
     padding: 0.6rem 1.2rem;
     border-radius: 12px;
+    /* margin-bottom: 1rem; */
     font-size: 0.9rem;
-    margin-bottom: 5rem;
     /* position: sticky; */
     transition: all 0.3s ease;
 }
@@ -249,6 +252,10 @@ input:focus{
     background-color: white;
     border: rgba(0, 0, 0, 0.229) 1px solid ;
     cursor: pointer;
+}
+.resources > div > div > .unavailable a:hover{
+    cursor: no-drop;
+    background-color: gray;
 }
 footer {
     margin-top: 6rem;

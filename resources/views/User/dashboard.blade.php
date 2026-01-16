@@ -47,12 +47,12 @@
 
                 </select>
 
-                <select name="manufacturer">
-                        <option value="all">All Manufacturers</option>
-    
-                        @foreach($manufacturers as $manufacturer)
-                            <option value="{{ $manufacturer->manufacturer }}"{{ request('manufacturer') == $manufacturer->manufacturer ? 'selected' : '' }}>
-                                {{ $manufacturer->manufacturer }}
+                <select name="brand">
+                        <option value="all">All brands</option>
+
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand }}"{{ request('brand') == $brand ? 'selected' : '' }}>
+                                {{ $brand }}
                             </option>
                         @endforeach
                     </select>
@@ -64,20 +64,52 @@
                 <!-- juste example je pense l'ajout d'autres ressources peut etre fait par laravel avec la base de données -->
                  @foreach($ressources as $ressource)
                 <div>
-                    <span class="Disponible">{{ $ressource->status }}</span>
-
-                    <div class="imgs"><img src="{{ asset($ressource->image) }}" alt="{{ $ressource->name }}"></div>
 
                     <h3>{{ $ressource->name }}</h3>
 
-                    <ul>
+                <ul>
+    
+                    @if($ressource->id_categorie == 1)
+                        <li>Brand : {{ $ressource->brand }}</li>
                         <li>CPU : {{ $ressource->cpu }} cœurs</li>
                         <li>RAM : {{ $ressource->ram }} Go</li>
-                        <li>Stockage : {{ $ressource->storage }} To SSD</li>
+                        <li>Stockage : {{ $ressource->storage }} To</li>
+                        <li>Type stockage : {{ $ressource->storage_type }}</li>
                         <li>OS : {{ $ressource->os }}</li>
-                    </ul>
+                        <li>Localisation : {{ $ressource->location }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
 
-                    <a href="{{ route('reserve', $ressource->id) }}">Réserver</a> <!-- disabled car indisponible-->
+                    @elseif($ressource->id_categorie == 2)
+                        <li>CPU : {{ $ressource->cpu }} vCPU</li>
+                        <li>RAM : {{ $ressource->ram }} Go</li>
+                        <li>Stockage : {{ $ressource->storage }} Go</li>
+                        <li>Type stockage : {{ $ressource->storage_type }}</li>
+                        <li>OS : {{ $ressource->os }}</li>
+                        <li>IP : {{ $ressource->ip_address }}</li>
+                        <li>Serveur hôte : {{ $ressource->server_hote }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+
+                    @elseif($ressource->id_categorie == 3)
+                        <li>Marque : {{ $ressource->brand }}</li>
+                        <li>Type : {{ $ressource->type }}</li>
+                        <li>Modèle : {{ $ressource->model }}</li>
+                        <li>Ports : {{ $ressource->port_number }}</li>
+                        <li>Vitesse : {{ $ressource->speed }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+
+                    @elseif($ressource->id_categorie == 4)
+                        <li>Marque : {{ $ressource->brand }}</li>
+                        <li>Capacité : {{ $ressource->capacity }} To</li>
+                        <li>Type : {{ $ressource->type }}</li>
+                        <li>Vitesse : {{ $ressource->speed }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+                    @endif
+
+                    
+
+                </ul>
+
+                    <a href="{{ route('reservation.create', ['id_categorie' => $ressource->id_categorie, 'id' => $ressource->id ]) }}">Réserver</a> <!-- disabled car indisponible-->
                 </div>
                 @endforeach
                
@@ -102,7 +134,6 @@
         <p>&copy; 2026 Data Center. Tous droits réservés.</p>
 
     </footer>
-    
     
 </body>
 </html>

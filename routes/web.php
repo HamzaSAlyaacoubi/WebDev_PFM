@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReservationController;
 // yassine
 use App\Http\Controllers\Guest\CategoryController;
 use App\Http\Controllers\Guest\ResourceController;
@@ -43,8 +44,10 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 
 Route::get('/categories/{id}/resources', [ResourceController::class, 'index'])->name('categories.index');
 
-Route::get('/Report', function () {
-    return view('User.Report');
-})->name('Report');
+Route::get('/Report', function () {return view('User.Report');})->name('Report');
 
 Route::get('/Reserve/{id}', [ResourceController::class, 'reserve'])->name('reserve');
+
+Route::get('/Reserve/{id_categorie}/{id}', [ReservationController::class, 'create'])->name('reservation.create');
+
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
