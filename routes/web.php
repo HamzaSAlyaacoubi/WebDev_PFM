@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationController;
 // yassine
 use App\Http\Controllers\Guest\CategoryController;
 use App\Http\Controllers\Guest\ResourceController;
+use App\Http\Controllers\ResponsableController;
 use App\Models\ResourceCategory;
 
 
@@ -30,11 +31,14 @@ Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 Route::get('/admin', [AdminController::class, 'afficherUsers'])->name('admin');
 Route::get('/admin/resp/{id}', [AdminController::class, 'toResponsable'])->name('toResponsable');
 Route::get('/admin/user/{id}', [AdminController::class, 'toUtilisateur'])->name('toUtilisateur');
+Route::post('/admin/create/responsable', [AdminController::class, 'createResponsable'])->name('create.responsable');
 
 // Route de Responsable
-Route::get('/responsable', function () {
-    return view('Responsable.responsable');
-})->name('responsable');
+Route::get('/responsable', [ResponsableController::class, 'afficherResources'])->name('responsable');
+Route::get('/responsable/modify/{type}/{id}', [ResponsableController::class, 'modifyResource'])->name('modify-resource');
+Route::post('/responsable/modify/validate/{type}/{id}', [ResponsableController::class, 'validateModification'])->name('validate-modification');
+Route::get('/responsable/create/{type}', [ResponsableController::class, 'createResource'])->name('create-resource');
+Route::post('/responsable/create/validate/{type}', [ResponsableController::class, 'validateCreation'])->name('validate-creation');
 
 
 // yassine

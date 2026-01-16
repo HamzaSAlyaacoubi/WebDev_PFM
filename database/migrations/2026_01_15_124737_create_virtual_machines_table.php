@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('storage');
             $table->string('storage_type')->nullable();
             $table->string('os');
-            $table->binary('ip_address', 16);
+            $table->string('ip_address');
             $table->string('server_hote');
             $table->enum('status', ['disponible', 'indisponible', 'maintenance'])->default('disponible');
             $table->integer('quantity_available');
