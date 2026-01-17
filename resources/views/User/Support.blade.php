@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <img src="" alt="Logo">
+        <span>ᔕEᖇᐯE</span>
 
         <nav>
             <ul>
@@ -35,7 +35,7 @@
             <h3>{{ $reservation->resource->name }}</h3>
             <label for="probleme">Problème rencontré: </label>
             <input type="text" placeholder="Probleme rencontree" id="probleme" name="Problem_type"><br><br>
-            <label for="area">Description:</label><br>
+            <label for="area">Description:</label>
             <textarea name="description" id="area" placeholder="Veuillez Decrire votre probleme"></textarea>
 
                 <button type="submit">Envoyer</button>

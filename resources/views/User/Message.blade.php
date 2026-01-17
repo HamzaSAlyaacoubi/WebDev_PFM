@@ -8,8 +8,7 @@
 </head>
 <body>
     <header>
-        <img src="" alt="Logo">
-
+    <span>ᔕEᖇᐯE</span>
         <nav>
             <ul>
                 <li><a href="{{ route('dashboard') }}">Accueil</a></li>

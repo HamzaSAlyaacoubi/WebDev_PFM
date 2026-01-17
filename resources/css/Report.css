@@ -96,7 +96,7 @@ form h1 {
 
 form h3 {
     margin-top: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.3rem;
     color: #1c1e21;
 }
 
@@ -107,7 +107,7 @@ form p {
 
 label {
     display: block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1.2rem;
     font-weight: 600;
     color: #374151;
 }

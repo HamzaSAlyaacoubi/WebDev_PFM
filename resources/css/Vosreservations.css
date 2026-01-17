@@ -138,6 +138,7 @@ header > a:hover {
     display: grid;
     grid-template-columns: 120px 1fr 200px 120px;
     align-items: center;
+    position: relative;
     gap: 1.5rem;
     box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
@@ -200,6 +201,39 @@ header > a:hover {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.reservation-row .btn {
+    max-width: fit-content;
+    gap: 1rem;
+    /* background-color: #f97316; */
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 65%;
+
+}
+.show{
+    /* display: none; */
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+.show.active{
+    /* background-color: #10b981; */
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 1;
+    max-height: 300px;
+    transform: translateY(-5px);
+    padding: 2rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    
+    /* box-shadow: 1px 1px 7px -1px rgba(128, 128, 128, 0.633); */
 }
 .reservation-row button:hover {
     color: #6366f1;

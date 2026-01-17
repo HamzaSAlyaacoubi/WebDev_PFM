@@ -59,9 +59,22 @@
             <div>
                 <h3>{{ $reservation->resource->name }}</h3>
                 <small>{{ $reservation->start_date }} → {{ $reservation->end_date }}</small>
+
+                <div class="show">
+                <ul>
+                        <li>Capacité : 1 To</li>
+                        <li>Type : HDD</li>
+                        <li>Accès : Réseau</li>
+                </ul>
+            </div>
             </div>
 
-            <button type="button"onclick="window.location.href='{{ route('support.reclamer', $reservation->id) }}'">Reclamer</button>
+            
+
+            <div class="btn">
+                <button type="button"onclick="window.location.href='{{ route('support.reclamer', $reservation->id) }}'">Reclamer</button>
+                <button class="details">Details</button>
+            </div>
         </div>
         @endforeach
 
@@ -83,5 +96,6 @@
 
         <p>&copy; 2026 Data Center. Tous droits réservés.</p>
     </footer>
+    <script src="{{ Vite::asset('resources/js/Vosreservations.js') }}"></script>
 </body>
 </html>
