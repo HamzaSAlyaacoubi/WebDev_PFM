@@ -14,4 +14,8 @@ class Resource extends Model
     {
         return $this->belongsTo(ResourceCategory::class, 'category_id');
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'resource_id');
+    }
 }

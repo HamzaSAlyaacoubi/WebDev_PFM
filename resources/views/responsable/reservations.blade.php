@@ -63,14 +63,16 @@
             @foreach($resources as $resource)
             @if($resource->id_categorie == $reservation->Category_id && $resource->id == $reservation->resource_id)
             <div class="reservation-row">
-                <div>
+                <div class="reservation-infos">
                     <h3>{{$resource->name}}</h3>
                     <p>Date de reservation : {{$reservation->created_at}}</p>
                     <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                 </div>
-                <button class="details-btn">Voir Details</button>
-                <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                <div class="reservation-btns">
+                    <button class="details-btn">Voir Details</button>
+                    <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                    <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                </div>
 
             </div>
             <div class="details">
@@ -92,14 +94,16 @@
             @foreach($resources as $resource)
             @if($resource->id_categorie == $reservation->Category_id && $resource->id == $reservation->resource_id)
             <div class="reservation-row">
-                <div>
+                <div class="reservation-infos">
                     <h3>{{$resource->name}}</h3>
                     <p>Date de reservation : {{$reservation->created_at}}</p>
                     <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                 </div>
-                <button class="details-btn">Voir Details</button>
-                <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                <div class="reservation-btns">
+                    <button class="details-btn">Voir Details</button>
+                    <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                    <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                </div>
 
             </div>
             <div class="details">
@@ -122,14 +126,16 @@
             @foreach($resources as $resource)
             @if($resource->id_categorie == $reservation->Category_id && $resource->id == $reservation->resource_id)
             <div class="reservation-row">
-                <div>
+                <div class="reservation-infos">
                     <h3>{{$resource->name}}</h3>
                     <p>Date de reservation : {{$reservation->created_at}}</p>
                     <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                 </div>
-                <button class="details-btn">Voir Details</button>
-                <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                <div class="reservation-btns">
+                    <button class="details-btn">Voir Details</button>
+                    <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                    <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                </div>
 
             </div>
             <div class="details">
@@ -150,14 +156,16 @@
             @foreach($resources as $resource)
             @if($resource->id_categorie == $reservation->Category_id && $resource->id == $reservation->resource_id)
             <div class="reservation-row">
-                <div>
+                <div class="reservation-infos">
                     <h3>{{$resource->name}}</h3>
                     <p>Date de reservation : {{$reservation->created_at}}</p>
                     <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                 </div>
-                <button class="details-btn">Voir Details</button>
-                <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                <div class="reservation-btns">
+                    <button class="details-btn">Voir Details</button>
+                    <a href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                    <a href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                </div>
 
             </div>
             <div class="details">
