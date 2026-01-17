@@ -61,6 +61,45 @@
                 <div>
                     <h3>{{ $reservation->resource->name }}</h3>
                     <small>{{ $reservation->start_date }} → {{ $reservation->end_date }}</small>
+
+                    <div class="show">
+                        <ul>
+                            <li>Capacité : 1 To</li>
+                            <li>Type : HDD</li>
+                            <li>Accès : Réseau</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="btn">
+                    <button type="button" onclick="window.location.href='{{ route('support.reclamer', $reservation->id) }}'">Reclamer</button>
+                    <button class="details">Details</button>
+                </div>
+            </div>
+            @endforeach
+            >>>>>>> 14470359b7629645c7330b00a35c153d9852fe49
+
+            <div class="stat-card">
+                <h2>{{ $maintenance }}</h2>
+                <p>En maintenance</p>
+            </div>
+
+            <div class="stat-card danger">
+                <h2>{{ $expirees }}</h2>
+                <p>Expirées</p>
+            </div>
+        </section>
+
+        <!-- LIST -->
+        <section class="reservations-list">
+            @foreach($vosreservations as $reservation)
+            <div class="reservation-row">
+                <span class="status active">{{ $reservation->status }}</span>
+                <div>
+                    <h3>{{ $reservation->resource->name }}</h3>
+                    <small>{{ $reservation->start_date }} → {{ $reservation->end_date }}</small>
                 </div>
 
                 <button type="button" onclick="window.location.href='{{ route('support.reclamer', $reservation->id) }}'">Reclamer</button>
@@ -85,6 +124,7 @@
 
         <p>&copy; 2026 Data Center. Tous droits réservés.</p>
     </footer>
+    <script src="{{ Vite::asset('resources/js/Vosreservations.js') }}"></script>
 </body>
 
 </html>
