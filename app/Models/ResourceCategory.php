@@ -34,4 +34,9 @@ class ResourceCategory extends Model
     {
         return $this->hasMany(Storage::class, 'id_categorie');
     }
+
+    public function reservationHistory()
+    {
+        return $this->hasMany(ReservationsHistory::class, 'id_category');
+    }
 }

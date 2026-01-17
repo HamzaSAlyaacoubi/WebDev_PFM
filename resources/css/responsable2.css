@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #f6f7fb;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 200px;
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    padding: 12px;
+    margin-bottom: 10px;
+    color: #555;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.menu li.active,
+.menu li:hover {
+    background: #6c4cff;
+    color: #fff;
+}
+
+.upgrade {
+    background: linear-gradient(135deg, #a98cff, #6c4cff);
+    color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.upgrade button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user img {
+    border-radius: 50%;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.content-section {
+    display: none; /* hide all sections by default */
+}
+
+.content-section.active {
+    display: block; /* show active section */
+}
+
+.content-section h1 {
+    margin-bottom: 1rem;
+}
+
+.resources-menu {
+    display: flex;
+    gap: 5px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.resources-menu li {
+    list-style: none;
+    padding: 12px;
+    /* margin-bottom: 10px; */
+    color: #555;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.resources-menu li.active-resource,
+.resources-menu li:hover {
+    background: #6c4cff;
+    color: #fff;
+}
+
+.resource-table {
+    display: none;
+}
+
+.resource-table.active {
+    display: block;
+}
+
+.modify-form {
+    display: none;
+}
+
+.modify-form.active {
+    display: block;
+}
+
+.modify-form input {
+    width: 300px;
+    height: 2rem;
+    padding: 4px;
+    border: 1px solid #000;
+    border-radius: 6px;
+}
+
+.modify-btn {
+    color: #fff;
+    padding: 5px;
+    background-color: #2e7d32;
+}
+.modify-btn:hover {
+    cursor: pointer;
+    background-color: #47c24d;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+/* TABLE */
+.table-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.table-header input {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.status.active {
+    background: #dff7ea;
+    color: #2e7d32;
+}
+
+.status.inactive {
+    background: #fdecea;
+    color: #c62828;
+}

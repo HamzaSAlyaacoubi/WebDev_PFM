@@ -8,7 +8,9 @@ use App\Http\Controllers\ReservationController;
 // yassine
 use App\Http\Controllers\Guest\CategoryController;
 use App\Http\Controllers\Guest\ResourceController;
+use App\Http\Controllers\ReservationsHistoryController;
 use App\Http\Controllers\ResponsableController;
+use App\Models\ReservationsHistory;
 use App\Models\ResourceCategory;
 
 
@@ -35,10 +37,19 @@ Route::post('/admin/create/responsable', [AdminController::class, 'createRespons
 
 // Route de Responsable
 Route::get('/responsable', [ResponsableController::class, 'afficherResources'])->name('responsable');
+Route::get('/responsable/search', [ResponsableController::class, 'search'])->name('responsable.search');
 Route::get('/responsable/modify/{type}/{id}', [ResponsableController::class, 'modifyResource'])->name('modify-resource');
 Route::post('/responsable/modify/validate/{type}/{id}', [ResponsableController::class, 'validateModification'])->name('validate-modification');
 Route::get('/responsable/create/{type}', [ResponsableController::class, 'createResource'])->name('create-resource');
 Route::post('/responsable/create/validate/{type}', [ResponsableController::class, 'validateCreation'])->name('validate-creation');
+
+Route::get('/responsable/reservations', [ResponsableController::class, 'displayReservations'])->name('responsable.reservations');
+Route::get('/responsable/reservation/{id}/accepted', [ReservationsHistoryController::class, 'acceptReservation'])->name('reservation.accept');
+Route::get('/responsable/reservation/{id}/refuse', [ReservationsHistoryController::class, 'refuseReservation'])->name('reservation.refuse');
+
+Route::get('/responsable/history', [ResponsableController::class, 'displayHistory'])->name('responsable.hitory');
+Route::get('/responsable/reclamations', [ResponsableController::class, 'displayReclamations'])->name('responsable.reclamations');
+Route::get('/responsable/support', [ResponsableController::class, 'displaySupport'])->name('responsable.support');
 
 
 // yassine
@@ -48,7 +59,9 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 
 Route::get('/categories/{id}/resources', [ResourceController::class, 'index'])->name('categories.index');
 
-Route::get('/Report', function () {return view('User.Report');})->name('Report');
+Route::get('/Report', function () {
+    return view('User.Report');
+})->name('Report');
 
 Route::get('/Reserve/{id}', [ResourceController::class, 'reserve'])->name('reserve');
 

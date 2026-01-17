@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             VirtualMachinesSeeder::class,
             NetworkSeeder::class,
             StorageSeeder::class,
+            UsersSeeder::class,
         ]);
     }
 }

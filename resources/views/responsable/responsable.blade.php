@@ -2,127 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsable</title>
+    <!-- <link rel="stylesheet" href="hometech.css"> -->
     @vite('resources/css/responsable.css')
     @vite('resources/js/responsable.js')
 </head>
 
 <body>
-    <div class="container">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <h2 class="logo">ᔕEᖇᐯE</h2>
+    <header>
+        <span>ᔕEᖇᐯE</span>
 
-            <ul class="menu">
-                <li class="active" data-target="dashboard">Dashboard</li>
-                <li data-target="resource">Resource</li>
-                <li data-target="customers">Customers</li>
-                <li data-target="income">Income</li>
-                <li data-target="promote">Promote</li>
-                <li data-target="help">Help</li>
-                <li><a href="{{route('logout')}}" class="btn"><button>Logout</button></a></li>
+        <nav>
+            <ul>
+                <li><a href="{{route('responsable')}}">Ressources</a></li>
+                <li><a href="{{route('responsable.reservations')}}">Reservations</a></li>
+                <li><a href="{{route('responsable.hitory')}}">Historique</a></li>
+                <li><a href="{{route('responsable.reclamations')}}">Reclamations</a></li>
+                <li><a href="{{route('responsable.support')}}">Support</a></li>
+            </ul>
+        </nav>
+
+        <a href="{{route('logout')}}">Se deconnecter</a>
+    </header>
+
+
+    <main>
+        <fieldset>
+            <form method="GET" action="{{ route('responsable.search') }}">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher">
+                <select name="brand">
+                    <option value="">All brands</option>
+                    @foreach($brands as $brand)
+                    <option value="{{ $brand }}" {{ request('brand') == $brand ? 'selected' : '' }}>
+                        {{ $brand }}
+                    </option>
+                    @endforeach
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
+        </fieldset>
+
+        <!-- <div id="h2"><span>Welcome <br><br>Mr.{{auth()->user()->name}} Vous etes maintenant responsable</span></div> -->
+
+        <div class="content-section" id="ressources">
+            <!-- Liste des ressources disponible -->
+            <ul class="resources-menu">
+                <li class="active-resource" data-target="servers">Servers</li>
+                <li data-target="virtualMachines">Virtual Machines</li>
+                <li data-target="networks">Networks</li>
+                <li data-target="storages">Storages</li>
             </ul>
 
-            <div class="upgrade">
-                <p>Upgrade to PRO<br />to get access all Features!</p>
-                <button>Get Pro Now</button>
+            <!-- affichage des ressources -->
+            <div class="resource-table active" id="servers">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Brand</th>
+                            <th>Cpu</th>
+                            <th>Ram</th>
+                            <th>Stockage</th>
+                            <th>Type de Stockage</th>
+                            <th>OS</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Quantite</th>
+                            <th>Description</th>
+                            <th><a href="{{route('create-resource',['type'=>'server'])}}" class="btn">Ajouter</a></th>
+                        </tr>
+                    </thead>
+                    @foreach($resources as $resource)
+                    @if($resource->id_categorie == 1)
+                    <tbody id="servers-body">
+                        <tr>
+                            <td>{{$resource->name}}</td>
+                            <td>{{$resource->brand}}</td>
+                            <td>{{$resource->cpu}}</td>
+                            <td>{{$resource->ram}}</td>
+                            <td>{{$resource->storage}}</td>
+                            <td>{{$resource->storage_type}}</td>
+                            <td>{{$resource->os}}</td>
+                            <td>{{$resource->location}}</td>
+                            <td><span class="status active">{{$resource->status}}</span></td>
+                            <td>{{$resource->quantity_available}}</td>
+                            <td>{{$resource->description}}</td>
+                            <td><button data-target="modify-server" data-id="{{ $resource->id }}"
+                                    data-name="{{ $resource->name }}"
+                                    data-brand="{{ $resource->brand }}"
+                                    data-cpu="{{ $resource->cpu }}"
+                                    data-ram="{{ $resource->ram }}"
+                                    data-storage="{{ $resource->storage }}"
+                                    data-storage_type="{{ $resource->storage_type }}"
+                                    data-os="{{ $resource->os }}"
+                                    data-location="{{ $resource->location }}"
+                                    data-status="{{ $resource->status }}"
+                                    data-quantity="{{ $resource->quantity_available }}"
+                                    data-description="{{ $resource->description }}"
+                                    data-action="{{ route('validate-modification', ['type' => 'server', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
+                        </tr>
+                    </tbody>
+                    @endif
+                    @endforeach
+                </table>
             </div>
-
-            <div class="user">
-                <img src="https://i.pravatar.cc/40" alt="user" />
-                <div>
-                    <strong>Evano</strong>
-                    <span>Project Manager</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- MAIN -->
-        <main class="main">
-            <!-- Dashboard Section -->
-            <div class="content-section active" id="dashboard">
-                <h1>Hello Evano 👋</h1>
-                <div class="stats">
-                    <div class="card">
-                        <p>Total Customers</p>
-                        <h2>5,423</h2>
-                        <span class="green">+16% this month</span>
-                    </div>
-                    <div class="card">
-                        <p>Members</p>
-                        <h2>1,893</h2>
-                        <span class="red">-1% this month</span>
-                    </div>
-                    <div class="card">
-                        <p>Active Now</p>
-                        <h2>189</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Resource Section -->
-            <div class="content-section" id="resource">
-                <h1>All Resources</h1>
-                <ul class="resources-menu">
-                    <li class="active-resource" data-target="servers">Servers</li>
-                    <li data-target="virtualMachines">virtualMachines</li>
-                    <li data-target="networks">Networks</li>
-                    <li data-target="storages">Storages</li>
-                </ul>
-                <div class="table-box resource-table active" id="servers">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Brand</th>
-                                <th>Cpu</th>
-                                <th>Ram</th>
-                                <th>Stockage</th>
-                                <th>Type de Stockage</th>
-                                <th>OS</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Quantite</th>
-                                <th>Description</th>
-                                <th><a href="{{route('create-resource',['type'=>'server'])}}" class="btn">Ajouter</a></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($servers as $server)
-                            <tr>
-                                <td>{{$server->name}}</td>
-                                <td>{{$server->brand}}</td>
-                                <td>{{$server->cpu}}</td>
-                                <td>{{$server->ram}}</td>
-                                <td>{{$server->storage}}</td>
-                                <td>{{$server->storage_type}}</td>
-                                <td>{{$server->os}}</td>
-                                <td>{{$server->location}}</td>
-                                <td><span class="status active">{{$server->status}}</span></td>
-                                <td>{{$server->quantity_available}}</td>
-                                <td>{{$server->description}}</td>
-                                <td><button data-target="modify-server" data-id="{{ $server->id }}"
-                                        data-name="{{ $server->name }}"
-                                        data-brand="{{ $server->brand }}"
-                                        data-cpu="{{ $server->cpu }}"
-                                        data-ram="{{ $server->ram }}"
-                                        data-storage="{{ $server->storage }}"
-                                        data-storage_type="{{ $server->storage_type }}"
-                                        data-os="{{ $server->os }}"
-                                        data-location="{{ $server->location }}"
-                                        data-status="{{ $server->status }}"
-                                        data-quantity="{{ $server->quantity_available }}"
-                                        data-description="{{ $server->description }}"
-                                        data-action="{{ route('validate-modification', ['type' => 'server', 'id' => $server->id]) }}" class="modify-btn">Modifier</button></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-box resource-table" id="virtualMachines">
-                    <table>
+            <div class="resource-table" id="virtualMachines">
+                <table>
+                    <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Cpu</th>
@@ -137,40 +126,45 @@
                             <th>Description</th>
                             <th><a href="{{route('create-resource',['type'=>'vm'])}}" class="btn">Ajouter</a></th>
                         </tr>
-                        @foreach($virtualMachines as $vm)
+                    </thead>
+                    @foreach($resources as $resource)
+                    @if($resource->id_categorie == 2)
+                    <tbody id="virtualMachines-body">
                         <tr>
-                            <td>{{$vm->name}}</td>
-                            <td>{{$vm->cpu}}</td>
-                            <td>{{$vm->ram}}</td>
-                            <td>{{$vm->storage}}</td>
-                            <td>{{$vm->storage_type}}</td>
-                            <td>{{$vm->os}}</td>
-                            <td>{{$vm->ip_address}}</td>
-                            <td>{{$vm->server_hote}}</td>
-                            <td><span class="status active">{{$vm->status}}</span></td>
-                            <td>{{$vm->quantity_available}}</td>
-                            <td>{{$vm->description}}</td>
-                            <td><button data-target="modify-vm" data-target="modify-vm"
-                                    data-id="{{ $vm->id }}"
-                                    data-name="{{ $vm->name }}"
-                                    data-cpu="{{ $vm->cpu }}"
-                                    data-ram="{{ $vm->ram }}"
-                                    data-storage="{{ $vm->storage }}"
-                                    data-storage_type="{{ $vm->storage_type }}"
-                                    data-os="{{ $vm->os }}"
-                                    data-ip="{{ $vm->ip_address }}"
-                                    data-server="{{ $vm->server_hote }}"
-                                    data-status="{{ $vm->status }}"
-                                    data-quantity="{{ $vm->quantity_available }}"
-                                    data-description="{{ $vm->description }}"
-                                    data-action="{{ route('validate-modification', ['type' => 'vm', 'id' => $vm->id]) }}" class="modify-btn">Modifier</button></td>
+                            <td>{{$resource->name}}</td>
+                            <td>{{$resource->cpu}}</td>
+                            <td>{{$resource->ram}}</td>
+                            <td>{{$resource->storage}}</td>
+                            <td>{{$resource->storage_type}}</td>
+                            <td>{{$resource->os}}</td>
+                            <td>{{$resource->ip_address}}</td>
+                            <td>{{$resource->server_hote}}</td>
+                            <td><span class="status active">{{$resource->status}}</span></td>
+                            <td>{{$resource->quantity_available}}</td>
+                            <td>{{$resource->description}}</td>
+                            <td><button data-target="modify-vm"
+                                    data-id="{{ $resource->id }}"
+                                    data-name="{{ $resource->name }}"
+                                    data-cpu="{{ $resource->cpu }}"
+                                    data-ram="{{ $resource->ram }}"
+                                    data-storage="{{ $resource->storage }}"
+                                    data-storage_type="{{ $resource->storage_type }}"
+                                    data-os="{{ $resource->os }}"
+                                    data-ip="{{ $resource->ip_address }}"
+                                    data-server="{{ $resource->server_hote }}"
+                                    data-status="{{ $resource->status }}"
+                                    data-quantity="{{ $resource->quantity_available }}"
+                                    data-description="{{ $resource->description }}"
+                                    data-action="{{ route('validate-modification', ['type' => 'vm', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
                         </tr>
-                        @endforeach
-
-                    </table>
-                </div>
-                <div class="table-box resource-table" id="networks">
-                    <table>
+                    </tbody>
+                    @endif
+                    @endforeach
+                </table>
+            </div>
+            <div class="resource-table" id="networks">
+                <table>
+                    <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Brand</th>
@@ -183,36 +177,41 @@
                             <th>Description</th>
                             <th><a href="{{route('create-resource',['type'=>'network'])}}" class="btn">Ajouter</a></th>
                         </tr>
-                        @foreach($networks as $network)
+                    </thead>
+                    @foreach($resources as $resource)
+                    @if($resource->id_categorie == 3)
+                    <tbody id="networks-body">
                         <tr>
-                            <td>{{$network->name}}</td>
-                            <td>{{$network->brand}}</td>
-                            <td>{{$network->type}}</td>
-                            <td>{{$network->model}}</td>
-                            <td>{{$network->port_number}}</td>
-                            <td>{{$network->speed}}</td>
-                            <td><span class="status active">{{$network->status}}</span></td>
-                            <td>{{$network->quantity_available}}</td>
-                            <td>{{$network->description}}</td>
+                            <td>{{$resource->name}}</td>
+                            <td>{{$resource->brand}}</td>
+                            <td>{{$resource->type}}</td>
+                            <td>{{$resource->model}}</td>
+                            <td>{{$resource->port_number}}</td>
+                            <td>{{$resource->speed}}</td>
+                            <td><span class="status active">{{$resource->status}}</span></td>
+                            <td>{{$resource->quantity_available}}</td>
+                            <td>{{$resource->description}}</td>
                             <td><button data-target="modify-network" data-target="modify-network"
-                                    data-id="{{ $network->id }}"
-                                    data-name="{{ $network->name }}"
-                                    data-brand="{{ $network->brand }}"
-                                    data-type="{{ $network->type }}"
-                                    data-model="{{ $network->model }}"
-                                    data-port="{{ $network->port_number }}"
-                                    data-speed="{{ $network->speed }}"
-                                    data-status="{{ $network->status }}"
-                                    data-quantity="{{ $network->quantity_available }}"
-                                    data-description="{{ $network->description }}"
-                                    data-action="{{ route('validate-modification', ['type' => 'network', 'id' => $network->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-id="{{ $resource->id }}"
+                                    data-name="{{ $resource->name }}"
+                                    data-brand="{{ $resource->brand }}"
+                                    data-type="{{ $resource->type }}"
+                                    data-model="{{ $resource->model }}"
+                                    data-port="{{ $resource->port_number }}"
+                                    data-speed="{{ $resource->speed }}"
+                                    data-status="{{ $resource->status }}"
+                                    data-quantity="{{ $resource->quantity_available }}"
+                                    data-description="{{ $resource->description }}"
+                                    data-action="{{ route('validate-modification', ['type' => 'network', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
                         </tr>
-                        @endforeach
-
-                    </table>
-                </div>
-                <div class="table-box resource-table" id="storages">
-                    <table>
+                    </tbody>
+                    @endif
+                    @endforeach
+                </table>
+            </div>
+            <div class="resource-table" id="storages">
+                <table>
+                    <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Brand</th>
@@ -224,397 +223,284 @@
                             <th>Description</th>
                             <th><a href="{{route('create-resource',['type'=>'storage'])}}" class="btn">Ajouter</a></th>
                         </tr>
-                        @foreach($storages as $storage)
+                    </thead>
+                    @foreach($resources as $resource)
+                    @if($resource->id_categorie == 4)
+                    <tbody id="storages-body">
                         <tr>
-                            <td>{{$storage->name}}</td>
-                            <td>{{$storage->brand}}</td>
-                            <td>{{$storage->capacity}}</td>
-                            <td>{{$storage->type}}</td>
-                            <td>{{$storage->speed}}</td>
-                            <td><span class="status active">{{$storage->status}}</span></td>
-                            <td>{{$storage->quantity_available}}</td>
-                            <td>{{$storage->description}}</td>
+                            <td>{{$resource->name}}</td>
+                            <td>{{$resource->brand}}</td>
+                            <td>{{$resource->capacity}}</td>
+                            <td>{{$resource->type}}</td>
+                            <td>{{$resource->speed}}</td>
+                            <td><span class="status active">{{$resource->status}}</span></td>
+                            <td>{{$resource->quantity_available}}</td>
+                            <td>{{$resource->description}}</td>
                             <td><button data-target="modify-storage" data-target="modify-storage"
-                                    data-id="{{ $storage->id }}"
-                                    data-name="{{ $storage->name }}"
-                                    data-brand="{{ $storage->brand }}"
-                                    data-capacity="{{ $storage->capacity }}"
-                                    data-type="{{ $storage->type }}"
-                                    data-speed="{{ $storage->speed }}"
-                                    data-status="{{ $storage->status }}"
-                                    data-quantity="{{ $storage->quantity_available }}"
-                                    data-description="{{ $storage->description }}"
-                                    data-action="{{ route('validate-modification', ['type' => 'storage', 'id' => $storage->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-id="{{ $resource->id }}"
+                                    data-name="{{ $resource->name }}"
+                                    data-brand="{{ $resource->brand }}"
+                                    data-capacity="{{ $resource->capacity }}"
+                                    data-type="{{ $resource->type }}"
+                                    data-speed="{{ $resource->speed }}"
+                                    data-status="{{ $resource->status }}"
+                                    data-quantity="{{ $resource->quantity_available }}"
+                                    data-description="{{ $resource->description }}"
+                                    data-action="{{ route('validate-modification', ['type' => 'storage', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
                         </tr>
-                        @endforeach
+                    </tbody>
+                    @endif
+                    @endforeach
+                </table>
+            </div>
 
-                    </table>
-                </div>
-                <!-- <div class="table-box resource-table active" id="servers">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Brand</th>
-                                <th>Cpu</th>
-                                <th>Ram</th>
-                                <th>Stockage</th>
-                                <th>Type de Stockage</th>
-                                <th>OS</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Quantite</th>
-                                <th>Description</th>
-                                <th><a href="{{route('create-resource',['type'=>'server'])}}" class="btn">Ajouter</a></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($servers as $server)
-                            <tr>
-                                <td>{{$server->name}}</td>
-                                <td>{{$server->brand}}</td>
-                                <td>{{$server->cpu}}</td>
-                                <td>{{$server->ram}}</td>
-                                <td>{{$server->storage}}</td>
-                                <td>{{$server->storage_type}}</td>
-                                <td>{{$server->os}}</td>
-                                <td>{{$server->location}}</td>
-                                <td><span class="status active">{{$server->status}}</span></td>
-                                <td>{{$server->quantity_available}}</td>
-                                <td>{{$server->description}}</td>
-                                <td><a href="{{route('modify-resource', ['type' => 'server','id' => $server->id])}}" class="btn">Modifier</a></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-box resource-table" id="virtualMachines">
+            <!-- modification des resources -->
+            <div class="modify-form table-box" id="modify-server">
+                <form id="modify-server-form" method="post">
+                    @csrf
+                    <h1>Serveur</h1>
+                    <input type="hidden" name="id" id="server-id">
                     <table>
                         <tr>
                             <th>Nom</th>
-                            <th>Cpu</th>
-                            <th>Ram</th>
+                            <td><input type="text" name="name" id="server-name"></td>
+                        </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td><input type="text" name="brand" id="server-brand"></td>
+                        </tr>
+                        <tr>
+                            <th>CPU</th>
+                            <td><input type="number" name="cpu" id="server-cpu"></td>
+                        </tr>
+                        <tr>
+                            <th>RAM</th>
+                            <td><input type="number" name="ram" id="server-ram"></td>
+                        </tr>
+                        <tr>
                             <th>Stockage</th>
+                            <td><input type="number" name="storage" id="server-storage"></td>
+                        </tr>
+                        <tr>
                             <th>Type de Stockage</th>
+                            <td><input type="text" name="storage_type" id="server-storage-type"></td>
+                        </tr>
+                        <tr>
                             <th>OS</th>
+                            <td><input type="text" name="os" id="server-os"></td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td><input type="text" name="location" id="server-location"></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td><input type="text" name="status" id="server-status"></td>
+                        </tr>
+                        <tr>
+                            <th>Quantité</th>
+                            <td><input type="number" name="quantity_available" id="server-quantity"></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td><input type="text" name="description" id="server-description"></td>
+                        </tr>
+                        <tr>
+                            <th>Action</th>
+                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
+                        </tr>
+                    </table>
+
+                    @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div>{{$error}}</div>
+                    @endforeach
+                    @endif
+                </form>
+            </div>
+            <div class="modify-form table-box" id="modify-vm">
+                <form id="modify-vm-form" method="post">
+                    @csrf
+                    <h1>Virtual Machine</h1>
+                    <input type="hidden" name="id" id="vm-id">
+                    <table>
+                        <tr>
+                            <th>Nom</th>
+                            <td><input type="text" name="name" id="vm-name"></td>
+                        </tr>
+                        <tr>
+                            <th>Cpu</th>
+                            <td><input type="number" name="cpu" id="vm-cpu"></td>
+                        </tr>
+                        <tr>
+                            <th>Ram</th>
+                            <td><input type="number" name="ram" id="vm-ram"></td>
+                        </tr>
+                        <tr>
+                            <th>Stockage</th>
+                            <td><input type="number" name="storage" id="vm-storage"></td>
+                        </tr>
+                        <tr>
+                            <th>Type de Stockage</th>
+                            <td><input type="text" name="storage_type" id="vm-storage-type"></td>
+                        </tr>
+                        <tr>
+                            <th>OS</th>
+                            <td><input type="text" name="os" id="vm-os"></td>
+                        </tr>
+                        <tr>
                             <th>IP Address</th>
+                            <td><input type="text" name="ip_address" id="vm-ip"></td>
+                        </tr>
+                        <tr>
                             <th>Serveur Hote</th>
-                            <th>Status</th>
-                            <th>Quantite</th>
-                            <th>Description</th>
-                            <th><a href="{{route('create-resource',['type'=>'vm'])}}" class="btn">Ajouter</a></th>
+                            <td><input type="text" name="server_hote" id="vm-server"></td>
                         </tr>
-                        @foreach($virtualMachines as $vm)
                         <tr>
-                            <td>{{$vm->name}}</td>
-                            <td>{{$vm->cpu}}</td>
-                            <td>{{$vm->ram}}</td>
-                            <td>{{$vm->storage}}</td>
-                            <td>{{$vm->storage_type}}</td>
-                            <td>{{$vm->os}}</td>
-                            <td>{{$vm->ip_address}}</td>
-                            <td>{{$vm->server_hote}}</td>
-                            <td><span class="status active">{{$vm->status}}</span></td>
-                            <td>{{$vm->quantity_available}}</td>
-                            <td>{{$vm->description}}</td>
-                            <td><a href="{{route('modify-resource', ['type' => 'vm','id' => $vm->id])}}" class=" btn">Modifier</a></td>
+                            <th>Status</th>
+                            <td><input type="text" name="status" id="vm-status"></td>
                         </tr>
-                        @endforeach
-
+                        <tr>
+                            <th>Quantite</th>
+                            <td><input type="number" name="quantity_available" id="vm-quantity"></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td><input type="text" name="description" id="vm-description"></td>
+                        </tr>
+                        <tr>
+                            <th>Action</th>
+                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
+                        </tr>
                     </table>
-                </div>
-                <div class="table-box resource-table" id="networks">
+                    @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div>{{$error}}</div>
+                    @endforeach
+                    @endif
+                </form>
+            </div>
+            <div class="modify-form table-box" id="modify-network">
+                <form id="modify-network-form" method="post">
+                    @csrf
+                    <h1>Network</h1>
+                    <input type="hidden" name="id" id="network-id">
                     <table>
                         <tr>
                             <th>Nom</th>
+                            <td><input type="text" name="name" id="network-name"></td>
+                        </tr>
+                        <tr>
                             <th>Brand</th>
+                            <td><input type="text" name="brand" id="network-brand"></td>
+                        </tr>
+                        <tr>
                             <th>Type</th>
+                            <td><input type="text" name="type" id="network-type"></td>
+                        </tr>
+                        <tr>
                             <th>Model</th>
-                            <th>Port Number</th>
-                            <th>Speed</th>
-                            <th>Status</th>
-                            <th>Quantite</th>
-                            <th>Description</th>
-                            <th><a href="{{route('create-resource',['type'=>'network'])}}" class="btn">Ajouter</a></th>
+                            <td><input type="text" name="model" id="network-model"></td>
                         </tr>
-                        @foreach($networks as $network)
                         <tr>
-                            <td>{{$network->name}}</td>
-                            <td>{{$network->brand}}</td>
-                            <td>{{$network->type}}</td>
-                            <td>{{$network->model}}</td>
-                            <td>{{$network->port_number}}</td>
-                            <td>{{$network->speed}}</td>
-                            <td><span class="status active">{{$network->status}}</span></td>
-                            <td>{{$network->quantity_available}}</td>
-                            <td>{{$network->description}}</td>
-                            <td><a href="{{route('modify-resource', ['type' => 'network','id' => $network->id])}}" class="btn">Modifier</a></td>
+                            <th>Port Number</th>
+                            <td><input type="number" name="port_number" id="network-port"></td>
                         </tr>
-                        @endforeach
-
+                        <tr>
+                            <th>Speed</th>
+                            <td><input type="text" name="speed" id="network-speed"></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td><input type="text" name="status" id="network-status"></td>
+                        </tr>
+                        <tr>
+                            <th>Quantite</th>
+                            <td><input type="number" name="quantity_available" id="network-quantity"></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td><input type="text" name="description" id="network-description"></td>
+                        </tr>
+                        <tr>
+                            <th>Action</th>
+                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
+                        </tr>
                     </table>
-                </div>
-                <div class="table-box resource-table" id="storages">
+                    @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div>{{$error}}</div>
+                    @endforeach
+                    @endif
+                </form>
+            </div>
+            <div class="modify-form table-box" id="modify-storage">
+                <form id="modify-storage-form" method="post">
+                    @csrf
+                    <h1>Storage</h1>
+                    <input type="hidden" name="id" id="storage-id">
                     <table>
                         <tr>
                             <th>Nom</th>
-                            <th>Brand</th>
-                            <th>Capacity</th>
-                            <th>Type</th>
-                            <th>Speed</th>
-                            <th>Status</th>
-                            <th>Quantite</th>
-                            <th>Description</th>
-                            <th><a href="{{route('create-resource',['type'=>'storage'])}}" class="btn">Ajouter</a></th>
+                            <td><input type="text" name="name" id="storage-name"></td>
                         </tr>
-                        @foreach($storages as $storage)
                         <tr>
-                            <td>{{$storage->name}}</td>
-                            <td>{{$storage->brand}}</td>
-                            <td>{{$storage->capacity}}</td>
-                            <td>{{$storage->type}}</td>
-                            <td>{{$storage->speed}}</td>
-                            <td><span class="status active">{{$storage->status}}</span></td>
-                            <td>{{$storage->quantity_available}}</td>
-                            <td>{{$storage->description}}</td>
-                            <td><a href="{{route('modify-resource', ['type' => 'storage','id' => $storage->id])}}" class="btn">Modifier</a></td>
+                            <th>Brand</th>
+                            <td><input type="text" name="brand" id="storage-brand"></td>
                         </tr>
-                        @endforeach
-
+                        <tr>
+                            <th>Capacity</th>
+                            <td><input type="text" name="capacity" id="storage-capacity"></td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td><input type="text" name="type" id="storage-type"></td>
+                        </tr>
+                        <tr>
+                            <th>Speed</th>
+                            <td><input type="text" name="speed" id="storage-speed"></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td><input type="text" name="status" id="storage-status"></td>
+                        </tr>
+                        <tr>
+                            <th>Quantite</th>
+                            <td><input type="number" name="quantity_available" id="storage-quantity"></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td><input type="text" name="description" id="storage-description"></td>
+                        </tr>
+                        <tr>
+                            <th>Action</th>
+                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
+                        </tr>
                     </table>
-                </div> -->
+                    @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div>{{$error}}</div>
+                    @endforeach
+                    @endif
+                </form>
+            </div>
+        </div>
+    </main>
 
-                <div class="modify-form table-box" id="modify-server">
-                    <form id="modify-server-form" method="post">
-                        @csrf
-                        <h1>Serveur</h1>
-                        <input type="hidden" name="id" id="server-id">
-                        <table>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Brand</th>
-                                <th>Cpu</th>
-                                <th>Ram</th>
-                                <th>Stockage</th>
-                                <th>Type de Stockage</th>
-                                <th>OS</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Quantite</th>
-                                <th>Description</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="name" id="server-name"></td>
-                                <td><input type="text" name="brand" id="server-brand"></td>
-                                <td><input type="number" name="cpu" id="server-cpu"></td>
-                                <td><input type="number" name="ram" id="server-ram"></td>
-                                <td><input type="number" name="storage" id="server-storage"></td>
-                                <td><input type="text" name="storage_type" id="server-storage-type"></td>
-                                <td><input type="text" name="os" id="server-os"></td>
-                                <td><input type="text" name="location" id="server-location"></td>
-                                <td><input type="text" name="status" id="server-status"></td>
-                                <td><input type="number" name="quantity_available" id="server-quantity"></td>
-                                <td><input type="text" name="description" id="server-description"></td>
-                                <td><button class="btn" type="submit">Valider</button></td>
-                            </tr>
-                        </table>
-                        @if($errors->any())
-                        @foreach($errors->all() as $error)
-                        <div>{{$error}}</div>
-                        @endforeach
-                        @endif
-                    </form>
-                </div>
-                <div class="modify-form table-box" id="modify-vm">
-                    <form id="modify-vm-form" method="post">
-                        @csrf
-                        <h1>Virtual Machine</h1>
-                        <input type="hidden" name="id" id="vm-id">
-                        <table>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Cpu</th>
-                                <th>Ram</th>
-                                <th>Stockage</th>
-                                <th>Type de Stockage</th>
-                                <th>OS</th>
-                                <th>IP Address</th>
-                                <th>Serveur Hote</th>
-                                <th>Status</th>
-                                <th>Quantite</th>
-                                <th>Description</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="name" id="vm-name"></td>
-                                <td><input type="number" name="cpu" id="vm-cpu"></td>
-                                <td><input type="number" name="ram" id="vm-ram"></td>
-                                <td><input type="number" name="storage" id="vm-storage"></td>
-                                <td><input type="text" name="storage_type" id="vm-storage-type"></td>
-                                <td><input type="text" name="os" id="vm-os"></td>
-                                <td><input type="text" name="ip_address" id="vm-ip"></td>
-                                <td><input type="text" name="server_hote" id="vm-server"></td>
-                                <td><input type="text" name="status" id="vm-status"></td>
-                                <td><input type="number" name="quantity_available" id="vm-quantity"></td>
-                                <td><input type="text" name="description" id="vm-description"></td>
-                                <td><button class="btn" type="submit">Valider</button></td>
-                            </tr>
-                        </table>
-                        @if($errors->any())
-                        @foreach($errors->all() as $error)
-                        <div>{{$error}}</div>
-                        @endforeach
-                        @endif
-                    </form>
-                </div>
-                <div class="modify-form table-box" id="modify-network">
-                    <form id="modify-network-form" method="post">
-                        @csrf
-                        <h1>Network</h1>
-                        <input type="hidden" name="id" id="network-id">
-                        <table>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Brand</th>
-                                <th>Type</th>
-                                <th>Model</th>
-                                <th>Port Number</th>
-                                <th>Speed</th>
-                                <th>Status</th>
-                                <th>Quantite</th>
-                                <th>Description</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="name" id="network-name"></td>
-                                <td><input type="text" name="brand" id="network-brand"></td>
-                                <td><input type="text" name="type" id="network-type"></td>
-                                <td><input type="text" name="model" id="network-model"></td>
-                                <td><input type="number" name="port_number" id="network-port"></td>
-                                <td><input type="text" name="speed" id="network-speed"></td>
-                                <td><input type="text" name="status" id="network-status"></td>
-                                <td><input type="number" name="quantity_available" id="network-quantity"></td>
-                                <td><input type="text" name="description" id="network-description"></td>
-                                <td><button class="btn" type="submit">Valider</button></td>
-                            </tr>
-                        </table>
-                        @if($errors->any())
-                        @foreach($errors->all() as $error)
-                        <div>{{$error}}</div>
-                        @endforeach
-                        @endif
-                    </form>
-                </div>
-                <div class="modify-form table-box" id="modify-storage">
-                    <form id="modify-storage-form" method="post">
-                        @csrf
-                        <h1>Storage</h1>
-                        <input type="hidden" name="id" id="storage-id">
-                        <table>
-                            <tr>
-                                <th>Nom</th>
-                                <td><input type="text" name="name" id="storage-name"></td>
-                            </tr>
-                            <tr>
-                                <th>Brand</th>
-                                <td><input type="text" name="brand" id="storage-brand"></td>
-                            </tr>
-                            <tr>
-                                <th>Capacity</th>
-                                <td><input type="text" name="capacity" id="storage-capacity"></td>
-                            </tr>
-                            <tr>
-                                <th>Type</th>
-                                <td><input type="text" name="type" id="storage-type"></td>
-                            </tr>
-                            <tr>
-                                <th>Speed</th>
-                                <td><input type="text" name="speed" id="storage-speed"></td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td><input type="text" name="status" id="storage-status"></td>
-                            </tr>
-                            <tr>
-                                <th>Quantite</th>
-                                <td><input type="number" name="quantity_available" id="storage-quantity"></td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td><input type="text" name="description" id="storage-description"></td>
-                            </tr>
-                            <tr>
-                                <th>Action</th>
-                                <td><button class="btn" type="submit">Valider</button></td>
-                            </tr>
-                        </table>
-                        @if($errors->any())
-                        @foreach($errors->all() as $error)
-                        <div>{{$error}}</div>
-                        @endforeach
-                        @endif
-                    </form>
-                </div>
-            </div>
+    <footer id="contact">
+        <h1>Contact</h1>
+        <span>Nos reseaux sociaux</span>
+        <ul>
+            <li><a href="https://www.instagram.com"><img src="../images/instagram.jpeg" alt="Logo Instagram" width="50" height="50"></a></li>
+            <li><a href="https://www.facebook.com"><img src="../images/facebook.jpeg" alt="Logo Facebook" width="50" height="50"></a></li>
+            <li><a href="https://www.tiktok.com"><img src="../images/tikTok.jpeg" alt="Logo TikTok" width="50" height="50"></a></li>
+            <li><a href="tel:+212660750696"><img src="../images/whatsApp.jpeg" alt="Logo WhatsApp" width="50" height="50"></a></li>
+        </ul>
+        <p id="contactLink"><a href="mailto:contact@datacenter.ma">contact@datacenter.ma</a></p>
+        <p>&copy; 2026 Data Center. Tous droits réservés.</p>
+    </footer>
 
-            <!-- Customers Section -->
-            <div class="content-section" id="customers">
-                <h1>All Customers</h1>
-                <div class="table-box">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Customer Name</th>
-                                <th>Company</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Country</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jane Cooper</td>
-                                <td>Microsoft</td>
-                                <td>(225) 555-0118</td>
-                                <td>jane@microsoft.com</td>
-                                <td>United States</td>
-                                <td><span class="status active">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>Floyd Miles</td>
-                                <td>Yahoo</td>
-                                <td>(205) 555-0100</td>
-                                <td>floyd@yahoo.com</td>
-                                <td>Kiribati</td>
-                                <td><span class="status inactive">Inactive</span></td>
-                            </tr>
-                            <tr>
-                                <td>Ronald Richards</td>
-                                <td>Adobe</td>
-                                <td>(302) 555-0107</td>
-                                <td>ronald@adobe.com</td>
-                                <td>Israel</td>
-                                <td><span class="status inactive">Inactive</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Other Sections -->
-            <div class="content-section" id="income">
-                <h1>Income Section</h1>
-                <p>Here you can view your income reports.</p>
-            </div>
-            <div class="content-section" id="promote">
-                <h1>Promote Section</h1>
-                <p>Marketing and promotion tools go here.</p>
-            </div>
-            <div class="content-section" id="help">
-                <h1>Help Section</h1>
-                <p>Support and FAQs.</p>
-            </div>
-        </main>
-    </div>
+    <script src="hometech.js"></script>
 </body>
 
 </html>

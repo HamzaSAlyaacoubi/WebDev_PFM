@@ -17,29 +17,50 @@
         <table>
             <tr>
                 <th>Nom</th>
-                <th>Brand</th>
-                <th>Cpu</th>
-                <th>Ram</th>
-                <th>Stockage</th>
-                <th>Type de Stockage</th>
-                <th>OS</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Quantite</th>
-                <th>Description</th>
+                <td><input type="text" name="name"></td>
             </tr>
             <tr>
-                <td><input type="text" name="name"></td>
+                <th>Brand</th>
                 <td><input type="text" name="brand"></td>
+            </tr>
+            <tr>
+                <th>Cpu</th>
                 <td><input type="number" name="cpu"></td>
+            </tr>
+            <tr>
+                <th>Ram</th>
                 <td><input type="number" name="ram"></td>
+            </tr>
+            <tr>
+                <th>Stockage</th>
                 <td><input type="number" name="storage"></td>
+            </tr>
+            <tr>
+                <th>Type de Stockage</th>
                 <td><input type="text" name="storage_type"></td>
+            </tr>
+            <tr>
+                <th>OS</th>
                 <td><input type="text" name="os"></td>
+            </tr>
+            <tr>
+                <th>Location</th>
                 <td><input type="text" name="location"></td>
+            </tr>
+            <tr>
+                <th>Status</th>
                 <td><input type="text" name="status"></td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
                 <td><input type="number" name="quantity_available"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
                 <td><input type="text" name="description"></td>
+            </tr>
+            <tr>
+                <th>Action</th>
                 <td><button class="btn" type="submit">Valider</button></td>
             </tr>
         </table>

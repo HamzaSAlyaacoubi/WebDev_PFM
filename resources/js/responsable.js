@@ -1,4 +1,4 @@
-const menuItems = document.querySelectorAll(".menu li");
+/* const menuItems = document.querySelectorAll(".menu li");
 const sections = document.querySelectorAll(".content-section");
 
 menuItems.forEach((item) => {
@@ -14,7 +14,7 @@ menuItems.forEach((item) => {
         const target = item.getAttribute("data-target");
         document.getElementById(target).classList.add("active");
     });
-});
+}); */
 
 // new code
 // code for switch between resources tables with buttons list
@@ -141,3 +141,48 @@ modifyBtns.forEach((btn) => {
         }
     });
 });
+
+const searchInput = document.getElementById("search-input");
+
+let debounceTimer;
+
+searchInput.addEventListener("keyup", function () {
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+        const query = searchInput.value;
+        const activeTab = document.querySelector(
+            ".resources-menu .active-resource"
+        );
+        const type = activeTab.dataset.target;
+
+        fetch(`/responsable/search?search=${query}&type=${type}`)
+            .then((res) => res.json())
+            .then((data) => updateTable(type, data));
+    }, 300);
+});
+
+function updateTable(type, data) {
+    const tbody = document.getElementById(`${type}-body`);
+    tbody.innerHTML = "";
+
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12">No results</td></tr>`;
+        return;
+    }
+
+    data.forEach((item) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.brand ?? "-"}</td>
+                <td>${item.cpu ?? "-"}</td>
+                <td>${item.ram ?? "-"}</td>
+                <td>${item.storage ?? "-"}</td>
+                <td>${item.status ?? "-"}</td>
+                <td>${item.quantity_available ?? "-"}</td>
+                <td>${item.description ?? "-"}</td>
+            </tr>
+        `;
+    });
+}

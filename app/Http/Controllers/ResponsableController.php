@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Network;
+use App\Models\Reservation;
 use App\Models\ResourceCategory;
 use App\Models\Servers;
 use App\Models\Storage;
@@ -13,13 +14,44 @@ class ResponsableController extends Controller
 {
     function afficherResources()
     {
+        // Selection all resources
         $servers = Servers::all();
         $virtualMachines = VirtualMachines::all();
         $networks = Network::all();
         $storages = Storage::all();
 
-        return view('Responsable.responsable', compact('servers', 'virtualMachines', 'networks', 'storages'));
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+        $brands = $resources->pluck('brand')->filter()->unique()->values();
+
+        return view('Responsable.responsable', compact('resources', 'brands'));
     }
+
+    function search(Request $request)
+    {
+        // Selection all resources
+        $servers = Servers::all();
+        $virtualMachines = VirtualMachines::all();
+        $networks = Network::all();
+        $storages = Storage::all();
+
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+        if ($request->filled('search')) {
+            $resources = $resources->filter(function ($ressource) use ($request) {
+                return str_contains(strtolower($ressource->name), strtolower($request->search));
+            });
+        }
+
+        $brands = $resources->pluck('brand')->filter()->unique()->values();
+
+        if ($request->filled('brand') && $request->brand !== 'all') {
+            $resources = $resources->where('brand', $request->brand);
+        }
+
+
+        return view('Responsable.responsable', compact('resources', 'brands'));
+    }
+
 
     function modifyResource($type, $id)
     {
@@ -184,5 +216,45 @@ class ResponsableController extends Controller
         }
 
         return redirect()->route('responsable')->with('success', 'Modification avec succes');
+    }
+
+    function displayReservations()
+    {
+        // Selection all resources
+        $servers = Servers::all();
+        $virtualMachines = VirtualMachines::all();
+        $networks = Network::all();
+        $storages = Storage::all();
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+        // Selection all reservations
+        $reservations = Reservation::all();
+        $currentReservationsCount = Reservation::count();
+        static $totalReservationsCount = 0;
+        static $reservationsAccepted = 0;
+        static $reservationsRefused = 0;
+        return view('Responsable.reservations', compact(
+            'reservations',
+            'resources',
+            'currentReservationsCount',
+            'totalReservationsCount',
+            'reservationsAccepted',
+            'reservationsRefused'
+        ));
+    }
+
+    function displayHistory()
+    {
+        return view('Responsable.history');
+    }
+
+    function displayReclamations()
+    {
+        return view('Responsable.reclamations');
+    }
+
+    function displaySupport()
+    {
+        return view('Responsable.support');
     }
 }
