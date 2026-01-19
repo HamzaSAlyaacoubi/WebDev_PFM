@@ -18,4 +18,8 @@ class Resource extends Model
     {
         return $this->hasMany(Reservation::class, 'resource_id');
     }
+    public function histories()
+    {
+        return $this->hasMany(ReservationsHistory::class, 'id_resource');
+    }
 }

@@ -2,30 +2,36 @@
 
 namespace App\Http\Controllers;
 use App\Models\Reservation;
+use App\Models\ReservationsHistory;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Resource;
 use Carbon\Carbon;
 
+use function Pest\Laravel\get;
+
 class VosReservationController extends Controller
 {
     function vosreservations()
-    {
-        
-    $vosreservations =Reservation::with('resource')->where('user_id', Auth::id())->get();
-    //Pour les statistiques
+{
+    $vosreservations = Reservation::where('user_id', Auth::id())->get();
+    $histories = ReservationsHistory::where('id_user', Auth::id())->get();
 
-    $total = $vosreservations->count();
+    $total = $histories->count();
 
-    $actives = $vosreservations->filter(function ($r) {
-        return $r->start_date <= now() && $r->end_date >= now();})->count();
+    $actives = $histories->filter(function ($r) {
+        return $r->status === 'accepted';
+    })->count();
 
-    $maintenance = $vosreservations->where('status', 'maintenance')->count();
+    $expirees = $histories->filter(function ($r) {
+        return $r->status === 'accepted'
+            && $r->end_date < now();
+    })->count();
 
-    $expirees = $vosreservations->filter(function ($r) {
-        return $r->end_date < now();
-        })->count();
-
-    return view('User.VosReservations', compact('vosreservations','total','actives','maintenance','expirees'));
+    return view(
+        'User.VosReservations',
+        compact('vosreservations', 'histories', 'total', 'actives', 'expirees')
+    );
 }
+
 }
 

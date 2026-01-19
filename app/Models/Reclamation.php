@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reclamation extends Model
 {
     protected $fillable = ['reservation_id', 'user_id', 'Problem_type', 'description'];
-    function reservation()
+    public function history()
     {
-        return $this->belongsTo(Reservation::class, 'reservation_id');
+        return $this->belongsTo(ReservationsHistory::class, 'reservation_id');
     }
     function user()
     {
