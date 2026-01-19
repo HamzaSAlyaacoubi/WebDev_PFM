@@ -27,6 +27,27 @@
     <main>
         <section class="history">
             <h1>Historique de vos réservations</h1>
+            
+            <form method="GET" action="{{ route('history') }}" class="filters">
+            
+                <select name="status">
+                    <option value="">Tous les statuts</option>
+                    <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>
+                        Acceptée
+                    </option>
+                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>
+                        Rejetée
+                    </option>
+                </select>
+
+            
+                <input type="date" name="start_date" value="{{ request('start_date') }}">
+                <input type="date" name="end_date" value="{{ request('end_date') }}">
+            
+                <button type="submit">Filtrer</button>
+            </form>
+
+
 
             <div class="history-list">
 
@@ -50,7 +71,6 @@
                         <li>Date de réservation : {{ $item->reservation_date }}</li>
                         <li>Date de Debut : {{ $item->start_date }}</li>
                         <li>Date de retour : {{ $item->end_date }}</li>
-                        <li>Brand: {{ $item->resource->brand }}</li>
                         <li>CPU : {{ $item->resource->cpu }}</li>
                         <li>RAM : {{ $item->resource->ram }}</li>
                         <li>Type : {{ $item->resource->storage }}</li>

@@ -93,8 +93,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="btn">
                     <button class="details">Details</button>
                 </div>
@@ -102,7 +100,7 @@
             @endforeach
 
         </section>
-        <!-- LIST -->
+        <br><br>
         <section class="reservations-list">
             <h1>Reservation accepté</h1>
             @foreach($histories as $history)
@@ -159,7 +157,7 @@
             @endforeach
 
         </section>
-        <!-- LIST -->
+        <br><br>
         <section class="reservations-list">
             <h1>Reservation refusée</h1>
             @foreach($histories as $history)
