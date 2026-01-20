@@ -15,7 +15,7 @@ use App\Models\ResourceCategory;
 use App\Http\Controllers\VosReservationController;
 use App\Http\Controllers\Reclamations;
 use App\Http\Controllers\SupportController;
-
+use App\Http\Controllers\UserHistory;
 
 // Route de Guest
 Route::get('/', function () {
@@ -79,9 +79,12 @@ Route::get('/vosreservations', [VosReservationController::class, 'vosreservation
 Route::get('/history', function () {
     return view('User.History');
 })->name('history');
-Route::get('/support/{reservation}', [Reclamations::class, 'reclamer'])->name('support.reclamer');
+// Route::get('/support/{reservation}', [Reclamations::class, 'reclamer'])->name('support.reclamer');
 // Route::post('/reclamations', [Reclamations::class, 'store'])->name('reclamations.store');
 Route::post('/reclamations/store', [Reclamations::class, 'store'])->name('reclamations.store');
 
 Route::get('/support-message', [SupportController::class, 'index'])->name('support.message');
 Route::post('/support-message', [SupportController::class, 'store'])->name('support.message.store');
+Route::get('/history',[UserHistory::class,'history'])->name('history');
+
+Route::get('/support/{history}', [Reclamations::class, 'reclamer'])->name('support.reclamer');

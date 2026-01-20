@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reclamations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('reservation_id');
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('reservation_id')->references('id')->on('reservations_histories')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('Problem_type');

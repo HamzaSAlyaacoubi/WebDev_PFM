@@ -12,11 +12,11 @@
 
         <nav>
             <ul>
-                <li><a href="home_user.php">Accueil</a></li>
-                <li><a href="ressources_user.php">Ressources</a></li>
-                <li><a href="suivis.php">Vos reservations</a></li>
-                <li><a href="history.php">Historique</a></li>
-                <li><a href="signaler.php">Support</a></li>
+                <li><a href="{{route('dashboard')}}">Accueil</a></li>
+                <li><a href="{{route('dashboard')}}">Ressources</a></li>
+                <li><a href="{{route('vosreservations')}}">Vos reservations</a></li>
+                <li><a href="{{route('history')}}">Historique</a></li>
+                <li><a href="{{route('support')}}" class="active">Support</a></li>
                 <li><a href=#contact>Contact</a></li>
             </ul>
         </nav>
@@ -29,10 +29,10 @@
         <section>
             <form method="POST" action="{{ route('reclamations.store') }}">
             @csrf
-            <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+            <input type="hidden" name="reservation_id" value="{{ $history->id }}">
             <h1>Reclamation</h1>
             <p>Veuillez signaler un problème et le decrire.</p>
-            <h3>{{ $reservation->resource->name }}</h3>
+            <h3>{{ $history->resource->name }}</h3>
             <label for="probleme">Problème rencontré: </label>
             <input type="text" placeholder="Probleme rencontree" id="probleme" name="Problem_type"><br><br>
             <label for="area">Description:</label>

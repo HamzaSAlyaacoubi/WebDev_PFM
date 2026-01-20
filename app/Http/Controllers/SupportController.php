@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 use App\Models\Support;
 use Illuminate\Http\Request;
+use App\Models\ReservationsHistory;
 use Illuminate\Support\Facades\Auth;
+
 
 class SupportController extends Controller
 {
@@ -23,5 +25,9 @@ class SupportController extends Controller
         ]);
 
         return redirect()->route('vosreservations')->with('success', 'Message envoyé avec succès');
+    }
+    public function reclamer(ReservationsHistory $history)
+    {
+        return view('User.Support', compact('history'));
     }
 }

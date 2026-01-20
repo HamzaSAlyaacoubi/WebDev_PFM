@@ -174,3 +174,59 @@ footer p {
     color: #b1b6c0;
     font-size: 0.9rem;
 }
+.filters {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filters select,
+.filters input[type="date"] {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #f5f6f8;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    min-width: 170px;
+    transition: all 0.2s ease;
+}
+
+.filters select {
+    cursor: pointer;
+}
+.filters select:focus,
+.filters input[type="date"]:focus {
+    border-color: #6c63ff;
+    background-color: #fff;
+}
+.filters button {
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: none;
+    background-color: #6c63ff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.filters button:hover {
+    background-color: #5a52e0;
+    transform: translateY(-1px);
+}
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filters select,
+    .filters input[type="date"],
+    .filters button {
+        width: 100%;
+    }
+}
