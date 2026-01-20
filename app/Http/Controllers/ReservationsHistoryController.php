@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Network;
 use App\Models\Reservation;
 use App\Models\ReservationsHistory;
+use App\Models\Servers;
+use App\Models\Storage;
+use App\Models\VirtualMachines;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationsHistoryController extends Controller
 {
@@ -13,7 +18,10 @@ class ReservationsHistoryController extends Controller
     {
         $reservation = Reservation::findOrFail($idReservation);
 
+        $id_responsable = Auth::id();
+        $id_category_responsable = Auth::user()->id_category;
         $history = [
+            'id_responsable'      => $id_responsable,
             'id_user'             => $reservation->user_id,
             'id_resource'         => $reservation->resource_id,
             'id_category'         => $reservation->Category_id,
@@ -28,6 +36,17 @@ class ReservationsHistoryController extends Controller
 
         $reservation->delete();
 
+        // Diminuer Quatity Available
+        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
+        $networks = Network::where('id_categorie', $id_category_responsable)->get();
+        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+        $resource = $resources->where('id', $reservation->resource_id)->first();
+        $resource->quantity_available -= 1;
+        $resource->save();
+
         return redirect()->route('responsable.reservations');
     }
 
@@ -35,7 +54,10 @@ class ReservationsHistoryController extends Controller
     {
         $reservation = Reservation::findOrFail($idReservation);
 
+        $id_responsable = Auth::id();
+
         $history = [
+            'id_responsable'      => $id_responsable,
             'id_user'             => $reservation->user_id,
             'id_resource'         => $reservation->resource_id,
             'id_category'         => $reservation->Category_id,

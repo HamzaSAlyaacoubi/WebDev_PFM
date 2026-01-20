@@ -39,28 +39,32 @@ class UsersSeeder extends Seeder
             'email' => 'responsable@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
-            'categorie' => 'Servers'
+            'categorie' => 'Servers',
+            'id_category' => 1
         ]);
         User::firstOrCreate([
             'name' => 'responsable1',
             'email' => 'responsable1@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
-            'categorie' => 'Virtual Machines'
+            'categorie' => 'Virtual Machines',
+            'id_category' => 2
         ]);
         User::firstOrCreate([
             'name' => 'responsable2',
             'email' => 'responsable2@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
-            'categorie' => 'Networking equipment'
+            'categorie' => 'Networking equipment',
+            'id_category' => 3
         ]);
         User::firstOrCreate([
             'name' => 'responsable3',
             'email' => 'responsable3@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
-            'categorie' => 'Storage'
+            'categorie' => 'Storage',
+            'id_category' => 4
         ]);
     }
 }

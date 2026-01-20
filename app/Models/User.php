@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'type',
         'categorie',
+        'id_category',
     ];
 
     /**
@@ -54,7 +55,7 @@ class User extends Authenticatable
         ];
     }
     public function supports()
-{
-    return $this->hasMany(Support::class);
-}
+    {
+        return $this->hasMany(Support::class);
+    }
 }

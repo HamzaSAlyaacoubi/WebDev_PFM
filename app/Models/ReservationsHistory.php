@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReservationsHistory extends Model
 {
-    protected $fillable = ['id_user', 'id_resource', 'id_category', 'reservation_date', 'start_date', 'end_date', 'user_justification', 'status', 'responsable_justification'];
+    protected $fillable = ['id_responsable', 'id_user', 'id_resource', 'id_category', 'reservation_date', 'start_date', 'end_date', 'user_justification', 'status', 'responsable_justification'];
 
+    function responsable()
+    {
+        return $this->belongsTo(User::class, 'id_responsable');
+    }
     function user()
     {
         return $this->belongsTo(User::class, 'id_user');

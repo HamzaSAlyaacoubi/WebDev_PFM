@@ -29,19 +29,35 @@
 
 
     <main>
+        <fieldset>
+            <form method="GET" action="{{ route('responsable.search') }}">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher">
+                <select name="brand">
+                    <option value="">All brands</option>
+                    @foreach($brands as $brand)
+                    <option value="{{ $brand }}" {{ request('brand') == $brand ? 'selected' : '' }}>
+                        {{ $brand }}
+                    </option>
+                    @endforeach
+                </select>
+                <button type="submit">Search</button>
+            </form>
 
+        </fieldset>
 
         <!-- <div id="h2"><span>Welcome <br><br>Mr.{{auth()->user()->name}} Vous etes maintenant responsable</span></div> -->
 
         <div class="content-section" id="ressources">
             <!-- Liste des ressources disponible -->
-
+            <ul class="resources-menu">
+                <li class="active-resource" data-target="servers">Servers</li>
+                <li data-target="virtualMachines">Virtual Machines</li>
+                <li data-target="networks">Networks</li>
+                <li data-target="storages">Storages</li>
+            </ul>
 
             <!-- affichage des ressources -->
-            @if(Auth::user()->categorie == 'Servers')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
-            <div class="resource-table" id="servers">
-                @include('include.responsableSearch')
+            <div class="resource-table active" id="servers">
                 <table>
                     <thead>
                         <tr>
@@ -93,11 +109,7 @@
                     @endforeach
                 </table>
             </div>
-            @endif
-            @if(Auth::user()->categorie == 'Virtual Machines')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
             <div class="resource-table" id="virtualMachines">
-                @include('include.responsableSearch')
                 <table>
                     <thead>
                         <tr>
@@ -150,11 +162,7 @@
                     @endforeach
                 </table>
             </div>
-            @endif
-            @if(Auth::user()->categorie == 'Networking equipment')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
             <div class="resource-table" id="networks">
-                @include('include.responsableSearch')
                 <table>
                     <thead>
                         <tr>
@@ -201,11 +209,7 @@
                     @endforeach
                 </table>
             </div>
-            @endif
-            @if(Auth::user()->categorie == 'Storage')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
             <div class="resource-table" id="storages">
-                @include('include.responsableSearch')
                 <table>
                     <thead>
                         <tr>
@@ -249,7 +253,6 @@
                     @endforeach
                 </table>
             </div>
-            @endif
 
             <!-- modification des resources -->
             <div class="modify-form table-box" id="modify-server">

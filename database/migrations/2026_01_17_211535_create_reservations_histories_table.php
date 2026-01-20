@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('reservations_histories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_responsable');
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_resource');
             $table->unsignedBigInteger('id_category');

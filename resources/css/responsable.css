@@ -163,15 +163,10 @@ form strong {
 }
 
 .resource-table {
-    display: none;
     background: white;
     border-radius: 0 0 24px 24px;
     padding: 1rem;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-}
-
-.resource-table.active {
-    display: block;
 }
 
 .modify-form {

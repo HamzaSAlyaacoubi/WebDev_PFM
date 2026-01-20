@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Network;
 use App\Models\Reservation;
+use App\Models\ReservationsHistory;
 use App\Models\ResourceCategory;
 use App\Models\Servers;
 use App\Models\Storage;
 use App\Models\VirtualMachines;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResponsableController extends Controller
 {
@@ -220,19 +222,25 @@ class ResponsableController extends Controller
 
     function displayReservations()
     {
+        // Id Responsable
+        $id_responsable = Auth::id();
+        $id_category_responsable = Auth::user()->id_category;
+
         // Selection all resources
-        $servers = Servers::all();
-        $virtualMachines = VirtualMachines::all();
-        $networks = Network::all();
-        $storages = Storage::all();
+        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
+        $networks = Network::where('id_categorie', $id_category_responsable)->get();
+        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
         $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
 
+
         // Selection all reservations
-        $reservations = Reservation::all();
-        $currentReservationsCount = Reservation::count();
-        static $totalReservationsCount = 0;
-        static $reservationsAccepted = 0;
-        static $reservationsRefused = 0;
+        $reservations = Reservation::where('Category_id',  $id_category_responsable)->get();
+        $currentReservationsCount = Reservation::where('Category_id', $id_category_responsable)->count();
+        $totalReservationsCount = ReservationsHistory::where('id_responsable', $id_responsable)->count() + $currentReservationsCount;
+        $reservationsAccepted = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'accepted')->count();
+        $reservationsRefused = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'rejected')->count();
+
         return view('Responsable.reservations', compact(
             'reservations',
             'resources',
@@ -245,7 +253,23 @@ class ResponsableController extends Controller
 
     function displayHistory()
     {
-        return view('Responsable.history');
+        $id_responsable = Auth::id();
+        $id_category_responsable = Auth::user()->id_category;
+
+        // Selection all resources
+        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
+        $networks = Network::where('id_categorie', $id_category_responsable)->get();
+        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+
+        $totalReservationsCount = ReservationsHistory::where('id_responsable', $id_responsable)->count();
+        $reservationsAccepted = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'accepted')->count();
+        $reservationsRefused = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'rejected')->count();
+
+        $reservations = ReservationsHistory::where('id_category', $id_category_responsable)->get();
+        return view('Responsable.history', compact('resources', 'reservations', 'totalReservationsCount', 'reservationsAccepted', 'reservationsRefused'));
     }
 
     function displayReclamations()

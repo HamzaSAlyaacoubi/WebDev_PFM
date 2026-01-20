@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('type');
             $table->string('categorie')->nullable();
+            $table->integer('id_category')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
