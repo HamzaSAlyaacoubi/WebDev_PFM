@@ -22,13 +22,13 @@ class ReservationsHistoryController extends Controller
         $id_category_responsable = Auth::user()->id_category;
         $history = [
             'id_responsable'      => $id_responsable,
-            'id_user'             => $reservation->user_id,
-            'id_resource'         => $reservation->resource_id,
-            'id_category'         => $reservation->Category_id,
+            'id_user'             => $reservation->id_user,
+            'id_resource'         => $reservation->id_resource,
+            'id_category'         => $reservation->id_category,
             'reservation_date'    => $reservation->created_at,
             'start_date'          => $reservation->start_date,
             'end_date'            => $reservation->end_date,
-            'user_justification'  => $reservation->reason,
+            'user_justification'  => $reservation->justification,
             'status'              => 'accepted',
         ];
 
@@ -37,13 +37,13 @@ class ReservationsHistoryController extends Controller
         $reservation->delete();
 
         // Diminuer Quatity Available
-        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
-        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
-        $networks = Network::where('id_categorie', $id_category_responsable)->get();
-        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
+        $servers = Servers::where('id_category', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_category', $id_category_responsable)->get();
+        $networks = Network::where('id_category', $id_category_responsable)->get();
+        $storages = Storage::where('id_category', $id_category_responsable)->get();
         $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
 
-        $resource = $resources->where('id', $reservation->resource_id)->first();
+        $resource = $resources->where('id', $reservation->id_resource)->first();
         $resource->quantity_available -= 1;
         $resource->save();
 
@@ -58,13 +58,13 @@ class ReservationsHistoryController extends Controller
 
         $history = [
             'id_responsable'      => $id_responsable,
-            'id_user'             => $reservation->user_id,
-            'id_resource'         => $reservation->resource_id,
-            'id_category'         => $reservation->Category_id,
+            'id_user'             => $reservation->id_user,
+            'id_resource'         => $reservation->id_resource,
+            'id_category'         => $reservation->id_category,
             'reservation_date'    => $reservation->created_at,
             'start_date'          => $reservation->start_date,
             'end_date'            => $reservation->end_date,
-            'user_justification'  => $reservation->reason,
+            'user_justification'  => $reservation->justification,
             'status'              => 'rejected',
         ];
 

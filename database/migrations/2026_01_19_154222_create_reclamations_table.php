@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('reclamations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reservation_id');
-            $table->foreign('reservation_id')->references('id')->on('reservations_histories')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('Problem_type');
+            $table->unsignedBigInteger('id_reservation');
+            $table->foreign('id_reservation')->references('id')->on('reservations_histories')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->string('problem_type');
             $table->text('description');
             $table->timestamps();
         });

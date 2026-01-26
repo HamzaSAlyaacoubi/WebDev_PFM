@@ -28,7 +28,7 @@ class VirtualMachinesSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 5,
             'description' => null,
-            'id_categorie' => $virtualMachine->id
+            'id_category' => $virtualMachine->id
         ]);
 
         VirtualMachines::firstOrCreate([
@@ -43,7 +43,7 @@ class VirtualMachinesSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 10,
             'description' => null,
-            'id_categorie' => $virtualMachine->id
+            'id_category' => $virtualMachine->id
         ]);
 
         VirtualMachines::firstOrCreate([
@@ -58,7 +58,7 @@ class VirtualMachinesSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 3,
             'description' => null,
-            'id_categorie' => $virtualMachine->id
+            'id_category' => $virtualMachine->id
         ]);
 
         VirtualMachines::firstOrCreate([
@@ -73,7 +73,7 @@ class VirtualMachinesSeeder extends Seeder
             'status' => 'indisponible',
             'quantity_available' => 0,
             'description' => null,
-            'id_categorie' => $virtualMachine->id
+            'id_category' => $virtualMachine->id
         ]);
     }
 }

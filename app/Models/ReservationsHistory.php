@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use \App\Models\Servers;
 use \App\Models\VirtualMachines;
@@ -23,18 +24,15 @@ class ReservationsHistory extends Model
     {
         return $this->belongsTo(ResourceCategory::class, 'id_category');
     }
-    // function resource()
-    // {
-    //     return $this->belongsTo(Resource::class, 'id_resource');
-    // }
+
     public function resource()
-{
-    return match ($this->id_category) {
-        1 => $this->belongsTo(Servers::class, 'id_resource'),
-        2 => $this->belongsTo(VirtualMachines::class, 'id_resource'),
-        3 => $this->belongsTo(Network::class, 'id_resource'),
-        4 => $this->belongsTo(Storage::class, 'id_resource'),
-        default => null,
-    };
-}
+    {
+        return match ($this->id_category) {
+            1 => $this->belongsTo(Servers::class, 'id_resource'),
+            2 => $this->belongsTo(VirtualMachines::class, 'id_resource'),
+            3 => $this->belongsTo(Network::class, 'id_resource'),
+            4 => $this->belongsTo(Storage::class, 'id_resource'),
+            default => null,
+        };
+    }
 }

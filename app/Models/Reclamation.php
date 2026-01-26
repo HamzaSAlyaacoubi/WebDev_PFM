@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reclamation extends Model
 {
-    protected $fillable = ['reservation_id', 'user_id', 'Problem_type', 'description'];
+    protected $fillable = ['id_reservation', 'id_user', 'problem_type', 'description'];
     public function history()
     {
-        return $this->belongsTo(ReservationsHistory::class, 'reservation_id');
+        return $this->belongsTo(ReservationsHistory::class, 'id_reservation');
     }
     function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

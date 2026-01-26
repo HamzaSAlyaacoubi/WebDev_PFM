@@ -24,11 +24,10 @@
 
         </div>
 
-        <div id="h2"><span>Make <br><br>New Friends </span></div>
+        <div id="h2"><span>Smart<br><br>Infrastructure</span></div>
 
         <div id="h3">
-            <p>Friends are the family we choose, offering support, laughter, and shared memories that enrich our lives. True friendship is built on trust,
-                understanding, and the comfort .</p>
+            <p>Reliable servers, secure storage, and optimized performance—all in one place. Our data center solutions are designed to keep your data available, protected, and scalable as your needs grow.</p>
             <a href="{{route('login')}}"><button id="login">Login</button></a>
         </div>
 
@@ -36,20 +35,20 @@
 
         <div id="blur">
             <p class="blur-this">We believe that in a world</p>
-            <p class="blur-this">where passengers have</p>
-            <p class="blur-this">become numbers, a</p>
-            <p class="blur-this">personal approach is key</p>
-            <p class="blur-this">to ensure you get the</p>
-            <p class="blur-this">best <strong>experience.</strong> </p>
+            <p class="blur-this">where data is critical,</p>
+            <p class="blur-this">reliable infrastructure</p>
+            <p class="blur-this">is the foundation of</p>
+            <p class="blur-this">every successful digital</p>
+            <p class="blur-this"><strong> system.</strong> </p>
         </div>
 
         <div class="details one">
-            <h2>Flexible Solutions</h2>
-            <p>Stop depending on airlines. Fly on your own terms or join our exclusive shared flights.</p>
+            <h2>High Availability</h2>
+            <p>Your services stay online with redundant systems and optimized uptime designed for critical workloads.</p>
         </div>
         <div class="details two">
-            <h2>Flexible Solutions</h2>
-            <p>Stop depending on airlines. Fly on your own terms or join our exclusive shared flights.</p>
+            <h2>Secure Infrastructure</h2>
+            <p>Enterprise-grade security measures protect your data, networks, and access at every level.</p>
         </div>
 
     </header>
@@ -116,7 +115,6 @@
 
         <span>Nos reseaux sociaux</span>
         <ul class="reseaux">
-
             <li id="logoInsta"><a href="https://www.instagram.com"><img src="images/instagram.jpeg" alt="Logo Instagram" width="50" height="50"></a></li>
             <li id="logoFb"><a href="https://www.facebook.com"><img src="images/facebook.jpeg" alt="Logo Facebook" width="50" height="50"></a></li>
             <li id="logoTik"><a href="https://www.tiktok.com"><img src="images/tikTok.jpeg" alt="Logo TikTok" width="50" height="50"></a></li>
@@ -124,11 +122,7 @@
 
             <p id="contactLink"><a href="mailto:contact@datacenter.ma">contact@datacenter.ma</a></p>
             <p>&copy; 2024 Data Center. Tous droits réservés.</p>
-
     </footer>
-
-
-    <script src="home.js"></script>
 </body>
 
 </html>

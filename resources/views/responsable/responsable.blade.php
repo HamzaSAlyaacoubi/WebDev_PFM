@@ -38,8 +38,8 @@
 
 
             <!-- affichage des ressources -->
-            @if(Auth::user()->categorie == 'Servers')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
+            @if(Auth::user()->category == 'Servers')
+            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="servers">
                 @include('include.responsableSearch')
                 <table>
@@ -60,7 +60,7 @@
                         </tr>
                     </thead>
                     @foreach($resources as $resource)
-                    @if($resource->id_categorie == 1)
+                    @if($resource->id_category == 1)
                     <tbody id="servers-body">
                         <tr>
                             <td>{{$resource->name}}</td>
@@ -94,8 +94,8 @@
                 </table>
             </div>
             @endif
-            @if(Auth::user()->categorie == 'Virtual Machines')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
+            @if(Auth::user()->category == 'Virtual Machines')
+            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="virtualMachines">
                 @include('include.responsableSearch')
                 <table>
@@ -116,7 +116,7 @@
                         </tr>
                     </thead>
                     @foreach($resources as $resource)
-                    @if($resource->id_categorie == 2)
+                    @if($resource->id_category == 2)
                     <tbody id="virtualMachines-body">
                         <tr>
                             <td>{{$resource->name}}</td>
@@ -151,8 +151,8 @@
                 </table>
             </div>
             @endif
-            @if(Auth::user()->categorie == 'Networking equipment')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
+            @if(Auth::user()->category == 'Networking equipment')
+            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="networks">
                 @include('include.responsableSearch')
                 <table>
@@ -171,7 +171,7 @@
                         </tr>
                     </thead>
                     @foreach($resources as $resource)
-                    @if($resource->id_categorie == 3)
+                    @if($resource->id_category == 3)
                     <tbody id="networks-body">
                         <tr>
                             <td>{{$resource->name}}</td>
@@ -202,8 +202,8 @@
                 </table>
             </div>
             @endif
-            @if(Auth::user()->categorie == 'Storage')
-            <h2>Responsable des {{Auth::user()->categorie}}</h2>
+            @if(Auth::user()->category == 'Storage')
+            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="storages">
                 @include('include.responsableSearch')
                 <table>
@@ -221,7 +221,7 @@
                         </tr>
                     </thead>
                     @foreach($resources as $resource)
-                    @if($resource->id_categorie == 4)
+                    @if($resource->id_category == 4)
                     <tbody id="storages-body">
                         <tr>
                             <td>{{$resource->name}}</td>

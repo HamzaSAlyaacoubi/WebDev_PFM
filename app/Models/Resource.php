@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Resource extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'manufacturer', 'category_id', 'cpu', 'ram', 'storage', 'os', 'location', 'status'];
+    protected $fillable = ['name', 'manufacturer', 'id_category', 'cpu', 'ram', 'storage', 'os', 'location', 'status'];
 
     public function category()
     {
-        return $this->belongsTo(ResourceCategory::class, 'category_id');
+        return $this->belongsTo(ResourceCategory::class, 'id_category');
     }
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'resource_id');
+        return $this->hasMany(Reservation::class, 'id_resource');
     }
     public function histories()
     {

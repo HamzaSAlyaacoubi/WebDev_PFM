@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Support;
 use Illuminate\Http\Request;
 use App\Models\ReservationsHistory;
@@ -20,7 +22,7 @@ class SupportController extends Controller
         ]);
 
         Support::create([
-            'user_id' => Auth::id(),
+            'id_user' => Auth::id(),
             'message' => $request->message,
         ]);
 

@@ -146,6 +146,7 @@ class ResponsableController extends Controller
     {
         return view('Responsable.create', compact('type'));
     }
+    
     function validateCreation(Request $request, $type)
     {
         if ($type === 'server') {
@@ -163,7 +164,7 @@ class ResponsableController extends Controller
                 'quantity_available' => 'required|numeric',
                 'description' => 'nullable',
             ]);
-            $valideted['id_categorie'] = $id;
+            $valideted['id_category'] = $id;
             Servers::create($valideted);
         }
         if ($type === 'vm') {
@@ -181,7 +182,7 @@ class ResponsableController extends Controller
                 'quantity_available' => 'required|numeric',
                 'description' => 'nullable',
             ]);
-            $valideted['id_categorie'] = $id;
+            $valideted['id_category'] = $id;
             VirtualMachines::create($valideted);
         }
         if ($type === 'network') {
@@ -197,7 +198,7 @@ class ResponsableController extends Controller
                 'quantity_available' => 'required|numeric',
                 'description' => 'nullable',
             ]);
-            $valideted['id_categorie'] = $id;
+            $valideted['id_category'] = $id;
             Network::create($valideted);
         }
         if ($type === 'storage') {
@@ -213,7 +214,7 @@ class ResponsableController extends Controller
                 'description' => 'nullable',
             ]);
 
-            $valideted['id_categorie'] = $id;
+            $valideted['id_category'] = $id;
             Storage::create($valideted);
         }
 
@@ -227,16 +228,16 @@ class ResponsableController extends Controller
         $id_category_responsable = Auth::user()->id_category;
 
         // Selection all resources
-        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
-        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
-        $networks = Network::where('id_categorie', $id_category_responsable)->get();
-        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
+        $servers = Servers::where('id_category', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_category', $id_category_responsable)->get();
+        $networks = Network::where('id_category', $id_category_responsable)->get();
+        $storages = Storage::where('id_category', $id_category_responsable)->get();
         $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
 
 
         // Selection all reservations
-        $reservations = Reservation::where('Category_id',  $id_category_responsable)->get();
-        $currentReservationsCount = Reservation::where('Category_id', $id_category_responsable)->count();
+        $reservations = Reservation::where('id_category',  $id_category_responsable)->get();
+        $currentReservationsCount = Reservation::where('id_category', $id_category_responsable)->count();
         $totalReservationsCount = ReservationsHistory::where('id_responsable', $id_responsable)->count() + $currentReservationsCount;
         $reservationsAccepted = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'accepted')->count();
         $reservationsRefused = ReservationsHistory::where('id_responsable', $id_responsable)->where('status', 'rejected')->count();
@@ -257,10 +258,10 @@ class ResponsableController extends Controller
         $id_category_responsable = Auth::user()->id_category;
 
         // Selection all resources
-        $servers = Servers::where('id_categorie', $id_category_responsable)->get();
-        $virtualMachines = VirtualMachines::where('id_categorie', $id_category_responsable)->get();
-        $networks = Network::where('id_categorie', $id_category_responsable)->get();
-        $storages = Storage::where('id_categorie', $id_category_responsable)->get();
+        $servers = Servers::where('id_category', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_category', $id_category_responsable)->get();
+        $networks = Network::where('id_category', $id_category_responsable)->get();
+        $storages = Storage::where('id_category', $id_category_responsable)->get();
         $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
 
 

@@ -26,7 +26,7 @@ class NetworkSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 5,
             'description' => null,
-            'id_categorie' => $network->id,
+            'id_category' => $network->id,
         ]);
 
         Network::firstOrCreate([
@@ -39,7 +39,7 @@ class NetworkSeeder extends Seeder
             'status' => 'indisponible',
             'quantity_available' => 0,
             'description' => null,
-            'id_categorie' => $network->id,
+            'id_category' => $network->id,
         ]);
 
         Network::firstOrCreate([
@@ -52,7 +52,7 @@ class NetworkSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 10,
             'description' => null,
-            'id_categorie' => $network->id,
+            'id_category' => $network->id,
         ]);
 
         Network::firstOrCreate([
@@ -65,7 +65,7 @@ class NetworkSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 3,
             'description' => null,
-            'id_categorie' => $network->id,
+            'id_category' => $network->id,
         ]);
     }
 }

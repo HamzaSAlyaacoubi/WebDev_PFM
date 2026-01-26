@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Reclamation;
 use App\Models\Reservation;
 use App\Models\ReservationsHistory;
@@ -18,19 +19,18 @@ class Reclamations extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'reservation_id' => 'required|exists:reservations_histories,id',
-            'Problem_type' => 'required|string|max:255',
+            'id_reservation' => 'required|exists:reservations_histories,id',
+            'problem_type' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
 
         Reclamation::create([
-            'user_id' => Auth::id(),
-            'reservation_id' => (int) $request->reservation_id,
-            'Problem_type' => $request->Problem_type,
+            'id_user' => Auth::id(),
+            'id_reservation' => (int) $request->id_reservation,
+            'problem_type' => $request->problem_type,
             'description' => $request->description,
         ]);
 
         return redirect()->route('vosreservations')->with('success', 'Réclamation envoyée avec succès');
     }
 }
-

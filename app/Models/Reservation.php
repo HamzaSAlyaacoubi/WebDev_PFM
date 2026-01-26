@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\Servers;
 use App\Models\VirtualMachines;
 use App\Models\Network;
@@ -11,28 +12,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    protected $fillable = ['user_id','resource_id','Category_id','start_date','end_date','status','reason',];
-    // function resource()
-    // {
-    //     return $this->belongsTo(Resource::class, 'resource_id');
-    // }
+    protected $fillable = ['id_user', 'id_resource', 'id_category', 'start_date', 'end_date', 'status', 'justification',];
+
     function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'id_user');
     }
+
     function category()
     {
-        return $this->belongsTo(ResourceCategory::class, 'Category_id', 'id');
+        return $this->belongsTo(ResourceCategory::class, 'id_category', 'id');
     }
+
     public function resource()
     {
-        return match ($this->Category_id) {
-            1 => $this->belongsTo(Servers::class, 'resource_id'),
-            2 => $this->belongsTo(VirtualMachines::class, 'resource_id'),
-            3 => $this->belongsTo(Network::class, 'resource_id'),
-            4 => $this->belongsTo(Storage::class, 'resource_id'),
+        return match ($this->id_category) {
+            1 => $this->belongsTo(Servers::class, 'id_resources'),
+            2 => $this->belongsTo(VirtualMachines::class, 'id_resources'),
+            3 => $this->belongsTo(Network::class, 'id_resources'),
+            4 => $this->belongsTo(Storage::class, 'id_resources'),
             default => null,
         };
     }
-
 }

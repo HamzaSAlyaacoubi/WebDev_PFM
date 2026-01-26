@@ -25,7 +25,7 @@ class StorageSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 3,
             'description' => null,
-            'id_categorie' => $storage->id,
+            'id_category' => $storage->id,
         ]);
 
         Storage::firstOrCreate([
@@ -37,7 +37,7 @@ class StorageSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 10,
             'description' => null,
-            'id_categorie' => $storage->id,
+            'id_category' => $storage->id,
         ]);
 
         Storage::firstOrCreate([
@@ -49,7 +49,7 @@ class StorageSeeder extends Seeder
             'status' => 'disponible',
             'quantity_available' => 15,
             'description' => null,
-            'id_categorie' => $storage->id,
+            'id_category' => $storage->id,
         ]);
 
         Storage::firstOrCreate([
@@ -61,7 +61,7 @@ class StorageSeeder extends Seeder
             'status' => 'indisponible',
             'quantity_available' => 0,
             'description' => null,
-            'id_categorie' => $storage->id,
+            'id_category' => $storage->id,
         ]);
     }
 }

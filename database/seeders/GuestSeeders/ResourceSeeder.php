@@ -10,16 +10,16 @@ class ResourceSeeder extends Seeder
 {
     public function run(): void
     {
-    $serverCategory = ResourceCategory::firstOrCreate(['name' => 'Servers']);
-    $vmCategory = ResourceCategory::firstOrCreate(['name' => 'Virtual Machines']);
-    $networkCategory = ResourceCategory::firstOrCreate(['name' => 'Networking equipment']);
-    $storageCategory = ResourceCategory::firstOrCreate(['name' => 'Storage']);
+        $serverCategory = ResourceCategory::firstOrCreate(['name' => 'Servers']);
+        $vmCategory = ResourceCategory::firstOrCreate(['name' => 'Virtual Machines']);
+        $networkCategory = ResourceCategory::firstOrCreate(['name' => 'Networking equipment']);
+        $storageCategory = ResourceCategory::firstOrCreate(['name' => 'Storage']);
 
         Resource::firstOrCreate(
-            ['name' => 'Server HP ProLiant'], 
+            ['name' => 'Server HP ProLiant'],
             [
                 'manufacturer' => 'HP',
-                'category_id' => $serverCategory->id,
+                'id_category' => $serverCategory->id,
                 'cpu' => 16,
                 'ram' => 64,
                 'storage' => 2000,
@@ -34,7 +34,7 @@ class ResourceSeeder extends Seeder
             ['name' => 'Virtual Machine VM-01'],
             [
                 'manufacturer' => 'VMware',
-                'category_id' => $vmCategory->id,
+                'id_category' => $vmCategory->id,
                 'cpu' => 4,
                 'ram' => 16,
                 'storage' => 500,
@@ -49,7 +49,7 @@ class ResourceSeeder extends Seeder
             ['name' => 'Network Switch Cisco'],
             [
                 'manufacturer' => 'Cisco',
-                'category_id' => $networkCategory->id,
+                'id_category' => $networkCategory->id,
                 'cpu' => 0,
                 'ram' => 0,
                 'storage' => 0,
@@ -64,7 +64,7 @@ class ResourceSeeder extends Seeder
             ['name' => 'Storage Array Dell EMC'],
             [
                 'manufacturer' => 'Dell EMC',
-                'category_id' => $storageCategory->id,
+                'id_category' => $storageCategory->id,
                 'cpu' => 0,
                 'ram' => 0,
                 'storage' => 10000,

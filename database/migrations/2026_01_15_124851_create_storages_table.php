@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status', ['disponible', 'indisponible', 'maintenance']);
             $table->integer('quantity_available');
             $table->string('description')->nullable();
-            $table->foreignId('id_categorie')->constrained('resource_categories')->onDelete('cascade');
+            $table->foreignId('id_category')->constrained('resource_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

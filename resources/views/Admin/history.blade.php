@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réservations</title>
+    <title>History</title>
     @vite('resources/css/reservations.css')
     @vite('resources/js/reservations.js')
 </head>
@@ -16,11 +16,11 @@
 
         <nav>
             <ul>
-                <li><a href="{{route('responsable')}}">Ressources</a></li>
-                <li><a href="{{route('responsable.reservations')}}">Reservations</a></li>
-                <li><a href="{{route('responsable.hitory')}}">Historique</a></li>
-                <li><a href="{{route('responsable.reclamations')}}">Reclamations</a></li>
-                <li><a href="{{route('responsable.support')}}">Support</a></li>
+                <li><a href="{{route('admin')}}">Ressources</a></li>
+                <li><a href="{{route('admin.users')}}">Users</a></li>
+                <li><a href="{{route('admin.hitory')}}">Historique</a></li>
+                <li><a href="{{route('admin.statistics')}}">Statistiques</a></li>
+                <li><a href="{{route('admin.support')}}">Support</a></li>
             </ul>
         </nav>
 
@@ -29,18 +29,13 @@
 
     <main class="dashboard">
 
-        <h1>Réservations</h1>
+        <h1>Historique de Reservations</h1>
 
         <!-- STATS -->
         <section class="stats">
             <div class="stat-card">
                 <h2>{{$totalReservationsCount}}</h2>
                 <p>Réservations totales</p>
-            </div>
-
-            <div class="stat-card">
-                <h2>{{$currentReservationsCount}}</h2>
-                <p>Current Reservations</p>
             </div>
 
             <div class="stat-card">
@@ -58,11 +53,10 @@
         <section class="reservations-list">
 
             @foreach($reservations as $reservation)
-            <!-- Servers -->
-            @if(Auth::user()->id_category == 1)
             @foreach($resources as $resource)
-            @if($resource->id == $reservation->id_resource)
-
+            @if($reservation->id_resource == $resource->id && $reservation->id_category == $resource->id_category)
+            <!-- Servers -->
+            @if($reservation->id_category == 1 && $resource->id_category == 1)
             <div>
                 <div class="reservation-row">
 
@@ -72,8 +66,6 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
                         <button class="details-btn">Voir Details</button>
                     </div>
 
@@ -91,12 +83,8 @@
                 </div>
             </div>
             @endif
-            @endforeach
-            @endif
             <!-- Virtual Machines -->
-            @if(Auth::user()->id_category == 2)
-            @foreach($resources as $resource)
-            @if($resource->id == $reservation->id_resource)
+            @if($reservation->id_category == 2 && $resource->id_category == 2)
             <div>
                 <div class="reservation-row">
 
@@ -106,8 +94,6 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
                         <button class="details-btn">Voir Details</button>
                     </div>
 
@@ -125,12 +111,8 @@
                 </div>
             </div>
             @endif
-            @endforeach
-            @endif
             <!-- Networks -->
-            @if(Auth::user()->id_category == 3)
-            @foreach($resources as $resource)
-            @if($resource->id == $reservation->id_resource)
+            @if($reservation->id_category == 3 && $resource->id_category == 3)
             <div>
                 <div class="reservation-row">
 
@@ -140,8 +122,6 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
                         <button class="details-btn">Voir Details</button>
                     </div>
 
@@ -158,12 +138,8 @@
                 </div>
             </div>
             @endif
-            @endforeach
-            @endif
             <!-- Storages -->
-            @if(Auth::user()->id_category == 4)
-            @foreach($resources as $resource)
-            @if($resource->id == $reservation->id_resource)
+            @if($reservation->id_category == 4 && $resource->id_category == 4)
             <div>
                 <div class="reservation-row">
 
@@ -173,8 +149,6 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
                         <button class="details-btn">Voir Details</button>
                     </div>
 
@@ -190,10 +164,11 @@
                 </div>
             </div>
             @endif
-            @endforeach
             @endif
             @endforeach
+            @endforeach
         </section>
+        <!--  -->
 
     </main>
 

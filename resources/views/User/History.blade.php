@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/History.css')
     <title>Historique</title>
 </head>
+
 <body>
     <header>
-        <span>ᔕEᖇᐯE</span>  
+        <span>ᔕEᖇᐯE</span>
 
         <nav>
             <ul>
-                <li><a href="{{route('dashboard')}}">Accueil</a></li>
                 <li><a href="{{route('dashboard')}}">Ressources</a></li>
                 <li><a href="{{route('vosreservations')}}">Vos reservations</a></li>
                 <li><a href="{{route('history')}}" class="active">Historique</a></li>
@@ -27,9 +28,9 @@
     <main>
         <section class="history">
             <h1>Historique de vos réservations</h1>
-            
+
             <form method="GET" action="{{ route('history') }}" class="filters">
-            
+
                 <select name="status">
                     <option value="">Tous les statuts</option>
                     <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>
@@ -40,10 +41,10 @@
                     </option>
                 </select>
 
-            
+
                 <input type="date" name="start_date" value="{{ request('start_date') }}">
                 <input type="date" name="end_date" value="{{ request('end_date') }}">
-            
+
                 <button type="submit">Filtrer</button>
             </form>
 
@@ -56,7 +57,7 @@
                     <span class="status completed">{{ $item->status }}</span>
                     <h3>{{ $item->resource->name }}</h3>
                     <ul>
-                        @if($item->id_category == 1) 
+                        @if($item->id_category == 1)
                         <li>Date de réservation : {{ $item->reservation_date }}</li>
                         <li>Date de Debut : {{ $item->start_date }}</li>
                         <li>Date de retour : {{ $item->end_date }}</li>
@@ -120,17 +121,8 @@
         </section>
     </main>
 
-    <footer id="contact">
-        <h1>Contact</h1>
-        <span>Nos reseaux sociaux</span>
-        <ul>
-            <li><a href="https://www.instagram.com"><img src="../images/instagram.jpeg" alt="Logo Instagram" width="50" height="50"></a></li>
-            <li><a href="https://www.facebook.com"><img src="../images/facebook.jpeg" alt="Logo Facebook" width="50" height="50"></a></li>
-            <li><a href="https://www.tiktok.com"><img src="../images/tikTok.jpeg" alt="Logo TikTok" width="50" height="50"></a></li>
-            <li><a href="tel:+212660750696"><img src="../images/whatsApp.jpeg" alt="Logo WhatsApp" width="50" height="50"></a></li>
-        </ul>
-        <p><a href="mailto:contact@datacenter.ma">contact@datacenter.ma</a></p>
-        <p>&copy; 2026 Data Center. Tous droits réservés.</p>
-    </footer>
+    @include('include.footer')
+
 </body>
+
 </html>

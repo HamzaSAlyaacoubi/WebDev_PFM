@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('manufacturer')->nullable();
-            $table->foreignId('category_id')->constrained('resource_categories')->onDelete('cascade');
+            $table->foreignId('id_category')->constrained('resource_categories')->onDelete('cascade');
             $table->integer('cpu');
             $table->integer('ram');
             $table->integer('storage');

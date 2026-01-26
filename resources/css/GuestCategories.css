@@ -69,11 +69,10 @@ main {
 .resources{
     width: 100%;
 }
-.resources h1 {
+main h1 {
     text-align: center;
     font-size: 38px;
     margin-bottom: 50px;
-    color: #6366f1;
 }
 
 .resources > div {

@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Support extends Model
 {
-    protected $fillable = ['user_id', 'message'];
+    protected $fillable = ['id_user', 'message'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
-

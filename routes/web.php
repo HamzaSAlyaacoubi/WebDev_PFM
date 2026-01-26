@@ -33,10 +33,22 @@ Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('re
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
 // Route de Administrateur
-Route::get('/admin', [AdminController::class, 'afficherUsers'])->name('admin');
+Route::get('/admin', [AdminController::class, 'displayResources'])->name('admin');
+Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+Route::get('/admin/modify/{type}/{id}', [AdminController::class, 'modifyResource'])->name('admin.modify.resource');
+Route::post('/admin/modify/validate/{type}/{id}', [AdminController::class, 'validateModification'])->name('admin.validate.modification');
+Route::get('/admin/create/{type}', [AdminController::class, 'createResource'])->name('admin.create.resource');
+Route::post('/admin/create/validate/{type}', [AdminController::class, 'validateCreation'])->name('admin.validate.creation');
+
+Route::get('/admin/users', [AdminController::class, 'displayUsers'])->name('admin.users');
 Route::get('/admin/resp/{id}', [AdminController::class, 'toResponsable'])->name('toResponsable');
 Route::get('/admin/user/{id}', [AdminController::class, 'toUtilisateur'])->name('toUtilisateur');
 Route::post('/admin/create/responsable', [AdminController::class, 'createResponsable'])->name('create.responsable');
+
+Route::get('/admin/history', [AdminController::class, 'displayHistory'])->name('admin.hitory');
+Route::get('/admin/reclamations', [AdminController::class, 'displayStatistics'])->name('admin.statistics');
+Route::get('/admin/support', [AdminController::class, 'displaySupport'])->name('admin.support');
+
 
 // Route de Responsable
 Route::get('/responsable', [ResponsableController::class, 'afficherResources'])->name('responsable');
@@ -68,7 +80,7 @@ Route::get('/Report', function () {
 
 Route::get('/Reserve/{id}', [ResourceController::class, 'reserve'])->name('reserve');
 
-Route::get('/Reserve/{id_categorie}/{id}', [ReservationController::class, 'create'])->name('reservation.create');
+Route::get('/Reserve/{id_category}/{id}', [ReservationController::class, 'create'])->name('reservation.create');
 
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
@@ -85,6 +97,6 @@ Route::post('/reclamations/store', [Reclamations::class, 'store'])->name('reclam
 
 Route::get('/support-message', [SupportController::class, 'index'])->name('support.message');
 Route::post('/support-message', [SupportController::class, 'store'])->name('support.message.store');
-Route::get('/history',[UserHistory::class,'history'])->name('history');
+Route::get('/history', [UserHistory::class, 'history'])->name('history');
 
 Route::get('/support/{history}', [Reclamations::class, 'reclamer'])->name('support.reclamer');

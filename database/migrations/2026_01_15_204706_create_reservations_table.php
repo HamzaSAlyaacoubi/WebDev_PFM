@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('resource_id');
-            $table->unsignedBigInteger('Category_id');
-            $table->foreign('Category_id')->references('id')->on('resource_categories')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_resource');
+            $table->unsignedBigInteger('id_category');
+            $table->foreign('id_category')->references('id')->on('resource_categories')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_resource')->references('id')->on('resources')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->text('reason')->nullable();
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+            $table->text('justification')->nullable();
             $table->timestamps();
         });
     }

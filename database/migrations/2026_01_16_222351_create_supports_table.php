@@ -10,14 +10,15 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::create('supports', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->text('message');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('supports', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->text('message');
+            $table->timestamps();
+        });
+    }
 
 
     /**

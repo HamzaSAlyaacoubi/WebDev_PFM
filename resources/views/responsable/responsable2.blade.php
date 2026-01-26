@@ -605,24 +605,24 @@
                 <h1>Reservations Section</h1>
                 <table>
                     <tr>
-                        <th>user_id</th>
-                        <th>resource_id</th>
+                        <th>id_user</th>
+                        <th>id_resource</th>
                         <th>Categorie_id</th>
                         <th>start_date</th>
                         <th>end_date</th>
-                        <th>reason</th>
+                        <th>justification</th>
                         <th>created_at</th>
                         <th>Action</th>
                         <th>Action</th>
                     </tr>
                     @foreach($reservations as $reservation)
                     <tr>
-                        <td>{{$reservation->user_id}}</td>
-                        <td>{{$reservation->resource_id}}</td>
-                        <td>{{$reservation->Category_id}}</td>
+                        <td>{{$reservation->id_user}}</td>
+                        <td>{{$reservation->id_resource}}</td>
+                        <td>{{$reservation->id_category}}</td>
                         <td>{{$reservation->start_date}}</td>
                         <td>{{$reservation->end_date}}</td>
-                        <td>{{$reservation->reason}}</td>
+                        <td>{{$reservation->justification}}</td>
                         <td>{{$reservation->created_at}}</td>
                         <td><a href="{{route('reservation.accept')}}" type="button">Accepter</a></td>
                         <td><a href="{{route('reservation.refuse')}}" type="button">Refuser</a></td>

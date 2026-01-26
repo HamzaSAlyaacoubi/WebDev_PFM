@@ -28,7 +28,7 @@ class ServerSeeder extends Seeder
                 'status' => 'disponible',
                 'quantity_available' => 5,
                 'description' => null,
-                'id_categorie' => $server->id
+                'id_category' => $server->id
             ]
         );
 
@@ -45,7 +45,7 @@ class ServerSeeder extends Seeder
                 'status' => 'disponible',
                 'quantity_available' => 3,
                 'description' => null,
-                'id_categorie' => $server->id
+                'id_category' => $server->id
             ]
         );
 
@@ -62,7 +62,7 @@ class ServerSeeder extends Seeder
                 'status' => 'indisponible',
                 'quantity_available' => 0,
                 'description' => null,
-                'id_categorie' => $server->id
+                'id_category' => $server->id
             ]
         );
     }

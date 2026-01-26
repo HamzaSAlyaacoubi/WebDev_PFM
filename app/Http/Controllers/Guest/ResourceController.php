@@ -15,27 +15,27 @@ class ResourceController extends Controller
 {
     // function index($categoryId)
     // {
-    //     $ressources = Resource::where('status', 'disponible')->where('category_id', $categoryId)->get();
+    //     $ressources = Resource::where('status', 'disponible')->where('id_category', $categoryId)->get();
 
     //     return view('Guest.ResourcesGuest', compact('ressources'));
     // }
-    function index($categoryId)
+    function index($id_category)
     {
-        $categorie = ResourceCategory::find($categoryId);
+        $category = ResourceCategory::find($id_category);
         // $ressources;
-        if ($categorie->name === "Servers") {
+        if ($category->name === "Servers") {
             $ressources = Servers::where('status', 'disponible')->get();
         }
-        if ($categorie->name === "Virtual Machines") {
+        if ($category->name === "Virtual Machines") {
             $ressources = VirtualMachines::where('status', 'disponible')->get();
         }
-        if ($categorie->name === "Networking equipment") {
+        if ($category->name === "Networking equipment") {
             $ressources = Network::where('status', 'disponible')->get();
         }
-        if ($categorie->name === "Storage") {
+        if ($category->name === "Storage") {
             $ressources = Storage::where('status', 'disponible')->get();
         }
-        return view('Guest.ResourcesGuest', compact('ressources'));
+        return view('Guest.ResourcesGuest', compact('ressources', 'id_category'));
     }
 
     public function reserve($id)

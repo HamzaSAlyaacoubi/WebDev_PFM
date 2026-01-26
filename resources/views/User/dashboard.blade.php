@@ -15,8 +15,7 @@
 
         <nav>
             <ul>
-                <li><a href="home_user.php">Accueil</a></li>
-                <li><a href="ressources_user.php">Ressources</a></li>
+                <li><a href="">Ressources</a></li>
                 <li><a href="{{ route('vosreservations') }}">Vos reservations</a></li>
                 <li><a href="{{ route('history') }}">Historique</a></li>
                 <li><a href="{{ route('support') }}">Support</a></li>
@@ -65,7 +64,7 @@
                 <div class="resource-infos">
                     <h3>{{ $ressource->name }}</h3>
                     <ul class="infos-list">
-                        @if($ressource->id_categorie == 1)
+                        @if($ressource->id_category == 1)
                         <li>Brand : {{ $ressource->brand }}</li>
                         <li>CPU : {{ $ressource->cpu }} cœurs</li>
                         <li>RAM : {{ $ressource->ram }} Go</li>
@@ -76,7 +75,7 @@
                         <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
                         @endif
 
-                        @if($ressource->id_categorie == 2)
+                        @if($ressource->id_category == 2)
                         <li>CPU : {{ $ressource->cpu }} vCPU</li>
                         <li>RAM : {{ $ressource->ram }} Go</li>
                         <li>Stockage : {{ $ressource->storage }} Go</li>
@@ -87,7 +86,7 @@
                         <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
                         @endif
 
-                        @if($ressource->id_categorie == 3)
+                        @if($ressource->id_category == 3)
                         <li>Marque : {{ $ressource->brand }}</li>
                         <li>Type : {{ $ressource->type }}</li>
                         <li>Modèle : {{ $ressource->model }}</li>
@@ -96,7 +95,7 @@
                         <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
                         @endif
 
-                        @if($ressource->id_categorie == 4)
+                        @if($ressource->id_category == 4)
                         <li>Marque : {{ $ressource->brand }}</li>
                         <li>Capacité : {{ $ressource->capacity }} To</li>
                         <li>Type : {{ $ressource->type }}</li>
@@ -104,7 +103,7 @@
                         <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
                         @endif
                     </ul>
-                    <a href="{{ route('reservation.create', ['id_categorie' => $ressource->id_categorie, 'id' => $ressource->id ]) }}" class="reserve-btn">Réserver</a> <!-- disabled car indisponible-->
+                    <a href="{{ route('reservation.create', ['id_category' => $ressource->id_category, 'id' => $ressource->id ]) }}" class="reserve-btn">Réserver</a> <!-- disabled car indisponible-->
                 </div>
                 @endforeach
             </div>
