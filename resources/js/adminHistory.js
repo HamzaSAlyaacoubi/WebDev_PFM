@@ -1,12 +1,10 @@
-const btns = document.querySelectorAll(".reservation-row .details-btn");
-btns.forEach((btn) => {
+const detailsBtns = document.querySelectorAll(".reservation-row .details-btn");
+detailsBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         const row = btn.closest(".reservation-row");
         const details = row.querySelector(".show");
         details.classList.toggle("active");
 
-        const reportBtn = row.querySelector(".report-btn");
-        reportBtn.classList.toggle("active");
     });
 });
 

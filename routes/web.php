@@ -46,7 +46,7 @@ Route::get('/admin/user/{id}', [AdminController::class, 'toUtilisateur'])->name(
 Route::post('/admin/create/responsable', [AdminController::class, 'createResponsable'])->name('create.responsable');
 
 Route::get('/admin/history', [AdminController::class, 'displayHistory'])->name('admin.hitory');
-Route::get('/admin/reclamations', [AdminController::class, 'displayStatistics'])->name('admin.statistics');
+Route::get('/admin/statistics', [AdminController::class, 'displayStatistics'])->name('admin.statistics');
 Route::get('/admin/support', [AdminController::class, 'displaySupport'])->name('admin.support');
 
 
@@ -85,7 +85,7 @@ Route::get('/Reserve/{id_category}/{id}', [ReservationController::class, 'create
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
 Route::get('/support', function () {
-    return view('User.Message');
+    return view('User.Support');
 })->name('support');
 Route::get('/vosreservations', [VosReservationController::class, 'vosreservations'])->name('vosreservations');
 Route::get('/history', function () {

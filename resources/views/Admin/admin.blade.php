@@ -11,21 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="{{route('admin')}}">Ressources</a></li>
-                <li><a href="{{route('admin.users')}}">Users</a></li>
-                <li><a href="{{route('admin.hitory')}}">Historique</a></li>
-                <li><a href="{{route('admin.statistics')}}">Statistiques</a></li>
-                <li><a href="{{route('admin.support')}}">Support</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
+    @include('include.adminHeader')
 
 
     <main>

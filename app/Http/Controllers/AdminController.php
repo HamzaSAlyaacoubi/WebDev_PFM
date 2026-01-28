@@ -16,7 +16,7 @@ class AdminController extends Controller
 {
     function displayStatistics()
     {
-        return view('Admin.admin');
+        return view('Admin.statistics');
     }
 
     function displayUsers()
@@ -215,7 +215,7 @@ class AdminController extends Controller
     function displayHistory()
     {
         // Select all reservations history
-        $reservations = ReservationsHistory::all();
+        $histories = ReservationsHistory::all();
 
         // Selection all resources
         $servers = Servers::all();
@@ -228,9 +228,9 @@ class AdminController extends Controller
 
         $totalReservationsCount = ReservationsHistory::count();
         $reservationsAccepted = ReservationsHistory::where('status', 'accepted')->count();
-        $reservationsRefused = ReservationsHistory::where('status', 'rejected')->count();
+        $reservationsRejected = ReservationsHistory::where('status', 'rejected')->count();
 
-        return view('Admin.history', compact('resources', 'reservations', 'totalReservationsCount', 'reservationsAccepted', 'reservationsRefused'));
+        return view('Admin.history', compact('resources', 'histories', 'totalReservationsCount', 'reservationsAccepted', 'reservationsRejected'));
     }
 
     function toResponsable($id)

@@ -1,29 +1,14 @@
-@vite('resources/css/Reserve.css')
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <title>Data Center - Réservation</title>
+    @vite('resources/css/reserve.css')
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="ressources_user.php">Ressources</a></li>
-                <li><a href="suivis.php">Vos reservations</a></li>
-                <li><a href="history.php">Historique</a></li>
-                <li><a href="signaler.php">Support</a></li>
-                <li><a href=#contact>Contact</a></li>
-            </ul>
-        </nav>
-
-        <a href="../guest/home_guest.php">Se deconnecter</a>
-    </header>
+    @include('include.header')
     <main>
         <section>
             <h1>Demande de réservation</h1>
@@ -91,7 +76,7 @@
                 <fieldset>
                     <legend>Justification</legend>
 
-                    <textarea name="justification" required></textarea>
+                    <textarea class="area" name="justification" placeholder="Write your justification" required></textarea>
                 </fieldset>
 
                 <button type="submit">Confirmer</button>

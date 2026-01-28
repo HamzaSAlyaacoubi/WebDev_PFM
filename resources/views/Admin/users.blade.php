@@ -10,22 +10,8 @@
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
+    @include('include.adminHeader')
 
-        <nav>
-            <ul>
-                <li><a href="{{route('admin')}}">Ressources</a></li>
-                <li><a href="{{route('admin.users')}}">Users</a></li>
-                <li><a href="{{route('admin.hitory')}}">Historique</a></li>
-                <li><a href="{{route('admin.statistics')}}">Statistiques</a></li>
-                <li><a href="{{route('admin.support')}}">Support</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
-    <div id="h2"><span>Welcome <br><br>Mr.{{auth()->user()->name}} </span></div>
     <br>
 
     <button class="btn" id="create-responsable-btn">Creer Responsable</button>

@@ -12,63 +12,8 @@ body {
     line-height: 1.6;
 }
 
-header {
-    background: #ffffff;
-    padding: 1.2rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-header span {
-    font-size: 1.2cm;
-    padding-left: 1rem;
-}
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-}
-nav a {
-    text-decoration: none;
-    color: #6b7280;
-    font-weight: 500;
-    position: relative;
-}
-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0;
-    height: 2px;
-    background: #6366f1;
-    transition: all 0.3s ease;
-}
-nav a:hover::after, nav a.active::after {
-    width: 100%;
-}
-header > a {
-    font-family: monospace;
-    background: #6366f1;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    margin-right: 2rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-header > a:hover {
-    color: #6366f1;
-    background-color: white;
-    border: rgba(0, 0, 0, 0.181) 1px solid;
-    cursor: pointer;
-}
+/* HEADER */
+/* The header css is in header.css */
 
 main {
     padding: 4rem 6rem;
@@ -81,7 +26,7 @@ main {
 
 .history-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 2rem;
 }
 
@@ -89,13 +34,16 @@ main {
     background: white;
     padding: 1.5rem;
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.123);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.123);
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
 .history-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.187);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.187);
 }
 
 .history-item h3 {
@@ -114,10 +62,11 @@ main {
 
 .status {
     position: absolute;
-    top: 16px;
+    top: 26px;
     right: 16px;
+    /* height: fit-content; */
     padding: 0.3rem 0.8rem;
-    border-radius: 1000px;
+    border-radius: 26px;
     font-size: 0.75rem;
     font-weight: 600;
 }
@@ -148,7 +97,7 @@ footer span {
 }
 footer ul {
     list-style: none;
-    display:flex ;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
@@ -156,10 +105,9 @@ footer ul {
     margin-bottom: 2rem;
     /* justify-content: space-evenly; */
 }
-footer ul img{
+footer ul img {
     border-radius: 999px;
     transition: all 0.3s ease;
-
 }
 footer img:hover {
     transform: scale(1.15);
@@ -212,7 +160,9 @@ footer p {
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
 }
 .filters button:hover {
     background-color: #5a52e0;

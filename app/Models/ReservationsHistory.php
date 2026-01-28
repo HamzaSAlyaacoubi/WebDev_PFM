@@ -35,4 +35,9 @@ class ReservationsHistory extends Model
             default => null,
         };
     }
+
+    public function reclamation()
+    {
+        return $this->hasMany(Reclamation::class, 'id_reservation');
+    }
 }

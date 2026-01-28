@@ -16,21 +16,29 @@ class VosReservationController extends Controller
     {
         $vosreservations = Reservation::where('id_user', Auth::id())->get();
         $histories = ReservationsHistory::where('id_user', Auth::id())->get();
+        $resevations = Reservation::where('id_user', Auth::id())->get();
 
-        $total = $histories->count();
+        $total = $histories->count() + $resevations->count();
+
+        $pending = $resevations->count();
 
         $actives = $histories->filter(function ($r) {
-            return $r->status === 'accepted';
+            return $r->status === 'accepted'
+                && $r->end_date > now();
         })->count();
 
-        $expirees = $histories->filter(function ($r) {
+        $rejected = $histories->filter(function ($r) {
+            return $r->status === 'rejected';
+        })->count();
+
+        $expired = $histories->filter(function ($r) {
             return $r->status === 'accepted'
                 && $r->end_date < now();
         })->count();
 
         return view(
             'User.VosReservations',
-            compact('vosreservations', 'histories', 'total', 'actives', 'expirees')
+            compact('vosreservations', 'histories', 'total', 'pending', 'actives', 'rejected', 'expired')
         );
     }
 }

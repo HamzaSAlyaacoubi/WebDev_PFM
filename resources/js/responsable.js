@@ -1,21 +1,3 @@
-/* const menuItems = document.querySelectorAll(".menu li");
-const sections = document.querySelectorAll(".content-section");
-
-menuItems.forEach((item) => {
-    item.addEventListener("click", () => {
-        // Remove active class from all menu items
-        menuItems.forEach((i) => i.classList.remove("active"));
-        // Add active to clicked item
-        item.classList.add("active");
-
-        // Hide all sections
-        sections.forEach((section) => section.classList.remove("active"));
-        // Show targeted section
-        const target = item.getAttribute("data-target");
-        document.getElementById(target).classList.add("active");
-    });
-}); */
-
 // new code
 // code for switch between resources tables with buttons list
 const resourcesMenuItems = document.querySelectorAll(".resources-menu li");
@@ -25,14 +7,14 @@ resourcesMenuItems.forEach((item) => {
     item.addEventListener("click", () => {
         // Remove active class from all menu items
         resourcesMenuItems.forEach((i) =>
-            i.classList.remove("active-resource")
+            i.classList.remove("active-resource"),
         );
         // Add active to clicked item
         item.classList.add("active-resource");
 
         // Hide all sections
         resourcesSections.forEach((section) =>
-            section.classList.remove("active")
+            section.classList.remove("active"),
         );
         // Show targeted section
         const target = item.getAttribute("data-target");
@@ -49,7 +31,7 @@ modifyBtns.forEach((btn) => {
         // hide all tables & forms
         document
             .querySelectorAll(".resource-table, .modify-form")
-            .forEach((el) => el.classList.remove("active"));
+            .forEach((el) => el.classList.add("hidden"));
 
         // show correct form
         const target = btn.dataset.target;
@@ -152,7 +134,7 @@ searchInput.addEventListener("keyup", function () {
     debounceTimer = setTimeout(() => {
         const query = searchInput.value;
         const activeTab = document.querySelector(
-            ".resources-menu .active-resource"
+            ".resources-menu .active-resource",
         );
         const type = activeTab.dataset.target;
 
@@ -186,3 +168,20 @@ function updateTable(type, data) {
         `;
     });
 }
+
+// for Cancel button in modify form
+const cancelBtns = document.querySelectorAll(".cancel-btn");
+
+cancelBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        document
+            .querySelector(".modify-form.active")
+            ?.classList.remove("active");
+
+        document
+            .querySelector(".resource-table.hidden")
+            ?.classList.remove("hidden");
+    });
+});

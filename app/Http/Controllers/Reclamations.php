@@ -13,7 +13,7 @@ class Reclamations extends Controller
 {
     public function reclamer(ReservationsHistory $history)
     {
-        return view('User.Support', compact('history'));
+        return view('User.Reclamation', compact('history'));
     }
 
     public function store(Request $request)

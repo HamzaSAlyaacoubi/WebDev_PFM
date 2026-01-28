@@ -5,25 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/History.css')
+    @vite('resources/js/history.js')
     <title>Historique</title>
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="{{route('dashboard')}}">Ressources</a></li>
-                <li><a href="{{route('vosreservations')}}">Vos reservations</a></li>
-                <li><a href="{{route('history')}}" class="active">Historique</a></li>
-                <li><a href="{{route('support')}}">Support</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <a href="../guest/home_guest.php">Se deconnecter</a>
-    </header>
+    @include('include.header')
 
     <main>
         <section class="history">
@@ -54,7 +41,7 @@
 
                 @foreach($history as $item)
                 <div class="history-item">
-                    <span class="status completed">{{ $item->status }}</span>
+                    <span class="status">{{ $item->status }}</span>
                     <h3>{{ $item->resource->name }}</h3>
                     <ul>
                         @if($item->id_category == 1)
@@ -95,28 +82,7 @@
                 </div>
                 @endforeach
 
-                <!-- <div class="history-item">
-                    <span class="status canceled">Annulée</span>
-                    <h3>Machine Virtuelle</h3>
-                    <ul>
-                        <li>Date de réservation : 5 Janvier 2026</li>
-                        <li>Durée : 1 jour</li>
-                        <li>CPU : 4 vCPU</li>
-                        <li>RAM : 8 Go</li>
-                    </ul>
-                </div>
 
-                <div class="history-item">
-                    <span class="status completed">Terminée</span>
-                    <h3>Baie de stockage</h3>
-                    <ul>
-                        <li>Date de réservation : 28 Déce
-                            mbre 2025</li>
-                        <li>Durée : 2 jours</li>
-                        <li>Capacité : 1 To</li>
-                        <li>Type : HDD</li>
-                    </ul>
-                </div> -->
             </div>
         </section>
     </main>

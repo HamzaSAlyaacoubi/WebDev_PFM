@@ -1,5 +1,5 @@
 <fieldset>
-    <form method="GET" action="{{ route('responsable.search') }}">
+    <form class="search-form" method="GET" action="{{ route('responsable.search') }}">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher">
         <select name="brand">
             <option value="">All brands</option>

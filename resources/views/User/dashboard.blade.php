@@ -10,21 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="">Ressources</a></li>
-                <li><a href="{{ route('vosreservations') }}">Vos reservations</a></li>
-                <li><a href="{{ route('history') }}">Historique</a></li>
-                <li><a href="{{ route('support') }}">Support</a></li>
-                <li><a href=#contact>Contact</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
+    @include('include.header')
 
     <body>
 

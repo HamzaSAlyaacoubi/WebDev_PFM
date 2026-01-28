@@ -58,4 +58,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Support::class);
     }
+
+    public function resource()
+    {
+        return match ($this->id_category) {
+            1 => $this->belongsTo(Servers::class, 'id_resource'),
+            2 => $this->belongsTo(VirtualMachines::class, 'id_resource'),
+            3 => $this->belongsTo(Network::class, 'id_resource'),
+            4 => $this->belongsTo(Storage::class, 'id_resource'),
+            default => null,
+        };
+    }
+
+    public function reclamation()
+    {
+        return $this->hasMany(User::class, 'id_user');
+    }
 }

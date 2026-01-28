@@ -27,10 +27,10 @@ class Reservation extends Model
     public function resource()
     {
         return match ($this->id_category) {
-            1 => $this->belongsTo(Servers::class, 'id_resources'),
-            2 => $this->belongsTo(VirtualMachines::class, 'id_resources'),
-            3 => $this->belongsTo(Network::class, 'id_resources'),
-            4 => $this->belongsTo(Storage::class, 'id_resources'),
+            1 => $this->belongsTo(Servers::class, 'id_resource'),
+            2 => $this->belongsTo(VirtualMachines::class, 'id_resource'),
+            3 => $this->belongsTo(Network::class, 'id_resource'),
+            4 => $this->belongsTo(Storage::class, 'id_resource'),
             default => null,
         };
     }

@@ -11,21 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="{{route('responsable')}}">Ressources</a></li>
-                <li><a href="{{route('responsable.reservations')}}">Reservations</a></li>
-                <li><a href="{{route('responsable.hitory')}}">Historique</a></li>
-                <li><a href="{{route('responsable.reclamations')}}">Reclamations</a></li>
-                <li><a href="{{route('responsable.support')}}">Support</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
+    @include('include.responsableHeader')
 
 
     <main>
@@ -37,9 +23,9 @@
             <!-- Liste des ressources disponible -->
 
 
+            <h2>Responsable des {{Auth::user()->category}}</h2>
             <!-- affichage des ressources -->
             @if(Auth::user()->category == 'Servers')
-            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="servers">
                 @include('include.responsableSearch')
                 <table>
@@ -95,7 +81,6 @@
             </div>
             @endif
             @if(Auth::user()->category == 'Virtual Machines')
-            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="virtualMachines">
                 @include('include.responsableSearch')
                 <table>
@@ -152,7 +137,6 @@
             </div>
             @endif
             @if(Auth::user()->category == 'Networking equipment')
-            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="networks">
                 @include('include.responsableSearch')
                 <table>
@@ -203,7 +187,6 @@
             </div>
             @endif
             @if(Auth::user()->category == 'Storage')
-            <h2>Responsable des {{Auth::user()->category}}</h2>
             <div class="resource-table" id="storages">
                 @include('include.responsableSearch')
                 <table>
@@ -252,61 +235,46 @@
             @endif
 
             <!-- modification des resources -->
-            <div class="modify-form table-box" id="modify-server">
-                <form id="modify-server-form" method="post">
+            <div class="modify-div table-box" id="modify-server">
+                <form class="modify-form" id="modify-server-form" method="post">
                     @csrf
-                    <h1>Serveur</h1>
+                    <h1>Modification</h1>
                     <input type="hidden" name="id" id="server-id">
-                    <table>
-                        <tr>
-                            <th>Nom</th>
-                            <td><input type="text" name="name" id="server-name"></td>
-                        </tr>
-                        <tr>
-                            <th>Brand</th>
-                            <td><input type="text" name="brand" id="server-brand"></td>
-                        </tr>
-                        <tr>
-                            <th>CPU</th>
-                            <td><input type="number" name="cpu" id="server-cpu"></td>
-                        </tr>
-                        <tr>
-                            <th>RAM</th>
-                            <td><input type="number" name="ram" id="server-ram"></td>
-                        </tr>
-                        <tr>
-                            <th>Stockage</th>
-                            <td><input type="number" name="storage" id="server-storage"></td>
-                        </tr>
-                        <tr>
-                            <th>Type de Stockage</th>
-                            <td><input type="text" name="storage_type" id="server-storage-type"></td>
-                        </tr>
-                        <tr>
-                            <th>OS</th>
-                            <td><input type="text" name="os" id="server-os"></td>
-                        </tr>
-                        <tr>
-                            <th>Location</th>
-                            <td><input type="text" name="location" id="server-location"></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><input type="text" name="status" id="server-status"></td>
-                        </tr>
-                        <tr>
-                            <th>Quantité</th>
-                            <td><input type="number" name="quantity_available" id="server-quantity"></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><input type="text" name="description" id="server-description"></td>
-                        </tr>
-                        <tr>
-                            <th>Action</th>
-                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
-                        </tr>
-                    </table>
+                    <label for="server-name">Nom</label>
+                    <input type="text" name="name" id="server-name">
+
+                    <label for="server-brand">Brand</label>
+                    <input type="text" name="brand" id="server-brand">
+
+                    <label for="server-cpu">CPU</label>
+                    <input type="number" name="cpu" id="server-cpu">
+
+                    <label for="server-ram">RAM</label>
+                    <input type="number" name="ram" id="server-ram">
+
+                    <label for="server-storage">Stockage</label>
+                    <input type="number" name="storage" id="server-storage">
+
+                    <label for="server-storage-type">Type de Stockage</label>
+                    <input type="text" name="storage_type" id="server-storage-type">
+
+                    <label for="server-os">OS</label>
+                    <input type="text" name="os" id="server-os">
+
+                    <label for="server-location">Location</label>
+                    <input type="text" name="location" id="server-location">
+
+                    <label for="server-status">Status</label>
+                    <input type="text" name="status" id="server-status">
+
+                    <label for="server-quantity">Quantité</label>
+                    <input type="number" name="quantity_available" id="server-quantity">
+
+                    <label for="server-description">Description</label>
+                    <input type="text" name="description" id="server-description">
+
+                    <button class="btn" type="submit">Valider</button>
+                    <button class="btn cancel-btn">Annuler</button>
 
                     @if($errors->any())
                     @foreach($errors->all() as $error)
@@ -315,61 +283,48 @@
                     @endif
                 </form>
             </div>
-            <div class="modify-form table-box" id="modify-vm">
-                <form id="modify-vm-form" method="post">
+            <div class="modify-div table-box" id="modify-vm">
+                <form class="modify-form" id="modify-vm-form" method="post">
                     @csrf
-                    <h1>Virtual Machine</h1>
+                    <h1>Modification</h1>
                     <input type="hidden" name="id" id="vm-id">
-                    <table>
-                        <tr>
-                            <th>Nom</th>
-                            <td><input type="text" name="name" id="vm-name"></td>
-                        </tr>
-                        <tr>
-                            <th>Cpu</th>
-                            <td><input type="number" name="cpu" id="vm-cpu"></td>
-                        </tr>
-                        <tr>
-                            <th>Ram</th>
-                            <td><input type="number" name="ram" id="vm-ram"></td>
-                        </tr>
-                        <tr>
-                            <th>Stockage</th>
-                            <td><input type="number" name="storage" id="vm-storage"></td>
-                        </tr>
-                        <tr>
-                            <th>Type de Stockage</th>
-                            <td><input type="text" name="storage_type" id="vm-storage-type"></td>
-                        </tr>
-                        <tr>
-                            <th>OS</th>
-                            <td><input type="text" name="os" id="vm-os"></td>
-                        </tr>
-                        <tr>
-                            <th>IP Address</th>
-                            <td><input type="text" name="ip_address" id="vm-ip"></td>
-                        </tr>
-                        <tr>
-                            <th>Serveur Hote</th>
-                            <td><input type="text" name="server_hote" id="vm-server"></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><input type="text" name="status" id="vm-status"></td>
-                        </tr>
-                        <tr>
-                            <th>Quantite</th>
-                            <td><input type="number" name="quantity_available" id="vm-quantity"></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><input type="text" name="description" id="vm-description"></td>
-                        </tr>
-                        <tr>
-                            <th>Action</th>
-                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
-                        </tr>
-                    </table>
+
+                    <label for="vm-name">Nom</label>
+                    <input type="text" name="name" id="vm-name">
+
+                    <label for="vm-cpu">CPU</label>
+                    <input type="number" name="cpu" id="vm-cpu">
+
+                    <label for="vm-ram">RAM</label>
+                    <input type="number" name="ram" id="vm-ram">
+
+                    <label for="vm-storage">Stockage</label>
+                    <input type="number" name="storage" id="vm-storage">
+
+                    <label for="vm-storage-type">Type de Stockage</label>
+                    <input type="text" name="storage_type" id="vm-storage-type">
+
+                    <label for="vm-os">OS</label>
+                    <input type="text" name="os" id="vm-os">
+
+                    <label for="vm-ip">IP Address</label>
+                    <input type="text" name="ip_address" id="vm-ip">
+
+                    <label for="vm-server">Serveur Hôte</label>
+                    <input type="text" name="server_hote" id="vm-server">
+
+                    <label for="vm-status">Status</label>
+                    <input type="text" name="status" id="vm-status">
+
+                    <label for="vm-quantity">Quantité</label>
+                    <input type="number" name="quantity_available" id="vm-quantity">
+
+                    <label for="vm-description">Description</label>
+                    <input type="text" name="description" id="vm-description">
+
+                    <button class="btn" type="submit">Valider</button>
+                    <button class="btn cancel-btn">Annuler</button>
+
                     @if($errors->any())
                     @foreach($errors->all() as $error)
                     <div>{{$error}}</div>
@@ -377,53 +332,41 @@
                     @endif
                 </form>
             </div>
-            <div class="modify-form table-box" id="modify-network">
-                <form id="modify-network-form" method="post">
+            <div class="modify-div table-box" id="modify-network">
+                <form class="modify-form" id="modify-network-form" method="post">
                     @csrf
-                    <h1>Network</h1>
+                    <h1>Modification</h1>
                     <input type="hidden" name="id" id="network-id">
-                    <table>
-                        <tr>
-                            <th>Nom</th>
-                            <td><input type="text" name="name" id="network-name"></td>
-                        </tr>
-                        <tr>
-                            <th>Brand</th>
-                            <td><input type="text" name="brand" id="network-brand"></td>
-                        </tr>
-                        <tr>
-                            <th>Type</th>
-                            <td><input type="text" name="type" id="network-type"></td>
-                        </tr>
-                        <tr>
-                            <th>Model</th>
-                            <td><input type="text" name="model" id="network-model"></td>
-                        </tr>
-                        <tr>
-                            <th>Port Number</th>
-                            <td><input type="number" name="port_number" id="network-port"></td>
-                        </tr>
-                        <tr>
-                            <th>Speed</th>
-                            <td><input type="text" name="speed" id="network-speed"></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><input type="text" name="status" id="network-status"></td>
-                        </tr>
-                        <tr>
-                            <th>Quantite</th>
-                            <td><input type="number" name="quantity_available" id="network-quantity"></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><input type="text" name="description" id="network-description"></td>
-                        </tr>
-                        <tr>
-                            <th>Action</th>
-                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
-                        </tr>
-                    </table>
+                    <label for="network-name">Nom</label>
+                    <input type="text" name="name" id="network-name">
+
+                    <label for="network-brand">Brand</label>
+                    <input type="text" name="brand" id="network-brand">
+
+                    <label for="network-type">Type</label>
+                    <input type="text" name="type" id="network-type">
+
+                    <label for="network-model">Model</label>
+                    <input type="text" name="model" id="network-model">
+
+                    <label for="network-port">Port Number</label>
+                    <input type="number" name="port_number" id="network-port">
+
+                    <label for="network-speed">Speed</label>
+                    <input type="text" name="speed" id="network-speed">
+
+                    <label for="network-status">Status</label>
+                    <input type="text" name="status" id="network-status">
+
+                    <label for="network-quantity">Quantité</label>
+                    <input type="number" name="quantity_available" id="network-quantity">
+
+                    <label for="network-description">Description</label>
+                    <input type="text" name="description" id="network-description">
+
+                    <button class="btn" type="submit">Valider</button>
+                    <button class="btn cancel-btn">Annuler</button>
+
                     @if($errors->any())
                     @foreach($errors->all() as $error)
                     <div>{{$error}}</div>
@@ -431,49 +374,38 @@
                     @endif
                 </form>
             </div>
-            <div class="modify-form table-box" id="modify-storage">
-                <form id="modify-storage-form" method="post">
+            <div class="modify-div table-box" id="modify-storage">
+                <form class="modify-form" id="modify-storage-form" method="post">
                     @csrf
-                    <h1>Storage</h1>
+                    <h1>Modification</h1>
                     <input type="hidden" name="id" id="storage-id">
-                    <table>
-                        <tr>
-                            <th>Nom</th>
-                            <td><input type="text" name="name" id="storage-name"></td>
-                        </tr>
-                        <tr>
-                            <th>Brand</th>
-                            <td><input type="text" name="brand" id="storage-brand"></td>
-                        </tr>
-                        <tr>
-                            <th>Capacity</th>
-                            <td><input type="text" name="capacity" id="storage-capacity"></td>
-                        </tr>
-                        <tr>
-                            <th>Type</th>
-                            <td><input type="text" name="type" id="storage-type"></td>
-                        </tr>
-                        <tr>
-                            <th>Speed</th>
-                            <td><input type="text" name="speed" id="storage-speed"></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><input type="text" name="status" id="storage-status"></td>
-                        </tr>
-                        <tr>
-                            <th>Quantite</th>
-                            <td><input type="number" name="quantity_available" id="storage-quantity"></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><input type="text" name="description" id="storage-description"></td>
-                        </tr>
-                        <tr>
-                            <th>Action</th>
-                            <td><button class="btn" type="submit">Valider</button><button class="cancel-btn btn">Annuler</button></td>
-                        </tr>
-                    </table>
+                    <label for="storage-name">Nom</label>
+                    <input type="text" name="name" id="storage-name">
+
+                    <label for="storage-brand">Brand</label>
+                    <input type="text" name="brand" id="storage-brand">
+
+                    <label for="storage-capacity">Capacity</label>
+                    <input type="text" name="capacity" id="storage-capacity">
+
+                    <label for="storage-type">Type</label>
+                    <input type="text" name="type" id="storage-type">
+
+                    <label for="storage-speed">Speed</label>
+                    <input type="text" name="speed" id="storage-speed">
+
+                    <label for="storage-status">Status</label>
+                    <input type="text" name="status" id="storage-status">
+
+                    <label for="storage-quantity">Quantité</label>
+                    <input type="number" name="quantity_available" id="storage-quantity">
+
+                    <label for="storage-description">Description</label>
+                    <input type="text" name="description" id="storage-description">
+
+                    <button class="btn" type="submit">Valider</button>
+                    <button class="btn cancel-btn">Annuler</button>
+
                     @if($errors->any())
                     @foreach($errors->all() as $error)
                     <div>{{$error}}</div>

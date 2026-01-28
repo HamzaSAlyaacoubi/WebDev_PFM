@@ -11,21 +11,7 @@
 
 <body>
 
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="{{route('responsable')}}">Ressources</a></li>
-                <li><a href="{{route('responsable.reservations')}}">Reservations</a></li>
-                <li><a href="{{route('responsable.hitory')}}">Historique</a></li>
-                <li><a href="{{route('responsable.reclamations')}}">Reclamations</a></li>
-                <li><a href="{{route('responsable.support')}}">Support</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
+    @include('include.responsableHeader')
 
     <main class="dashboard">
 

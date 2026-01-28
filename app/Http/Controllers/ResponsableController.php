@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Network;
+use App\Models\Reclamation;
 use App\Models\Reservation;
 use App\Models\ReservationsHistory;
 use App\Models\ResourceCategory;
@@ -146,7 +147,7 @@ class ResponsableController extends Controller
     {
         return view('Responsable.create', compact('type'));
     }
-    
+
     function validateCreation(Request $request, $type)
     {
         if ($type === 'server') {
@@ -275,7 +276,18 @@ class ResponsableController extends Controller
 
     function displayReclamations()
     {
-        return view('Responsable.reclamations');
+        $id_category_responsable = Auth::user()->id_category;
+        // Selection all resources
+        $servers = Servers::where('id_category', $id_category_responsable)->get();
+        $virtualMachines = VirtualMachines::where('id_category', $id_category_responsable)->get();
+        $networks = Network::where('id_category', $id_category_responsable)->get();
+        $storages = Storage::where('id_category', $id_category_responsable)->get();
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+        $reclamations = Reclamation::whereHas('history', function ($query) {
+            $query->where('id_category', Auth::user()->id_category);
+        })->get();
+        return view('Responsable.reclamations', compact('reclamations', 'resources'));
     }
 
     function displaySupport()

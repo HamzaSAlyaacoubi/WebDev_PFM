@@ -1,4 +1,3 @@
-@vite('resources/css/Vosreservations.css')
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,24 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vos réservations</title>
+    @vite('resources/css/vosReservations.css')
+    @vite('resources/js/vosReservations.js')
 </head>
 
 <body>
-
-    <header>
-        <span>ᔕEᖇᐯE</span>
-
-        <nav>
-            <ul>
-                <li><a href="{{ route('dashboard') }}">Ressources</a></li>
-                <li><a href="{{ route('vosreservations') }}" class="active">Vos reservations</a></li>
-                <li><a href="{{ route('history') }}">Historique</a></li>
-                <li><a href="{{ route('support') }}">Support</a></li>
-            </ul>
-        </nav>
-
-        <a href="{{route('logout')}}">Se deconnecter</a>
-    </header>
+    @include('include.header')
 
     <main class="dashboard">
 
@@ -36,14 +23,24 @@
                 <p>Réservations totales</p>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card active">
                 <h2>{{ $actives }}</h2>
                 <p>Actives</p>
             </div>
 
+            <div class="stat-card pending">
+                <h2>{{ $pending }}</h2>
+                <p>Pending</p>
+            </div>
+
             <div class="stat-card danger">
-                <h2>{{ $expirees }}</h2>
-                <p>Expirées</p>
+                <h2>{{ $rejected }}</h2>
+                <p>Rejected</p>
+            </div>
+
+            <div class="stat-card danger">
+                <h2>{{ $expired }}</h2>
+                <p>Expired</p>
             </div>
         </section>
         <!-- LIST -->
@@ -52,7 +49,7 @@
             @foreach($vosreservations as $reservation)
             <div class="reservation-row">
                 <span class="status active">{{ $reservation->status }}</span>
-                <div>
+                <div class="reservation-infos">
                     <h3>{{ $reservation->resource->name }}</h3>
                     <small>{{ $reservation->start_date }} → {{ $reservation->end_date }}</small>
 
@@ -68,7 +65,6 @@
                             <li>OS : {{ $reservation->resource->os }}</li>
                             <li>Location: {{ $reservation->resource->location }}</li>
                             @elseif($reservation->id_category == 2)
-                            <li>Brand: {{ $reservation->resource->brand }}</li>
                             <li>CPU : {{ $reservation->resource->cpu }}</li>
                             <li>RAM : {{ $reservation->resource->ram }}</li>
                             <li>Type : {{ $reservation->resource->storage }}</li>
@@ -92,8 +88,8 @@
                     </div>
                 </div>
 
-                <div class="btn">
-                    <button class="details">Details</button>
+                <div class="btns">
+                    <button class="details-btn btn">Details</button>
                 </div>
             </div>
             @endforeach
@@ -101,12 +97,12 @@
         </section>
         <br><br>
         <section class="reservations-list">
-            <h1>Reservation accepté</h1>
+            <h1>Reservation actives</h1>
             @foreach($histories as $history)
-            @if($history->status == "accepted")
+            @if($history->status == "accepted" && $history->end_date > now())
             <div class="reservation-row">
                 <span class="status active">{{ $history->status }}</span>
-                <div>
+                <div class="reservation-infos">
                     <h3>{{ $history->resource->name }}</h3>
                     <small>{{ $history->start_date }} → {{ $history->end_date }}</small>
 
@@ -121,7 +117,6 @@
                             <li>OS : {{ $history->resource->os }}</li>
                             <li>Location: {{ $history->resource->location }}</li>
                             @elseif($history->id_category == 2)
-                            <li>Brand: {{ $history->resource->brand }}</li>
                             <li>CPU : {{ $history->resource->cpu }}</li>
                             <li>RAM : {{ $history->resource->ram }}</li>
                             <li>Type : {{ $history->resource->storage }}</li>
@@ -145,10 +140,10 @@
                     </div>
                 </div>
 
-                <div class="btn">
-                    <button class="details">Details</button>
-                    <button type="button" onclick="window.location.href='{{ route('support.reclamer', ['history' => $history->id]) }}'">Reclamer</button>
-
+                <div class="btns">
+                    <button class="start-btn btn">Start</button>
+                    <button class="details-btn btn">Details</button>
+                    <a class="report-btn btn" href="{{ route('support.reclamer', ['history' => $history->id]) }}">Reclamer</a>
                 </div>
             </div>
             @endif
@@ -162,7 +157,7 @@
             @if($history->status == "rejected")
             <div class="reservation-row">
                 <span class="status active">{{ $history->status }}</span>
-                <div>
+                <div class="reservation-infos">
                     <h3>{{ $history->resource->name }}</h3>
                     <small>{{ $history->start_date }} → {{ $history->end_date }}</small>
 
@@ -178,7 +173,6 @@
                             <li>OS : {{ $history->resource->os }}</li>
                             <li>Location: {{ $history->resource->location }}</li>
                             @elseif($history->id_category == 2)
-                            <li>Brand: {{ $history->resource->brand }}</li>
                             <li>CPU : {{ $history->resource->cpu }}</li>
                             <li>RAM : {{ $history->resource->ram }}</li>
                             <li>Type : {{ $history->resource->storage }}</li>
@@ -201,10 +195,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="btn">
-                    <button class="details">Details</button>
-                    <button type="button" onclick="window.location.href='{{ route('support.reclamer', ['history' => $history->id]) }}'">Reclamer</button>
-
+                <div class="btns">
+                    <button class="details-btn btn">Details</button>
                 </div>
             </div>
             @endif

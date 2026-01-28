@@ -8,83 +8,11 @@ body {
     font-family: "Segoe UI", Arial, sans-serif;
     background: #f6f7fb;
     color: #1c1e21;
+    line-height: 1.6;
 }
 
-header {
-    background: white;
-    padding: 1.4rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    position: relative;
-    top: 0;
-    z-index: 10;
-}
-
-header span {
-    font-size: 1.2cm;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-nav a {
-    text-decoration: none;
-    color: #6b7280;
-    font-weight: 500;
-    position: relative;
-}
-header nav a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -6px;
-    /* bottom: 10px; */
-    width: 0;
-    height: 2px;
-    background-color: #6366f1;
-    transition: all 0.3s ease;
-}
-
-header a:hover::after {
-    transform: translateX(-50%);
-    width: 100%;
-}
-
-nav a.active {
-    color: #6366f1;
-}
-header > a {
-    font-family: monospace;
-    background: #6366f1;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    margin-right: 2rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-header > a:hover {
-    color: #6366f1;
-    background-color: white;
-    border: rgba(0, 0, 0, 0.181) 1px solid;
-    cursor: pointer;
-}
-
-/* header > a {
-    background: #6366f1;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-family: monospace;
-    font-weight: 700;
-} */
+/* HEADER */
+/* The header css is in responsableHeader.css */
 
 .dashboard {
     padding: 4rem 6rem;
@@ -196,6 +124,10 @@ header > a:hover {
     margin-inline: 1rem;
     /* list-style: none; */
     font-size: 1.2rem;
+}
+
+.details p {
+    margin-bottom: 1rem;
 }
 
 .details-btn {

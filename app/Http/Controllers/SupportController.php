@@ -12,7 +12,7 @@ class SupportController extends Controller
 {
     public function index()
     {
-        return view('User.Support');
+        return view('User.Reclamation');
     }
 
     public function store(Request $request)
@@ -30,6 +30,6 @@ class SupportController extends Controller
     }
     public function reclamer(ReservationsHistory $history)
     {
-        return view('User.Support', compact('history'));
+        return view('User.Reclamation', compact('history'));
     }
 }
