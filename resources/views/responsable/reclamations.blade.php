@@ -29,7 +29,7 @@
                         <p>Date de reclamation : {{$reclamation->created_at}}</p>
                     </div>
                     <div class="reservation-btns">
-                        <button class="details-btn">Voir Details</button>
+                        <button class="btn details-btn">Voir Details</button>
                     </div>
 
                 </div>
