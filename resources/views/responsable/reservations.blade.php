@@ -58,9 +58,9 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
-                        <button class="details-btn">Voir Details</button>
+                        <a class="btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                        <a class="btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                        <button class="details-btn btn">Voir Details</button>
                     </div>
 
                 </div>
@@ -72,7 +72,7 @@
                         <li>Storage : {{$resource->storage}}</li>
                         <li>Storage type : {{$resource->storage_type}}</li>
                         <li>Os :{{$resource->os}}</li>
-                        <li>Qty : {{$resource->quantity_available}}</li>
+                        <li>Qty : {{$resource->quantity_available - $resource->quantity_used}}</li>
                     </ul>
                 </div>
             </div>
@@ -92,9 +92,9 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
-                        <button class="details-btn">Voir Details</button>
+                        <a class="btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                        <a class="btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                        <button class="details-btn btn">Voir Details</button>
                     </div>
 
                 </div>
@@ -106,7 +106,7 @@
                         <li>Storage type : {{$resource->storage_type}}</li>
                         <li>Os : {{$resource->os}}</li>
                         <li>IP : {{$resource->ip_address}}</li>
-                        <li>Qty : {{$resource->quantity_available}}</li>
+                        <li>Qty : {{$resource->quantity_available - $resource->quantity_used}}</li>
                     </ul>
                 </div>
             </div>
@@ -126,9 +126,9 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
-                        <button class="details-btn">Voir Details</button>
+                        <a class="btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                        <a class="btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                        <button class="details-btn btn">Voir Details</button>
                     </div>
 
                 </div>
@@ -139,7 +139,7 @@
                         <li>Modele : {{$resource->model}}</li>
                         <li>Nombre de ports : {{$resource->port_number}}</li>
                         <li>Vitesse : {{$resource->speed}}</li>
-                        <li>Qty : {{$resource->quantity_available}}</li>
+                        <li>Qty : {{$resource->quantity_available - $resource->quantity_used}}</li>
                     </ul>
                 </div>
             </div>
@@ -159,9 +159,9 @@
                         <small>Periode : {{$reservation->start_date}} → {{$reservation->end_date}}</small>
                     </div>
                     <div class="reservation-btns">
-                        <a class="details-btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
-                        <a class="details-btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
-                        <button class="details-btn">Voir Details</button>
+                        <a class="btn accept" href="{{route('reservation.accept', $reservation->id)}}" class="accept-btn">Accepter</a>
+                        <a class="btn refuse" href="{{route('reservation.refuse', $reservation->id)}}" class="refuse-btn">Refuser</a>
+                        <button class="details-btn btn">Voir Details</button>
                     </div>
 
                 </div>
@@ -171,7 +171,7 @@
                         <li>Capacite : {{$resource->capacity}}</li>
                         <li>Type : {{$resource->type}}</li>
                         <li>Vitesse : {{$resource->speed}}</li>
-                        <li>Qty : {{$resource->quantity_available}}</li>
+                        <li>Qty : {{$resource->quantity_available - $resource->quantity_used}}</li>
                     </ul>
                 </div>
             </div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('type');
+            $table->boolean('blocked')->default(false);
             $table->string('category')->nullable();
             $table->integer('id_category')->nullable();
             $table->rememberToken();

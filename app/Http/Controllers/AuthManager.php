@@ -32,11 +32,12 @@ class AuthManager extends Controller
         if (Auth::attempt($credentials)) {
 
             $user = Auth::user();
-            if ($user->type === User::ADMIN) return redirect()->intended(route('admin'));
+            if ($user->type === User::ADMIN) return redirect()->intended(route('admin.statistics'));
             if ($user->type === User::RESPONSABLE) return redirect()->intended(route('responsable'));
+            if ($user->blocked === 1) return redirect()->intended(route('login'))->with('login-error', 'This account is blocked');
             return redirect()->intended(route('dashboard'));
         }
-        return redirect()->intended(route('login'))->with('error', 'login faild');
+        return redirect()->intended(route('login'))->with('login-error', 'login faild');
     }
 
     function registrationPost(Request $request)
@@ -55,7 +56,7 @@ class AuthManager extends Controller
         $user = User::create($data);
 
         if (!$user) {
-            return redirect()->intended('registration')->with('error', 'Registration fail, Try again');
+            return redirect()->intended('registration')->with('registration-error', 'Registration fail, Try again');
         }
         return redirect()->route('login')->with('success', 'Registration success, login to access the app');
     }

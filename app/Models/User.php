@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+        'blocked',
         'category',
         'id_category',
     ];
@@ -56,7 +57,7 @@ class User extends Authenticatable
     }
     public function supports()
     {
-        return $this->hasMany(Support::class);
+        return $this->hasMany(Support::class, 'id_user');
     }
 
     public function resource()

@@ -58,7 +58,7 @@
                         <li>Type stockage : {{ $ressource->storage_type }}</li>
                         <li>OS : {{ $ressource->os }}</li>
                         <li>Localisation : {{ $ressource->location }}</li>
-                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available - $ressource->quantity_used }}</li>
                         @endif
 
                         @if($ressource->id_category == 2)
@@ -69,7 +69,7 @@
                         <li>OS : {{ $ressource->os }}</li>
                         <li>IP : {{ $ressource->ip_address }}</li>
                         <li>Serveur hôte : {{ $ressource->server_hote }}</li>
-                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available - $ressource->quantity_used}}</li>
                         @endif
 
                         @if($ressource->id_category == 3)
@@ -78,7 +78,7 @@
                         <li>Modèle : {{ $ressource->model }}</li>
                         <li>Ports : {{ $ressource->port_number }}</li>
                         <li>Vitesse : {{ $ressource->speed }}</li>
-                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available - $ressource->quantity_used}}</li>
                         @endif
 
                         @if($ressource->id_category == 4)
@@ -86,7 +86,7 @@
                         <li>Capacité : {{ $ressource->capacity }} To</li>
                         <li>Type : {{ $ressource->type }}</li>
                         <li>Vitesse : {{ $ressource->speed }}</li>
-                        <li>Quantité disponible : {{ $ressource->quantity_available }}</li>
+                        <li>Quantité disponible : {{ $ressource->quantity_available - $ressource->quantity_used}}</li>
                         @endif
                     </ul>
                     <a href="{{ route('reservation.create', ['id_category' => $ressource->id_category, 'id' => $ressource->id ]) }}" class="reserve-btn">Réserver</a> <!-- disabled car indisponible-->

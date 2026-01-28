@@ -26,7 +26,7 @@
                     </option>
                     @endforeach
                 </select>
-                <button type="submit">Search</button>
+                <button class="btn" type="submit">Search</button>
             </form>
 
         </fieldset>
@@ -88,7 +88,7 @@
                                     data-status="{{ $resource->status }}"
                                     data-quantity="{{ $resource->quantity_available }}"
                                     data-description="{{ $resource->description }}"
-                                    data-action="{{ route('admin.validate.modification', ['type' => 'server', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-action="{{ route('admin.validate.modification', ['type' => 'server', 'id' => $resource->id]) }}" class="modify-btn btn">Modifier</button></td>
                         </tr>
                     </tbody>
                     @endif
@@ -141,7 +141,7 @@
                                     data-status="{{ $resource->status }}"
                                     data-quantity="{{ $resource->quantity_available }}"
                                     data-description="{{ $resource->description }}"
-                                    data-action="{{ route('admin.validate.modification', ['type' => 'vm', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-action="{{ route('admin.validate.modification', ['type' => 'vm', 'id' => $resource->id]) }}" class="modify-btn btn">Modifier</button></td>
                         </tr>
                     </tbody>
                     @endif
@@ -188,7 +188,7 @@
                                     data-status="{{ $resource->status }}"
                                     data-quantity="{{ $resource->quantity_available }}"
                                     data-description="{{ $resource->description }}"
-                                    data-action="{{ route('admin.validate.modification', ['type' => 'network', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-action="{{ route('admin.validate.modification', ['type' => 'network', 'id' => $resource->id]) }}" class="modify-btn btn">Modifier</button></td>
                         </tr>
                     </tbody>
                     @endif
@@ -232,7 +232,7 @@
                                     data-status="{{ $resource->status }}"
                                     data-quantity="{{ $resource->quantity_available }}"
                                     data-description="{{ $resource->description }}"
-                                    data-action="{{ route('admin.validate.modification', ['type' => 'storage', 'id' => $resource->id]) }}" class="modify-btn">Modifier</button></td>
+                                    data-action="{{ route('admin.validate.modification', ['type' => 'storage', 'id' => $resource->id]) }}" class="modify-btn btn">Modifier</button></td>
                         </tr>
                     </tbody>
                     @endif

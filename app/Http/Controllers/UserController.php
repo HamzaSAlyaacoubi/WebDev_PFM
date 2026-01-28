@@ -8,6 +8,7 @@ use App\Models\ResourceCategory;
 use App\Models\Servers;
 use App\Models\VirtualMachines;
 use App\Models\Network;
+use App\Models\ReservationsHistory;
 use App\Models\Storage;
 
 class UserController extends Controller
@@ -16,10 +17,10 @@ class UserController extends Controller
     {
         $categories = ResourceCategory::all();
 
-        $servers   = Servers::where('status', 'disponible')->get();
-        $vms       = VirtualMachines::where('status', 'disponible')->get();
-        $networks  = Network::where('status', 'disponible')->get();
-        $storages  = Storage::where('status', 'disponible')->get();
+        $servers   = Servers::where('status', 'disponible')->whereColumn('quantity_available', '>', 'quantity_used')->get();
+        $vms       = VirtualMachines::where('status', 'disponible')->whereColumn('quantity_available', '>', 'quantity_used')->get();
+        $networks  = Network::where('status', 'disponible')->whereColumn('quantity_available', '>', 'quantity_used')->get();
+        $storages  = Storage::where('status', 'disponible')->whereColumn('quantity_available', '>', 'quantity_used')->get();
 
         $ressources = collect()->merge($servers)->merge($vms)->merge($networks)->merge($storages);
 
@@ -38,6 +39,13 @@ class UserController extends Controller
         if ($request->filled('brand') && $request->brand !== 'all') {
             $ressources = $ressources->where('brand', $request->brand);
         }
+
+        ReservationsHistory::where('end_date', '<', now())
+            ->where('status', 'accepted')
+            ->each(function ($history) {
+                $history->resource->decrement('quantity_used');
+                $history->update(['status' => 'terminated']);
+            });
 
         return view('User.dashboard', compact('categories', 'ressources', 'brands'));
     }

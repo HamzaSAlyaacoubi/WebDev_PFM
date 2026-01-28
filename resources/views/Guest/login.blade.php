@@ -31,16 +31,17 @@
                       <a href="#">Forgot Password?</a>
                   </div> -->
                 <button type="submit" class="btn">Login</button>
+
                 @if($errors->login->any())
                 @foreach($errors->login->all() as $error)
-                <div>{{$error}}</div>
+                <div class="login-error">{{$error}}</div>
                 @endforeach
                 @endif
-                @if(session()->has('error'))
-                <div>{{session('error')}}</div>
+                @if(session()->has('login-error'))
+                <div class="login-error">{{session('login-error')}}!</div>
                 @endif
                 @if(session()->has('success'))
-                <div>{{session('success')}}</div>
+                <div class="login-success">{{session('success')}}</div>
                 @endif
 
             </form>
@@ -65,14 +66,14 @@
                 <button type="submit" class="btn">Register</button>
                 @if($errors->register->any())
                 @foreach($errors->register->all() as $error)
-                <div>{{$error}}</div>
+                <div class="registration-error">{{$error}}</div>
                 @endforeach
                 @endif
-                @if(session()->has('error'))
-                <div>{{session('error')}}</div>
+                @if(session()->has('registration-error'))
+                <div class="registration-error">{{session('registration-error')}}!</div>
                 @endif
                 @if(session()->has('success'))
-                <div>{{session('success')}}</div>
+                <div class="registration-success">{{session('success')}}</div>
                 @endif
 
             </form>

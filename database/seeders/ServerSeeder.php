@@ -34,7 +34,7 @@ class ServerSeeder extends Seeder
 
         Servers::firstOrCreate(
             [
-                'name' => 'Server DELL ProLiant',
+                'name' => 'Server DELL',
                 'brand' => 'DELL',
                 'cpu' => 32,
                 'ram' => 32,
@@ -51,7 +51,7 @@ class ServerSeeder extends Seeder
 
         Servers::firstOrCreate(
             [
-                'name' => 'Server Lenovo ProLiant',
+                'name' => 'Server Lenovo',
                 'brand' => 'Lenovo',
                 'cpu' => 16,
                 'ram' => 64,

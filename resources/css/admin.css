@@ -112,16 +112,6 @@ form strong {
     border-radius: 6px;
 }
 
-/* .modify-btn {
-    color: #fff;
-    padding: 5px;
-    background-color: #2e7d32;
-}
-.modify-btn:hover {
-    cursor: pointer;
-    background-color: #47c24d;
-} */
-
 table {
     width: 100%;
     border-collapse: separate;
@@ -129,7 +119,7 @@ table {
 }
 
 th {
-    text-align: left;
+    text-align: center;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -170,21 +160,28 @@ td:last-child {
 
 .btn,
 .modify-btn {
-    border: 0;
-    font-size: 14px;
-    padding: 0.5rem 1.4rem;
-    border-radius: 1rem;
-    background: #e0e7ff;
-    color: #3730a3;
-    font-weight: 700;
     text-decoration: none;
-    transition: 0.3s;
+    font-family: monospace;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: #6366f1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
 }
 
 .btn:hover,
 .modify-btn:hover {
-    background: #4f46e5;
-    color: white;
+    color: #6366f1;
+    background-color: white;
+    border: rgba(0, 0, 0, 0.181) 1px solid;
+    cursor: pointer;
 }
 
 #login button {

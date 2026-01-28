@@ -7,23 +7,178 @@ use App\Models\ReservationsHistory;
 use App\Models\ResourceCategory;
 use App\Models\Servers;
 use App\Models\Storage;
+use App\Models\Support;
 use App\Models\User;
 use App\Models\VirtualMachines;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     function displayStatistics()
     {
-        return view('Admin.statistics');
+        $servers = Servers::all();
+        $virtualMachines = VirtualMachines::all();
+        $networks = Network::all();
+        $storages = Storage::all();
+
+        $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
+
+        /* occupation Global */
+        $totalResources = 0;
+        $usedResources = 0;
+        foreach ($resources as $resource) {
+            $totalResources += $resource->quantity_available;
+        }
+        foreach ($resources as $resource) {
+            $usedResources += $resource->quantity_used;
+        }
+        $occupationGlobal = $usedResources / $totalResources * 100;
+
+        /* occupation Serveur */
+        $totalServers = 0;
+        $usedServers = 0;
+        foreach ($servers as $server) {
+            $totalServers += $server->quantity_available;
+        }
+        foreach ($servers as $server) {
+            $usedServers += $server->quantity_used;
+        }
+        $occupationServers = $usedServers / $totalServers * 100;
+
+        /* occupation Vms */
+        $totalVms = 0;
+        $usedVms = 0;
+        foreach ($virtualMachines as $vm) {
+            $totalVms += $vm->quantity_available;
+        }
+        foreach ($virtualMachines as $vm) {
+            $usedVms += $vm->quantity_used;
+        }
+        $occupationVms = $usedVms / $totalVms * 100;
+
+        /* occupation Networks */
+        $totalNetworks = 0;
+        $usedNetworks = 0;
+        foreach ($networks as $network) {
+            $totalNetworks += $network->quantity_available;
+        }
+        foreach ($networks as $network) {
+            $usedNetworks += $network->quantity_used;
+        }
+        $occupationNetworks = $usedNetworks / $totalNetworks * 100;
+
+        /* occupation Storages */
+        $totalStorages = 0;
+        $usedStorages = 0;
+        foreach ($storages as $storage) {
+            $totalStorages += $storage->quantity_available;
+        }
+        foreach ($storages as $storage) {
+            $usedStorages += $storage->quantity_used;
+        }
+        $occupationStorages = $usedStorages / $totalStorages * 100;
+
+        /* Statistique des reservations */
+        $type = request('type', 'day');
+
+        if ($type === 'day') {
+            $reservations = DB::table('reservations_histories')
+                ->selectRaw('DATE(created_at) as label, COUNT(*) as total')
+                ->groupBy('label')
+                ->orderBy('label')
+                ->get();
+        }
+
+        if ($type === 'week') {
+            $reservations = DB::table('reservations_histories')
+                ->selectRaw('YEARWEEK(created_at) as label, COUNT(*) as total')
+                ->groupBy('label')
+                ->orderBy('label')
+                ->get();
+        }
+
+        if ($type === 'month') {
+            $reservations = DB::table('reservations_histories')
+                ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as label, COUNT(*) as total')
+                ->groupBy('label')
+                ->orderBy('label')
+                ->get();
+        }
+
+        $reservationLabels = $reservations->pluck('label')->toArray();
+        $reservationData   = $reservations->pluck('total')->toArray();
+
+        /* ==========================
+       Répartition des utilisateurs
+    ========================== */
+
+        $usersByRole = DB::table('users')
+            ->select('type', DB::raw('COUNT(*) as total'))
+            ->groupBy('type')
+            ->get();
+
+        $rolesLabels = $usersByRole->pluck('type');
+        $rolesData   = $usersByRole->pluck('total');
+
+        /* ==========================
+       Utilisateurs les plus actifs
+    ========================== */
+
+        $topUsers = DB::table('reservations_histories')
+            ->join('users', 'users.id', '=', 'reservations_histories.id_user')
+            ->select(
+                'users.name',
+                DB::raw('COUNT(reservations_histories.id) as total_reservations'),
+                DB::raw('SUM(TIMESTAMPDIFF(HOUR, start_date, end_date)) as total_hours')
+            )
+            ->groupBy('users.id', 'users.name')
+            ->orderByDesc('total_reservations')
+            ->limit(5)
+            ->get();
+
+        return view('Admin.statistics', compact(
+            'totalResources',
+            'usedResources',
+            'occupationGlobal',
+            'occupationNetworks',
+            'occupationServers',
+            'occupationStorages',
+            'occupationVms',
+            'totalNetworks',
+            'totalServers',
+            'totalStorages',
+            'totalVms',
+            'usedNetworks',
+            'usedServers',
+            'usedStorages',
+            'usedVms',
+            'type',
+            'reservationLabels',
+            'reservationData',
+            'rolesLabels',
+            'rolesData',
+            'topUsers'
+        ));
     }
 
     function displayUsers()
     {
         $users = User::all();
+        $nbrResponsables = User::where('type', 'responsable')->count();
+        $nbrUsers = User::where('type', 'utilisateur')->count();
         $categories = ResourceCategory::all();
-        return view('Admin.users', compact('users', 'categories'));
+        return view('Admin.users', compact('users', 'categories', 'nbrResponsables', 'nbrUsers'));
+    }
+
+    function displaySupport()
+    {
+
+        $supports = Support::all();
+
+        return view('Admin.support', compact('supports'));
     }
 
     function displayResources()
@@ -270,5 +425,53 @@ class AdminController extends Controller
         User::create($responsable);
 
         return redirect()->route('admin.users');
+    }
+
+    function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully');
+    }
+
+    function toogleBlockUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->blocked = !$user->blocked;
+        $user->save();
+
+        return redirect()->route('admin.users');
+    }
+
+    function modifyUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->id === Auth::id()) {
+            return back()->with('error', 'You cannot modify yourself');
+        }
+
+        $validated = $request->validate([
+            'type' => 'required|in:utilisateur,responsable',
+            'category' => 'required',
+        ]);
+
+        if ($validated['category'] != "aucun") {
+            $categoryModel = ResourceCategory::where('name', $validated['category'])->first();
+            $user->update([
+                'type' => $validated['type'],
+                'category' => $validated['category'],
+                'id_category' => $categoryModel->id,
+
+            ]);
+        } else {
+            $user->update([
+                'type' => $validated['type'],
+                'category' => $validated['category'],
+            ]);
+        }
+
+        return redirect()->route('admin.users')->with('success', 'User updated successfully');
     }
 }

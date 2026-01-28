@@ -15,27 +15,33 @@ class UsersSeeder extends Seeder
     {
         // Utilisateurs
         User::firstOrCreate([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
+            'name' => 'Hamza',
+            'email' => 'hamza@gmail.com',
             'password' => 'jjj',
             'type' => 'utilisateur',
         ]);
         User::firstOrCreate([
-            'name' => 'user2',
-            'email' => 'user2@gmail.com',
+            'name' => 'yassine',
+            'email' => 'yassine@gmail.com',
             'password' => 'jjj',
             'type' => 'utilisateur',
         ]);
         User::firstOrCreate([
-            'name' => 'user3',
-            'email' => 'user3@gmail.com',
+            'name' => 'adam',
+            'email' => 'adam@gmail.com',
+            'password' => 'jjj',
+            'type' => 'utilisateur',
+        ]);
+        User::firstOrCreate([
+            'name' => 'chemseddine',
+            'email' => 'chemseddine@gmail.com',
             'password' => 'jjj',
             'type' => 'utilisateur',
         ]);
 
         // Responsable
         User::firstOrCreate([
-            'name' => 'responsable',
+            'name' => 'Responsable Serveur',
             'email' => 'responsable@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
@@ -43,7 +49,7 @@ class UsersSeeder extends Seeder
             'id_category' => 1
         ]);
         User::firstOrCreate([
-            'name' => 'responsable1',
+            'name' => 'Responsable Vms',
             'email' => 'responsable1@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
@@ -51,7 +57,7 @@ class UsersSeeder extends Seeder
             'id_category' => 2
         ]);
         User::firstOrCreate([
-            'name' => 'responsable2',
+            'name' => 'Responsable Network',
             'email' => 'responsable2@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',
@@ -59,7 +65,7 @@ class UsersSeeder extends Seeder
             'id_category' => 3
         ]);
         User::firstOrCreate([
-            'name' => 'responsable3',
+            'name' => 'Responsable Storage',
             'email' => 'responsable3@gmail.com',
             'password' => 'jjj',
             'type' => 'responsable',

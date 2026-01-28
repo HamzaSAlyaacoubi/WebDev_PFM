@@ -44,7 +44,7 @@ class ReservationsHistoryController extends Controller
         $resources = collect()->merge($servers)->merge($virtualMachines)->merge($networks)->merge($storages);
 
         $resource = $resources->where('id', $reservation->id_resource)->first();
-        $resource->quantity_available -= 1;
+        $resource->quantity_used += 1;
         $resource->save();
 
         return redirect()->route('responsable.reservations');

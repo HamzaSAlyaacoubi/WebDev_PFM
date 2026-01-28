@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('speed');
             $table->enum('status', ['disponible', 'indisponible', 'maintenance'])->default('disponible');
             $table->integer('quantity_available');
+            $table->integer('quantity_used')->default(0);
             $table->string('description')->nullable();
             $table->foreignId('id_category')->constrained('resource_categories')->onDelete('cascade');
             $table->timestamps();

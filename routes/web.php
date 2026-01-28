@@ -41,6 +41,10 @@ Route::get('/admin/create/{type}', [AdminController::class, 'createResource'])->
 Route::post('/admin/create/validate/{type}', [AdminController::class, 'validateCreation'])->name('admin.validate.creation');
 
 Route::get('/admin/users', [AdminController::class, 'displayUsers'])->name('admin.users');
+Route::get('/admin/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('admin.delete.user');
+Route::post('/admin/users/modify/{id}', [AdminController::class, 'modifyUser'])->name('admin.modify.responsable');
+Route::get('/admin/users/block/{id}', [AdminController::class, 'toogleBlockUser'])->name('admin.block.user');
+
 Route::get('/admin/resp/{id}', [AdminController::class, 'toResponsable'])->name('toResponsable');
 Route::get('/admin/user/{id}', [AdminController::class, 'toUtilisateur'])->name('toUtilisateur');
 Route::post('/admin/create/responsable', [AdminController::class, 'createResponsable'])->name('create.responsable');

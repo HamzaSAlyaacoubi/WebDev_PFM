@@ -1,3 +1,185 @@
-main {
-    padding: 4rem 6rem;
+body {
+    background: #f4f6f9;
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+}
+
+.dashboard {
+    padding: 3rem 5rem;
+}
+
+.dashboard-header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    /* background-color: red; */
+}
+
+.dashboard-header p {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.double-card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reservations-card {
+    width: 49%;
+}
+
+@media (max-width: 1100px) {
+    .reservations-card {
+        width: 100%;
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Stat circles */
+.stats-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-circle {
+    --size: 150px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 calc(var(--percent) * 1%), #e6e6e6 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.stat-circle:hover {
+    transform: translateY(-5px);
+}
+
+.stat-circle::before {
+    content: "";
+    width: 115px;
+    height: 115px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.stat-circle span {
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+}
+
+.stat-circle p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    position: relative;
+}
+
+.stat-circle small {
+    font-size: 12px;
+    color: #777;
+    position: relative;
+}
+
+/* Colors */
+.blue {
+    background: conic-gradient(#2196f3 calc(var(--percent) * 1%), #e6e6e6 0);
+}
+.purple {
+    background: conic-gradient(#9c27b0 calc(var(--percent) * 1%), #e6e6e6 0);
+}
+.orange {
+    background: conic-gradient(#ff9800 calc(var(--percent) * 1%), #e6e6e6 0);
+}
+.red {
+    background: conic-gradient(#f44336 calc(var(--percent) * 1%), #e6e6e6 0);
+}
+
+/* Chart */
+canvas {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 14px;
+    /* background: #fafafa; */
+}
+
+/* Select */
+select {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#reservationChart {
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    margin: auto;
+}
+
+.chart-card,
+.table-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+.table-card {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+/* Table */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f5f7fa;
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+}
+
+tbody tr:hover {
+    background: #f9f9f9;
+}
+
+th {
+    color: #555;
+    font-weight: 600;
+}
+
+/* Chart */
+canvas {
+    max-width: 400px;
+    margin: auto;
 }

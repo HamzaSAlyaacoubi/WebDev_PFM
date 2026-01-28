@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Servers extends Model
 {
     use HasFactory, Notifiable;
-    protected $fillable = ['name', 'brand', 'cpu', 'ram', 'storage', 'storage_type', 'os', 'location', 'status', 'quantity_available', 'description', 'id_category'];
+    protected $fillable = ['name', 'brand', 'cpu', 'ram', 'storage', 'storage_type', 'os', 'location', 'status', 'quantity_available','quantity_used', 'description', 'id_category'];
 
     public function category()
     {
